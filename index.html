@@ -8,13 +8,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root,[data-theme="light"]{--bg:#f3f4f6;--bg-sb:#fff;--bg-c:#fff;--bg-ca:#f9fafb;--bg-th:#f1f3f5;--bg-h:#f5f6f8;--brd:#e2e5ea;--brd-l:#eef0f3;--tx:#374151;--txd:#6b7280;--txb:#111827;--txi:#fff;--sh:0 1px 3px rgba(0,0,0,.06);--acc:#d97706;--acc-bg:#fffbeb;--bl:#2563eb;--bl-bg:#eff6ff;--gn:#059669;--gn-bg:#ecfdf5;--rd:#dc2626;--rd-bg:#fef2f2;--pr:#7c3aed;--pr-bg:#f5f3ff;--cy:#0891b2;--cy-bg:#ecfeff;--sb-a:#f3f4f6;--sb-h:#f9fafb;--ov:rgba(0,0,0,.3);--cg:#e5e7eb;--ct:#6b7280;--tp-bg:rgba(37,99,235,.08);--tp-c:#2563eb;--tv-bg:rgba(124,58,237,.08);--tv-c:#7c3aed}
-[data-theme="dark"]{--bg:#0b0e13;--bg-sb:#11151c;--bg-c:#151a24;--bg-ca:#1a2030;--bg-th:#1a2030;--bg-h:rgba(255,255,255,.03);--brd:#252d3a;--brd-l:#1e2533;--tx:#b0b8c8;--txd:#636d80;--txb:#e4e8f0;--txi:#0b0e13;--sh:0 1px 3px rgba(0,0,0,.3);--acc:#f59e0b;--acc-bg:rgba(245,158,11,.08);--bl:#3b82f6;--bl-bg:rgba(59,130,246,.08);--gn:#10b981;--gn-bg:rgba(16,185,129,.08);--rd:#ef4444;--rd-bg:rgba(239,68,68,.08);--pr:#a78bfa;--pr-bg:rgba(167,139,250,.08);--cy:#22d3ee;--cy-bg:rgba(34,211,238,.08);--sb-a:#1a2030;--sb-h:#151a24;--ov:rgba(0,0,0,.6);--cg:#252d3a;--ct:#636d80;--tp-bg:rgba(59,130,246,.12);--tp-c:#60a5fa;--tv-bg:rgba(167,139,250,.12);--tv-c:#a78bfa}
+:root,[data-theme="light"]{--bg:#f4f3f1;--bg-sb:#002D5C;--bg-c:#fff;--bg-ca:#f9f8f6;--bg-th:#efeee9;--bg-h:#f6f5f2;--brd:#ddd9d0;--brd-l:#eae7e0;--tx:#3b3a37;--txd:#7F7F7F;--txb:#002D5C;--txi:#fff;--sh:0 1px 3px rgba(0,45,92,.08);--acc:#EF7622;--acc-bg:rgba(239,118,34,.07);--bl:#28477E;--bl-bg:rgba(40,71,126,.07);--gn:#77A28A;--gn-bg:rgba(119,162,138,.09);--rd:#C55A17;--rd-bg:rgba(197,90,23,.07);--pr:#002D5C;--pr-bg:rgba(0,45,92,.06);--cy:#5A9B87;--cy-bg:rgba(168,210,187,.12);--sb-a:rgba(255,255,255,.12);--sb-h:rgba(255,255,255,.06);--ov:rgba(0,45,92,.25);--cg:#ddd9d0;--ct:#7F7F7F;--tp-bg:rgba(40,71,126,.08);--tp-c:#28477E;--tv-bg:rgba(0,45,92,.08);--tv-c:#002D5C}
+[data-theme="dark"]{--bg:#0c0e12;--bg-sb:#071526;--bg-c:#131821;--bg-ca:#19202d;--bg-th:#19202d;--bg-h:rgba(255,255,255,.03);--brd:#243044;--brd-l:#1c2536;--tx:#b0b8c8;--txd:#636d80;--txb:#e4e8f0;--txi:#0c0e12;--sh:0 1px 3px rgba(0,0,0,.3);--acc:#F5923E;--acc-bg:rgba(245,146,62,.1);--bl:#5B80B2;--bl-bg:rgba(91,128,178,.1);--gn:#99BBA8;--gn-bg:rgba(153,187,168,.1);--rd:#E07A3A;--rd-bg:rgba(224,122,58,.1);--pr:#5B8DBF;--pr-bg:rgba(91,141,191,.1);--cy:#A8D2BB;--cy-bg:rgba(168,210,187,.1);--sb-a:#19202d;--sb-h:#131821;--ov:rgba(0,0,0,.6);--cg:#243044;--ct:#636d80;--tp-bg:rgba(91,128,178,.12);--tp-c:#7DA3CE;--tv-bg:rgba(91,141,191,.12);--tv-c:#8DBAD8}
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.65;overflow-x:hidden}.layout{display:flex;min-height:100vh}
-.sidebar{width:260px;min-width:260px;background:var(--bg-sb);border-right:1px solid var(--brd);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .25s}.sidebar.closed{transform:translateX(-260px)}.sidebar-hd{padding:18px 20px;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between}.sidebar-br{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--txb)}.sidebar-br small{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:.6rem;color:var(--txd);font-weight:400;margin-top:2px;letter-spacing:.3px;text-transform:uppercase}
-.bi{width:30px;height:30px;border:1px solid var(--brd);border-radius:6px;background:var(--bg-c);color:var(--txd);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:.15s}.bi:hover{background:var(--bg-h);color:var(--txb)}
-.sidebar-nav{flex:1;overflow-y:auto;padding:10px 0}.ngl{padding:10px 20px 4px;font-size:.58rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--txd);font-weight:700}.ni{display:flex;align-items:center;gap:9px;padding:8px 20px;cursor:pointer;font-size:.8rem;color:var(--txd);font-weight:500;transition:.12s;border-left:3px solid transparent}.ni:hover{background:var(--sb-h);color:var(--tx)}.ni.a{background:var(--sb-a);color:var(--txb);border-left-color:var(--acc);font-weight:600}.ni .ic{width:18px;text-align:center;font-size:13px;flex-shrink:0}.ni .cd{font-family:'IBM Plex Mono',monospace;font-size:.58rem;background:var(--bg-ca);border:1px solid var(--brd);padding:1px 5px;border-radius:3px;color:var(--txd);margin-left:auto}
-.sidebar-ft{padding:12px 20px;border-top:1px solid var(--brd);display:flex;align-items:center;gap:10px}.tt{display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--txd);cursor:pointer;background:none;border:none;font-family:inherit}.tt:hover{color:var(--tx)}.ttr{width:34px;height:18px;background:var(--brd);border-radius:9px;position:relative;transition:.2s}.ttr::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:var(--bg-c);border-radius:50%;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.15)}[data-theme="dark"] .ttr{background:var(--acc)}[data-theme="dark"] .ttr::after{left:18px}
+.sidebar{width:260px;min-width:260px;background:var(--bg-sb);border-right:none;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .25s}.sidebar.closed{transform:translateX(-260px)}.sidebar-hd{padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between}.sidebar-br{font-family:'DM Serif Display',serif;font-size:1rem;color:#fff}.sidebar-br small{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:.6rem;color:rgba(255,255,255,.5);font-weight:400;margin-top:2px;letter-spacing:.3px;text-transform:uppercase}
+.bi{width:30px;height:30px;border:1px solid rgba(255,255,255,.15);border-radius:6px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:.15s}.bi:hover{background:rgba(255,255,255,.12);color:#fff}
+.sidebar-nav{flex:1;overflow-y:auto;padding:10px 0}.ngl{padding:10px 20px 4px;font-size:.58rem;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.35);font-weight:700}.ni{display:flex;align-items:center;gap:9px;padding:8px 20px;cursor:pointer;font-size:.8rem;color:rgba(255,255,255,.55);font-weight:500;transition:.12s;border-left:3px solid transparent}.ni:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}.ni.a{background:rgba(255,255,255,.1);color:#fff;border-left-color:var(--acc);font-weight:600}.ni .ic{width:18px;text-align:center;font-size:13px;flex-shrink:0}.ni .cd{font-family:'IBM Plex Mono',monospace;font-size:.58rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:1px 5px;border-radius:3px;color:rgba(255,255,255,.5);margin-left:auto}
+.sidebar-ft{padding:12px 20px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px}.tt{display:flex;align-items:center;gap:8px;font-size:.76rem;color:rgba(255,255,255,.5);cursor:pointer;background:none;border:none;font-family:inherit}.tt:hover{color:rgba(255,255,255,.8)}.ttr{width:34px;height:18px;background:rgba(255,255,255,.2);border-radius:9px;position:relative;transition:.2s}.ttr::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.15)}[data-theme="dark"] .ttr{background:var(--acc)}[data-theme="dark"] .ttr::after{left:18px}
 .sov{display:none;position:fixed;inset:0;background:var(--ov);z-index:90}.sov.sh{display:block}
 .main{flex:1;margin-left:260px;transition:margin-left .25s}.main.exp{margin-left:0}.topbar{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--brd);padding:11px 24px;display:flex;align-items:center;gap:12px}.topbar-t{font-size:.84rem;color:var(--txd);font-weight:500}.content{padding:22px 24px 80px}
 .kg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.kpi{background:var(--bg-c);border:1px solid var(--brd);border-radius:10px;padding:16px 18px;position:relative;box-shadow:var(--sh);overflow:hidden}.kpi::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px}.kpi.go::before{background:var(--acc)}.kpi.bu::before{background:var(--bl)}.kpi.gn::before{background:var(--gn)}.kpi.re::before{background:var(--rd)}.kpi.pu::before{background:var(--pr)}.kpi.cn::before{background:var(--cy)}.kl{font-size:.65rem;text-transform:uppercase;letter-spacing:.8px;color:var(--txd);margin-bottom:5px;font-weight:600}.kv{font-family:'IBM Plex Mono',monospace;font-size:1.35rem;font-weight:700;color:var(--txb)}.kv span{font-size:.7rem;font-weight:400;color:var(--txd)}.kn{font-size:.68rem;color:var(--txd);margin-top:3px}.ks{font-size:.58rem;color:var(--txd);margin-top:7px;padding-top:5px;border-top:1px solid var(--brd-l)}.ks a{color:var(--bl);text-decoration:none}.ks a:hover{text-decoration:underline}
@@ -29,6 +29,26 @@
 .vi{margin-bottom:18px}.vit{font-weight:700;color:var(--txb);font-size:.9rem;margin-bottom:3px;display:flex;align-items:center;gap:7px}.vn{font-family:'IBM Plex Mono',monospace;font-size:.58rem;background:var(--rd);color:#fff;padding:2px 6px;border-radius:3px;font-weight:700}.vi p{font-size:.82rem}
 @media(max-width:1024px){.kg{grid-template-columns:repeat(2,1fr)}.g2,.g3{grid-template-columns:1fr}}
 @media(max-width:768px){.sidebar{transform:translateX(-260px)}.sidebar.open{transform:translateX(0)}.main{margin-left:0!important}.content{padding:14px 14px 80px}.topbar{padding:9px 14px}.kg{grid-template-columns:repeat(2,1fr);gap:8px}.kpi{padding:12px 14px}.kv{font-size:1.15rem}}
+/* Infographic styles */
+.inf{margin:12px 0}.inf-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0;justify-content:center}
+.inf-box{padding:10px 14px;border-radius:8px;text-align:center;font-size:.78rem;line-height:1.4;min-width:90px;flex-shrink:0}
+.inf-box strong{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;opacity:.8;margin-bottom:2px}
+.inf-box .val{font-family:'IBM Plex Mono',monospace;font-size:1.1rem;font-weight:800;display:block}
+.inf-arr{font-size:1.1rem;color:var(--txd);flex-shrink:0;line-height:1}
+.inf-arr.down{transform:rotate(90deg)}
+.ib-pri{background:#28477E;color:#fff}.ib-sec{background:#EF7622;color:#fff}.ib-grn{background:#77A28A;color:#fff}.ib-red{background:#C55A17;color:#fff}.ib-gray{background:var(--bg-ca);color:var(--txb);border:1.5px solid var(--brd)}.ib-pur{background:#002D5C;color:#fff}
+.inf-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.inf-g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.inf-lane{border-radius:10px;padding:14px;background:var(--bg-c);border:1.5px solid var(--brd)}
+.inf-lane h4{font-family:'DM Serif Display',serif;font-size:.9rem;margin:0 0 8px;color:var(--txb)}
+.inf-lane .il-stat{font-family:'IBM Plex Sans',sans-serif;font-size:.74rem;margin:3px 0;color:var(--txd)}
+.inf-lane .il-stat b{color:var(--txb)}
+.inf-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.62rem;font-weight:700;margin:2px}
+.pill-g{background:#77A28A;color:#fff}.pill-b{background:#28477E;color:#fff}.pill-r{background:#C55A17;color:#fff}.pill-a{background:#EF7622;color:#fff}.pill-d{background:#7F7F7F;color:#fff}
+.inf-bar{height:28px;border-radius:6px;display:flex;overflow:hidden;margin:6px 0;font-size:.62rem;font-weight:700;color:#fff;line-height:28px;text-align:center}
+.inf-bar>div{white-space:nowrap;overflow:hidden;padding:0 4px}
+.inf-note{font-size:.72rem;color:var(--txd);margin-top:6px;line-height:1.5;font-style:italic}
+@media(max-width:768px){.inf-row{flex-direction:column}.inf-split,.inf-g3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -55,7 +75,9 @@
     <div class="ni" onclick="nv(8,this)"><span class="ic">🚢</span> Comércio Exterior<span class="cd">08</span></div>
     <div class="ni" onclick="nv(9,this)"><span class="ic">🏗️</span> Infraestrutura<span class="cd">09</span></div>
     <div class="ngl">Perspectivas</div>
-    <div class="ni" onclick="nv(10,this)"><span class="ic">⚠️</span> Riscos & Expansão<span class="cd">10</span></div>
+    <div class="ni" onclick="nv(10,this)"><span class="ic">⚠️</span> Riscos & Expansão<span class="cd">11</span></div>
+    <div class="ngl">Mercado</div>
+    <div class="ni" onclick="nv(11,this)"><span class="ic">🏢</span> Players<span class="cd">12</span></div>
   </nav>
   <div class="sidebar-ft"><button class="tt" onclick="tgTh()"><div class="ttr"></div><span id="tl">Modo escuro</span></button></div>
 </aside>
@@ -94,16 +116,51 @@
 <div class="tw"><table>
 <thead><tr><th>Componente</th><th>Gasolina C</th><th>Diesel B</th><th>Notas</th></tr></thead>
 <tbody>
-<tr><td class="bold">Petrobras (refinaria)</td><td class="mono">~R$ 3,04/L (47%)</td><td class="mono">~47–63%</td><td>Referência PPI (paridade importação), mas Petrobras se descolou em mar/2026 (desconto de 18,1% vs PPI)</td></tr>
+<tr><td class="bold">Petrobras (refinaria)</td><td class="mono">~R$ 3,04/L (47%)</td><td class="mono">~47–63%</td><td>Referência PPI, mas descolou em mar/2026 (−18,1% vs PPI). Reajuste diesel A +R$ 0,38/L em 13/mar. Entrega 15% acima das cotas mensais.</td></tr>
 <tr><td class="bold">ICMS (estadual, ad rem)</td><td class="mono">R$ 1,57/L (24%)</td><td class="mono">R$ 1,17/L (19%)</td><td>Monofásico desde LC 192/2022 · Confaz atualiza anualmente · GLP: R$ 1,47/kg</td></tr>
-<tr><td class="bold">PIS/Cofins + CIDE (federal)</td><td class="mono">~R$ 0,89/L (14%)</td><td class="mono">~R$ 0,35/L (5%)</td><td>Diesel: PIS/Cofins <span class="hr">zerados em mar/2026</span> (MP 1.340) + subsídio R$ 0,32/L até dez/2026</td></tr>
+<tr><td class="bold">PIS/Cofins + CIDE (federal)</td><td class="mono">~R$ 0,89/L (14%)</td><td class="mono">~R$ 0,35/L (5%)</td><td>Diesel: PIS/Cofins <span class="hr">zerados em mar/2026</span> (MP 1.340) + subsídio R$ 0,32/L — mas reajuste Petrobras de R$ 0,38 neutralizou o efeito</td></tr>
 <tr><td class="bold">Biocombustível na mistura</td><td class="mono">E30 (30% anidro)</td><td class="mono">B15 (15% biodiesel)</td><td>Custo do biocombustível embutido no preço final · Biodiesel ~R$ 5,29/L</td></tr>
 <tr><td class="bold">Distribuição + Revenda</td><td class="mono">~R$ 1,12/L (18%)</td><td class="mono">~18%</td><td>Margem cresceu <span class="hr">31,3% em 2025</span> enquanto preço refinaria caiu 21,3% (Ineep)</td></tr>
-<tr style="background:var(--acc-bg);font-weight:700"><td>TOTAL na bomba</td><td class="mono">~R$ 6,47/L</td><td class="mono">~R$ 5,90–7,22/L</td><td>Impostos = ~34% gasolina, ~22% diesel. Carga total entre as mais altas do mundo.</td></tr>
+<tr style="background:var(--acc-bg);font-weight:700"><td>TOTAL na bomba</td><td class="mono">~R$ 6,65/L</td><td class="mono">~R$ 7,35/L (mar/2026)</td><td>Impostos = ~34% gasolina, ~22% diesel. Mas "preço é mais macroeconômico que tributário" (Valêncio/CBIE).</td></tr>
 </tbody></table></div>
 <div class="cs"><a href="https://istoedinheiro.com.br/impostos-representam-ate-34-do-preco-dos-combustiveis-nos-postos-veja-composicao" target="_blank">ISTOÉ Dinheiro/Petrobras</a> · <a href="https://comsefaz.org.br/novo/atualizacao-de-aliquotas-do-icms-sobre-combustiveis-entra-em-vigor-em-1o-de-janeiro-de-2026/" target="_blank">Comsefaz (ICMS 2026)</a> · <a href="https://revistaforum.com.br/brasil/o-que-faz-o-diesel-subir-de-preco-no-brasil/" target="_blank">R. Fórum (composição diesel)</a> · <a href="https://www.defesaemfoco.com.br/autossuficiencia-e-preco-alto/" target="_blank">Defesa em Foco (PPI/margens)</a></div></div>
 
-<div class="co r"><strong>Distorção de margens (2025):</strong> Entre jan–out 2025, o preço da gasolina A na refinaria caiu 21,3%, mas na bomba subiu 0,3%. A margem de distribuição e revenda saltou de R$ 0,96 para R$ 1,26 (+31,3%). O consumidor não sentiu a queda do petróleo internacional. Em mar/2026, o governo zerou PIS/Cofins sobre diesel e criou subsídio de R$ 0,32/L (redução potencial de R$ 0,64/L), mas fiscalização da ANP em 9 estados encontrou postos que não repassaram integralmente.</div>
+<div class="co r"><strong>Distorção de margens (2025–2026):</strong> Entre jan–out 2025, o preço da gasolina A na refinaria caiu 21,3%, mas na bomba subiu 0,3%. A margem de distribuição e revenda saltou de R$ 0,96 para R$ 1,26 (+31,3%, Ineep). Desde o início da guerra Irã (28/fev), margens cresceram mais <span class="hr">37%</span> (Ibeps/MME). O governo zerou PIS/Cofins sobre diesel + subsídio R$ 0,32/L (MP 1.340), mas a Petrobras reajustou diesel A em R$ 0,38/L em 13/mar — neutralizando na prática a subvenção. A PF deflagrou a <span class="hl">Operação Vem Diesel</span> (27/mar) para investigar preços abusivos em 11 estados + DF.</div>
+
+<div class="card"><div class="ct"><span class="badge">MEC</span> Mecânica de Suprimento — Como Funciona a Cadeia</div>
+<div class="inf">
+<!-- Row 1: Sources -->
+<div class="inf-row">
+  <div class="inf-box ib-pri"><strong>Petrobras</strong><span class="val">~70%</span>13 refinarias · Cotas mensais por share</div>
+  <div class="inf-box ib-gray"><strong>Refinarias Privadas</strong><span class="val">~5%</span>Acelen (Mataripe) · 3R · Dax</div>
+  <div class="inf-box ib-red"><strong>Importação</strong><span class="val">~25%</span>Diesel: Rússia 47% + EUA 33%</div>
+</div>
+<div style="text-align:center;font-size:1.3rem;color:var(--txd);line-height:1">▼</div>
+<!-- Row 2: Mechanism -->
+<div class="inf-row">
+  <div class="inf-box ib-sec" style="max-width:520px;flex:1"><strong>Sistema de Cotas + Leilões Spot</strong>Distribuidora com 20% share → recebe 20% do volume mensal. Se precisa mais → refinarias privadas ou importação a preço PPI</div>
+</div>
+<div style="text-align:center;font-size:1.3rem;color:var(--txd);line-height:1">▼</div>
+<!-- Row 3: Distribution -->
+<div class="inf-row">
+  <div class="inf-box ib-pri"><strong>Vibra (BR)</strong><span class="val">24,5%</span>~8.100 postos</div>
+  <div class="inf-box ib-grn"><strong>Ipiranga</strong><span class="val">15,3%</span>~7.800 postos</div>
+  <div class="inf-box ib-pur"><strong>Raízen (Shell)</strong><span class="val">15,0%</span>~7.200 postos</div>
+  <div class="inf-box ib-gray"><strong>Bandeira Branca</strong><span class="val">~42%</span>174 distribuidoras · 20k+ postos</div>
+</div>
+<div style="text-align:center;font-size:1.3rem;color:var(--txd);line-height:1">▼</div>
+<!-- Row 4: End consumer -->
+<div class="inf-row">
+  <div class="inf-box ib-gray" style="min-width:140px"><strong>44.678 Postos</strong>+ 607 TRRs (agro)</div>
+  <div style="font-size:1.3rem;color:var(--txd)">→</div>
+  <div class="inf-box ib-gray" style="min-width:140px"><strong>Consumidor Final</strong>133,1 bi L/ano</div>
+</div>
+</div>
+<!-- Crisis box -->
+<div style="margin:10px 0;padding:10px 14px;border-radius:8px;background:var(--rd-bg);border-left:3px solid var(--rd);font-size:.78rem;line-height:1.6">
+<strong style="color:var(--rd)">⚠ Crise mar/2026 — O "Mercado Dual":</strong> Petrobras vende diesel a R$3,72/L (−18% vs PPI). Importado custa <strong>+R$2,50/L</strong> → importadores recuam → oferta encolhe → Big 3 cortam 10–20% a bandeira branca/TRRs. Vendas +20% a/a (estocagem). Governo subsidia −R$0,32/L mas Petrobras reajusta +R$0,38 → <strong>efeito neutralizado</strong>. Tese do setor: <em>"preço é mais macroeconômico que tributário"</em> (Valêncio/CBIE).
+</div>
+<div class="cs"><a href="https://minaspetro.com.br/por-que-os-precos-dos-combustiveis-estao-subindo-nas-bombas-entenda/" target="_blank">Valor Econômico/Minaspetro, 21/mar/2026</a> · <a href="https://www.fecombustiveis.org.br/noticia/alta-de-precos-e-risco-de-escassez-de-combustiveis-mostram-pouca-eficacia-de-acoes-do-governo/263964" target="_blank">Fecombustíveis/O Globo</a> · <a href="https://www.seudinheiro.com/2026/economia/distribuidoras-e-postos-de-combustiveis-ampliaram-margem-de-lucro-em-37-desde-inicio-da-guerra-lvgb/" target="_blank">Seu Dinheiro/Ibeps (+37%)</a> · <a href="https://www.poder360.com.br/poder-energia/setor-de-combustiveis-alerta-para-risco-de-desabastecimento-no-brasil/" target="_blank">Poder360 (nota conjunta)</a></div></div>
 </div>
 
 <!-- ===== S1: REFINO & PRODUÇÃO ===== -->
@@ -162,10 +219,48 @@
 <div class="cs"><a href="https://www.poder360.com.br/poder-economia/frota-de-veiculos-no-brasil-cresce-4-em-2024-diz-levantamento/" target="_blank">Poder360/Veloe/Fipe (frota 2024)</a> · <a href="https://www.autoindustria.com.br/2024/04/24/carros-flex-respondem-por-762-da-frota-brasileira/" target="_blank">AutoIndústria/Sindipeças (76,2% flex)</a></div></div>
 
 <div class="card"><div class="ct"><span class="badge">TRANS</span> Transição Energética — A Aposta Brasileira: Híbrido Flex</div>
-<div class="pr"><p>O Brasil não seguirá o modelo europeu de eletrificação pura. A estratégia nacional é o <span class="hg">veículo híbrido flex</span> — motor elétrico combinado com combustão flex (etanol + gasolina). Montadoras comprometeram <span class="hl">R$ 117 bilhões</span> em investimentos, com pelo menos 30 novos modelos previstos. VW investirá R$ 9 bi em plataforma híbrida flex; Hyundai, Stellantis e Toyota também investem pesado. O Programa Mover oferece R$ 19,3 bi até 2028 para P&D em baixa emissão.</p>
-<p><strong>EPE projeta (2034):</strong> No cenário de referência, eletrificados serão <span class="hb">8% da frota</span> de veículos leves. No cenário "turbo", <span class="hb">22%</span> (400 mil híbridos + 122 mil plug-in + 172 mil elétricos/ano). A demanda elétrica para recarga cresceria de 627 GWh (2025) para 7,8 TWh (2035). Infraestrutura: apenas 4.230 eletropostos em 2024, concentrados em grandes centros.</p>
-<p><strong>Transporte pesado permanece diesel:</strong> Caminhões e ônibus não têm alternativa viável em escala. Alternativas piloto: VW Meteor Hybrid (diesel + elétrico, −90% CO₂ com HVO), Volvo FH B100 Flex (biodiesel puro, 80 unidades em uso), Scania elétrico 30G (entrega jan/2026, 250 km autonomia), Cummins HELM (motor único: diesel, gás, hidrogênio). A EPE estima 43 mil caminhões eletrificados até 2035 — uma fração dos milhões a diesel.</p></div>
-<div class="cs"><a href="https://usebaratao.com.br/motores-em-transicao-o-mercado-automotivo-brasileiro-em-2025/" target="_blank">Baratão (frota 2025)</a> · <a href="https://www.jota.info/coberturas-especiais/carros-hibridos-flex-sao-o-futuro-da-mobilidade-no-brasil-25062024" target="_blank">JOTA (híbrido flex)</a> · <a href="https://www.biodieselbr.com/noticias/qualidade/motor/fenatan-caminhoes-hibridos-e-flex-sao-destaque-como-alternativas-ao-diesel-051124" target="_blank">BiodieselBR (Fenatran caminhões)</a> · <a href="https://eixos.com.br/transicao-energetica/quase-um-quarto-da-frota-de-novos-veiculos-leves-sera-eletrificada-em-2035-estima-epe/" target="_blank">Eixos/EPE (projeção 2035)</a></div></div>
+<div class="inf">
+<!-- Investment banner -->
+<div class="inf-row">
+  <div class="inf-box ib-grn" style="flex:1;max-width:100%"><strong>Investimentos Comprometidos por Montadoras</strong><span class="val">R$ 117 bilhões</span>30+ novos modelos · VW R$9 bi · Hyundai · Stellantis · Toyota · Programa Mover R$19,3 bi até 2028</div>
+</div>
+<!-- Three lanes -->
+<div class="inf-g3" style="margin:12px 0">
+  <div class="inf-lane">
+    <h4>🚗 Veículos Leves</h4>
+    <div class="inf-bar"><div style="width:76%;background:var(--gn)">Flex 76%</div><div style="width:12%;background:var(--txd)">Gasolina 12%</div><div style="width:12%;background:var(--bl)">Outros</div></div>
+    <div class="il-stat"><b>Aposta:</b> Híbrido Flex</div>
+    <div class="il-stat">Motor elétrico + combustão flex (etanol/gasolina)</div>
+    <div class="il-stat"><b>Eletrificados 2024:</b> 0,4% da frota</div>
+    <div class="il-stat" style="margin-top:6px"><span class="inf-pill pill-g">EPE Ref. 2034: 8%</span> <span class="inf-pill pill-b">Turbo: 22%</span></div>
+    <div class="il-stat">400k híbridos + 122k plug-in + 172k EV/ano</div>
+    <div class="il-stat"><b>Infraestrutura:</b> 4.230 eletropostos (2024)</div>
+  </div>
+  <div class="inf-lane">
+    <h4>🚛 Transporte Pesado</h4>
+    <div class="inf-bar"><div style="width:100%;background:var(--rd)">Diesel 100%</div></div>
+    <div class="il-stat"><b>Sem alternativa em escala</b></div>
+    <div class="il-stat">Diesel dominará por décadas</div>
+    <div class="il-stat" style="margin-top:6px"><b>Pilotos:</b></div>
+    <div class="il-stat"><span class="inf-pill pill-b">VW Meteor Hybrid</span> diesel+elétrico, −90% CO₂ c/ HVO</div>
+    <div class="il-stat"><span class="inf-pill pill-g">Volvo FH B100</span> biodiesel puro, 80 un.</div>
+    <div class="il-stat"><span class="inf-pill pill-a">Scania 30G EV</span> jan/26, 250 km</div>
+    <div class="il-stat"><span class="inf-pill pill-d">Cummins HELM</span> diesel/gás/H₂</div>
+    <div class="il-stat"><b>EPE 2035:</b> 43 mil caminhões eletrificados</div>
+  </div>
+  <div class="inf-lane">
+    <h4>⚡ Demanda Elétrica</h4>
+    <div class="inf-bar"><div style="width:8%;background:var(--bl)">2025</div><div style="width:92%;background:var(--gn)">2035</div></div>
+    <div class="il-stat"><b>Recarga veículos:</b></div>
+    <div class="il-stat"><span class="val" style="font-size:.95rem;color:var(--bl)">627 GWh</span> (2025)</div>
+    <div class="il-stat" style="text-align:center;font-size:1rem;color:var(--txd)">▼ ×12,4</div>
+    <div class="il-stat"><span class="val" style="font-size:.95rem;color:var(--gn)">7,8 TWh</span> (2035)</div>
+    <div class="il-stat" style="margin-top:8px"><b>Brasil ≠ Europa</b></div>
+    <div class="il-stat">Biocombustíveis já descarbonizam a frota flex. Eletrificação pura levaria décadas pelo legado de 124 Mi veículos a combustão.</div>
+  </div>
+</div>
+</div>
+<div class="cs"><a href="https://usebaratao.com.br/motores-em-transicao-o-mercado-automotivo-brasileiro-em-2025/" target="_blank">Baratão (frota 2025)</a> · <a href="https://www.jota.info/coberturas-especiais/carros-hibridos-flex-sao-o-futuro-da-mobilidade-no-brasil-25062024" target="_blank">JOTA (híbrido flex)</a> · <a href="https://www.biodieselbr.com/noticias/qualidade/motor/fenatan-caminhoes-hibridos-e-flex-sao-destaque-como-alternativas-ao-diesel-051124" target="_blank">BiodieselBR (Fenatran)</a> · <a href="https://eixos.com.br/transicao-energetica/quase-um-quarto-da-frota-de-novos-veiculos-leves-sera-eletrificada-em-2035-estima-epe/" target="_blank">Eixos/EPE (projeção 2035)</a></div></div>
 </div>
 
 <!-- ===== S3: DIESEL DEEP DIVE ===== -->
@@ -174,7 +269,7 @@
   <div class="kpi go"><div class="kl">Vendas Diesel B (2024)</div><div class="kv">67,3 <span>bi L</span></div><div class="kn">Projeção 2025: 69,3–70,5 bi L (StoneX/EPE)</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a></div></div>
   <div class="kpi re"><div class="kl">Importações (2025)</div><div class="kv">17,3 <span>bi L</span></div><div class="kn">Recorde · +20% vs 2024</div><div class="ks"><a href="https://www.infomoney.com.br/mercados/importacao-de-diesel-pelo-brasil-bate-recorde-em-2025-com-aumento-de-20/" target="_blank">StoneX/InfoMoney</a></div></div>
   <div class="kpi pu"><div class="kl">Defasagem Petrobras (mar/2026)</div><div class="kv">67% <span>abaixo PPI</span></div><div class="kn">Guerra Irã · Petróleo +49%</div><div class="ks"><a href="https://www.cnnbrasil.com.br/economia/negocios/defasagem-do-diesel-escala-a-47-nas-refinarias-da-petrobras-diz-abicom/" target="_blank">Abicom/CNN</a></div></div>
-  <div class="kpi cn"><div class="kl">Spread Preço (mar/2026)</div><div class="kv">R$4,30 <span>/L</span></div><div class="kn">RJ R$5,69 vs SP R$9,99</div><div class="ks"><a href="https://revistaoeste.com/economia/diesel-sobe-24-em-sp-e-precos-abusivos-levam-a-autuacoes-da-anp/" target="_blank">Revista Oeste/ANP</a></div></div>
+  <div class="kpi cn"><div class="kl">Spread Preço (mar/2026)</div><div class="kv">R$4,30 <span>/L</span></div><div class="kn">RJ R$5,69 vs SP R$9,99 · Diesel +19,5% desde 28/fev (ANP)</div><div class="ks"><a href="https://minaspetro.com.br/por-que-os-precos-dos-combustiveis-estao-subindo-nas-bombas-entenda/" target="_blank">Valor Econômico/ANP</a></div></div>
 </div>
 <div class="card"><div class="ct"><span class="badge">FLUX</span> Fluxos Internos de Diesel</div>
 <div class="flow"><div class="flt">C1 — SE → Centro-Oeste/Norte (maior fluxo)</div><div class="fc"><div class="fn o">REPLAN (SP)</div><span class="fa">→</span><div class="fn">Duto+Rodovia</div><span class="fa">→</span><div class="fn d">Interior SP, GO, DF, MT, MS, TO, RO, AC</div></div><p>55% da REPLAN para interior SP. Restante via rodovia para CO e Norte. Agro é o driver sazonal.</p></div>
@@ -227,8 +322,23 @@
 <div class="card"><div class="ct"><span class="badge">PREÇO</span> Preço Médio Diesel por Região (R$/L)</div><div class="cw"><canvas id="c4c"></canvas></div><div class="cs"><a href="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/anuario-estatistico/arquivos-anuario-estatistico-2024/secao-3/secao3.pdf" target="_blank">ANP Anuário 2024 (Seção 3)</a> · <a href="https://exame.com/brasil/preco-do-diesel-dispara-no-brasil-e-ja-custa-r-722-mostra-levantamento/" target="_blank">Exame/TicketLog mar/2026</a></div></div>
 
 <div class="card"><div class="ct"><span class="badge">MERC</span> Concentração de Mercado na Distribuição</div>
-<div class="pr"><p>O mercado de distribuição é dominado por 4 grandes players: <span class="hb">Vibra (BR) 15,9%</span>, <span class="hl">Ipiranga 13,1%</span>, <span class="hg">Raízen (Shell) 10,8%</span> e Alesat 2,8% — juntas, 42,6% dos postos. As 63 bandeiras restantes dividem 57,4%. Na crise de março/2026, <span class="hr">as grandes distribuidoras priorizaram redes próprias, cortando 10–20% das vendas a postos bandeira branca e TRRs</span> — amplificando o racionamento em regiões já vulneráveis.</p>
-<p>Os TRRs (transportadores-revendedores-retalhistas) — 607 no Brasil — são essenciais para o agro, entregando diesel diretamente a fazendas. A concentração no Sul (38,2%) e Centro-Oeste (23,4%) reflete a geografia da demanda agrícola. Na crise, foram os primeiros a sofrer cortes de suprimento.</p></div>
+<div class="cw"><canvas id="c4d"></canvas></div>
+<div class="inf" style="margin-top:8px">
+<div class="inf-split">
+  <div class="inf-lane">
+    <h4>⛽ 44.678 Postos</h4>
+    <div class="il-stat">SP 19,6% · MG 10,9% · BA 7,6% · RS 7,2% · PR 6,5%</div>
+    <div class="il-stat">63 bandeiras ativas · Big 3 = 42,6% dos postos</div>
+    <div class="il-stat" style="color:var(--rd);font-weight:600">Crise mar/26: Big 3 cortaram 10–20% a bandeira branca</div>
+  </div>
+  <div class="inf-lane">
+    <h4>🚚 607 TRRs</h4>
+    <div class="il-stat">Sul 38,2% · SE 25,4% · CO 23,4% · N+NE 13%</div>
+    <div class="il-stat">Essenciais para o agro: diesel direto a fazendas</div>
+    <div class="il-stat" style="color:var(--rd);font-weight:600">Primeiros a sofrer cortes na crise</div>
+  </div>
+</div>
+</div>
 <div class="cs"><a href="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/anuario-estatistico/arquivos-anuario-estatistico-2024/secao-3/secao3.pdf" target="_blank">ANP Anuário 2024 (Seção 3)</a> · <a href="https://www.fecombustiveis.org.br/noticia/alta-de-precos-e-risco-de-escassez-de-combustiveis-mostram-pouca-eficacia-de-acoes-do-governo/263964" target="_blank">Fecombustíveis (racionamento mar/2026)</a></div></div>
 
 <div class="co y"><strong>O paradoxo regional:</strong> O Sudeste concentra ~66% do refino mas é o maior consumidor. O Centro-Oeste — coração do agronegócio, com 29 bases de distribuição só em MT — não tem uma única refinaria. A REPLAN funciona como o "coração" do sistema, bombeando diesel por rodovia até o Acre. O etanol hidratado é competitivo em apenas 5 estados (GO, MT, MG, PR, SP) — no Norte e Nordeste, gasolina permanece dominante, sem alternativa de preço.</div>
@@ -244,16 +354,71 @@
   <div class="kpi pu"><div class="kl">QAV — Crescimento</div><div class="kv">+6,8% <span>em 2024</span></div><div class="kn">~7 Mi m³ · Recuperação pós-COVID forte</div><div class="ks"><a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/ANP</a></div></div>
 </div>
 <div class="card"><div class="ct"><span class="badge">GAS</span> Gasolina C: dinâmica com Etanol</div>
-<div class="pr"><p>Gasolina C caiu <span class="hr">4%</span> em 2024 enquanto etanol hidratado subiu <span class="hg">33,4%</span> — a "regra dos 70%" (etanol competitivo quando <70% do preço da gasolina) foi amplamente atendida. A Lei do Combustível do Futuro (14.993/2024) prevê etanol anidro até 35% na gasolina (E30 já vigente). A mistura E30 comprime a oferta de hidratado, tendendo a re-equilibrar preços. StoneX projeta gasolina C em alta de ~4,9% em 2025 (recorde de 46,5 bi L) com etanol recuando 7,8%.</p></div>
+<div class="inf">
+<div class="inf-row">
+  <div class="inf-box ib-red"><strong>Gasolina C (2024)</strong><span class="val">44,2 bi L</span>−4% vs 2023</div>
+  <div style="font-size:1rem;color:var(--txd)">⇄</div>
+  <div class="inf-box ib-grn"><strong>Etanol Hidratado</strong><span class="val">21,7 bi L</span>+33,4% vs 2023</div>
+</div>
+<div class="inf-split">
+  <div class="inf-lane">
+    <h4>📉 Gasolina perde share</h4>
+    <div class="il-stat">Regra dos 70% amplamente atendida em 2024</div>
+    <div class="il-stat">E30 vigente (30% anidro na gasolina)</div>
+    <div class="il-stat">StoneX projeta recuperação: <b>46,5 bi L</b> em 2025 (+4,9%)</div>
+  </div>
+  <div class="inf-lane">
+    <h4>📈 Etanol ganha share</h4>
+    <div class="il-stat">Competitividade de preço impulsionou migração flex</div>
+    <div class="il-stat">E30 comprime oferta hidratado → reequilíbrio de preços</div>
+    <div class="il-stat"><b>Autossuficiência gasolina A:</b> 90% (10% importado)</div>
+  </div>
+</div>
+</div>
 <div class="cs"><a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica</a> · <a href="https://br.investing.com/news/economy-news/vendas-de-diesel-b-crescem-em-maio-e-tem-maior-volume-em-7-meses-mostra-anp-1595965" target="_blank">StoneX/Investing</a></div></div>
+
 <div class="card"><div class="ct"><span class="badge">GLP</span> GLP: gás de cozinha e a questão social</div>
-<div class="pr"><p>GLP é essencial: atende <span class="hl">58.283 revendas</span> e ~95% dos lares brasileiros. Importações cobrem ~25% da demanda. A EPE projeta superávit possível a partir de ~2029 com aumento da produção em UPGNs (processamento de gás natural). Principal vulnerabilidade: preço do botijão — em Ilhéus/BA atingiu R$150 em mar/2026. Transpetro triplicará capacidade de transporte de GLP com 5 novos gaseiros.</p></div>
+<div class="inf">
+<div class="inf-row">
+  <div class="inf-box ib-sec"><strong>Vendas 2024</strong><span class="val">7,57 Mi m³</span>+2,2% · ~95% dos lares</div>
+  <div class="inf-box ib-red"><strong>Importação</strong><span class="val">25%</span>da demanda total</div>
+  <div class="inf-box ib-gray"><strong>Revendas GLP</strong><span class="val">58.283</span>Maior rede do país</div>
+  <div class="inf-box ib-grn"><strong>Superávit</strong><span class="val">~2029</span>Expansão UPGNs (gás do pré-sal)</div>
+</div>
+<div style="margin:8px 0;padding:8px 14px;border-radius:8px;background:var(--rd-bg);border-left:3px solid var(--rd);font-size:.76rem;line-height:1.5">
+<strong>⚠ Vulnerabilidade social:</strong> Botijão a R$150 em Ilhéus/BA (mar/2026). Preço médio Norte R$8,88/kg vs NE R$7,89. Transpetro triplicará capacidade com 5 novos gaseiros (Mar Aberto).
+</div>
+</div>
 <div class="cs"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a> · <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-01/novas-embarcacoes-da-petrobras-triplicarao-capacidade-de-transporte" target="_blank">Agência Brasil/Mar Aberto</a></div></div>
-<div class="card"><div class="ct"><span class="badge">QAV</span> QAV & Outros: aviação e indústria</div>
-<div class="pr"><p><strong>QAV (querosene de aviação):</strong> recuperação vigorosa pós-COVID. Crescimento de 6,8% em 2024, aproximando-se dos níveis pré-crise de 2014. EPE projeta importações acima das máximas históricas. Trade-off com diesel: refinarias podem aumentar QAV em detrimento do diesel, até certo limite. SAF (combustível sustentável de aviação) começa a ganhar tração — planta HEFA na RPBC em construção.</p>
-<p><strong>Nafta:</strong> insumo petroquímico. Demanda por plásticos e resinas. Brasil importador líquido durante todo o horizonte.</p>
-<p><strong>Óleo Combustível:</strong> excedentário — produção supera demanda. Usado para bunker (abastecimento naval) e exportação.</p>
-<p><strong>Asfalto (CAP):</strong> demanda correlacionada com ciclos eleitorais e obras públicas (PAC). Produção nacional atende.</p></div>
+
+<div class="card"><div class="ct"><span class="badge">QAV</span> QAV & Outros Derivados</div>
+<div class="inf">
+<div class="inf-g3">
+  <div class="inf-lane" style="border-left:3px solid var(--pr)">
+    <h4>✈️ QAV (Querosene de Aviação)</h4>
+    <div class="il-stat"><span class="inf-pill pill-g">+6,8%</span> em 2024</div>
+    <div class="il-stat">Recuperação vigorosa pós-COVID</div>
+    <div class="il-stat">Import. acima de máximas históricas</div>
+    <div class="il-stat">Trade-off com diesel no refino</div>
+    <div class="il-stat" style="color:var(--gn)"><b>SAF:</b> planta HEFA/RPBC em construção</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--rd)">
+    <h4>🏭 Nafta Petroquímica</h4>
+    <div class="il-stat"><span class="inf-pill pill-r">Importador líquido</span></div>
+    <div class="il-stat">Insumo para plásticos e resinas</div>
+    <div class="il-stat">Déficit permanente no horizonte</div>
+    <div class="il-stat">Demanda cresce com indústria</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--gn)">
+    <h4>🛢️ Óleo Comb. / Asfalto</h4>
+    <div class="il-stat"><span class="inf-pill pill-g">Excedentário</span> Óleo Comb.</div>
+    <div class="il-stat">Bunker naval + exportação</div>
+    <div class="il-stat" style="margin-top:6px"><b>Asfalto (CAP):</b></div>
+    <div class="il-stat">Correlação com obras públicas (PAC)</div>
+    <div class="il-stat">Produção nacional atende demanda</div>
+  </div>
+</div>
+</div>
 <div class="cs"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a> · <a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica</a></div></div>
 </div>
 
@@ -283,30 +448,177 @@
 <tr><td class="bold">Minas Gerais</td><td class="mono">44</td><td>Cana</td><td>Triângulo Mineiro: polo canavieiro</td><td>Paridade etanol/gasolina ~64%</td></tr>
 <tr><td class="bold">Mato Grosso do Sul</td><td class="mono">27</td><td>Cana + milho (2 usinas milho)</td><td>Inpasa Sidrolândia em expansão</td><td>Menor preço etanol país em jan/2026 (R$4,00)</td></tr>
 <tr><td class="bold">Paraná</td><td class="mono">28</td><td>Cana + milho (1 usina milho)</td><td>REPAR produz Diesel R com co-processamento</td><td>Paridade ~70% (limiar)</td></tr>
+<tr><td class="bold" style="color:var(--gn)">Bahia</td><td class="mono">1+</td><td style="color:var(--gn);font-weight:600">Milho + sorgo (Inpasa LEM, inaugurada mar/2026)</td><td>470 Mi L/ano · 1ª grande planta milho no NE · Matopiba</td><td>Expansão geográfica inédita para o Nordeste</td></tr>
 <tr><td class="bold">Alagoas</td><td class="mono">25</td><td>Cana</td><td>Tradição histórica canavieira NE</td><td>Exporta anidro</td></tr>
 <tr><td class="bold">Pernambuco</td><td class="mono">19</td><td>Cana</td><td>Zona da Mata: cana desde era colonial</td><td>Menor relevância atual vs SE/CO</td></tr>
 </tbody></table></div>
-<div class="cs"><a href="https://www.novacana.com/usinas_brasil/estados" target="_blank">NovaCana — Usinas por Estado</a> · <a href="https://fiemt.ind.br/noticias/4067/mato-grosso-e-segundo-maior-produtor-nacional-de-etanol" target="_blank">FIEMT/Bioind-MT</a> · <a href="https://agroadvance.com.br/blog-maiores-grupos-do-setor-sucroalcooleiro/" target="_blank">AgroAdvance (Raízen/grupos)</a></div></div>
+<div class="cs"><a href="https://www.novacana.com/usinas_brasil/estados" target="_blank">NovaCana — Usinas por Estado</a> · <a href="https://fiemt.ind.br/noticias/4067/mato-grosso-e-segundo-maior-produtor-nacional-de-etanol" target="_blank">FIEMT/Bioind-MT</a> · <a href="https://agroadvance.com.br/blog-maiores-grupos-do-setor-sucroalcooleiro/" target="_blank">AgroAdvance (Raízen/grupos)</a> · <a href="https://eixos.com.br/combustiveis-e-bioenergia/biocombustiveis/inpasa-inicia-operacao-na-bahia-para-produzir-470-milhoes-de-litros-de-etanol/" target="_blank">Eixos (Inpasa LEM/BA)</a></div></div>
 
 <div class="card"><div class="ct"><span class="badge">MILHO</span> Revolução do Etanol de Milho</div>
-<div class="pr"><p>A produção de etanol de milho multiplicou-se por <span class="hg">10x em uma década</span> (de 0,8 bi L em 2018/19 para 8,2 bi L em 2024/25). O Brasil é o <span class="hb">2º maior produtor mundial de etanol de milho</span>, atrás apenas dos EUA. A Unem projeta <span class="hl">10 bi litros na safra 2025/26</span> (+20%), quando o milho representará >25% do etanol nacional.</p>
-<p>O modelo é imbatível: milho a preço competitivo (safra recorde ~130 Mi ton), tecnologia americana madura (440 L/ton, +20% em 7 anos), operação o ano todo (sem entressafra da cana), coprodutos de valor (DDG para ração animal: 2,12 Mi ton em MT). São <span class="hb">25 biorrefinarias em operação</span>, com 16 autorizadas para construção e 16 em planejamento — <span class="hl">R$ 40 bilhões em investimentos mapeados</span>. Nova planta Inpasa em Luís Eduardo Magalhães (BA) expande a geografia para o Nordeste pela primeira vez.</p></div>
-<div class="cs"><a href="https://timesbrasil.com.br/brasil/etanol-de-milho-cresce-20-ao-ano-e-faz-do-brasil-o-segundo-maior-produtor-mundial/" target="_blank">Times Brasil/CNBC, ago/2025</a> · <a href="https://www.novacana.com/noticias/producao-etanol-milho-dispara-superar-25-total-2025-unem-230625" target="_blank">NovaCana/Unem, jun/2025</a> · <a href="https://fiemt.ind.br/noticias/4067/mato-grosso-e-segundo-maior-produtor-nacional-de-etanol" target="_blank">FIEMT/Bioind-MT</a></div></div>
+<div class="inf">
+<div class="inf-row">
+  <div class="inf-box ib-grn"><strong>Produção 18/19</strong><span class="val">0,8 bi L</span></div>
+  <div style="font-size:1.3rem;color:var(--txd)">→</div>
+  <div class="inf-box ib-grn"><strong>Produção 24/25</strong><span class="val">8,2 bi L</span><span class="inf-pill pill-g" style="margin-top:4px">×10 em 6 anos</span></div>
+  <div style="font-size:1.3rem;color:var(--txd)">→</div>
+  <div class="inf-box ib-sec"><strong>Projeção 25/26</strong><span class="val">10 bi L</span><span class="inf-pill pill-a" style="margin-top:4px">&gt;25% do total BR</span></div>
+</div>
+<div class="inf-split" style="margin-top:10px">
+  <div class="inf-lane">
+    <h4>🏭 Parque Industrial</h4>
+    <div class="il-stat"><b>25</b> biorrefinarias em operação</div>
+    <div class="il-stat"><b>16</b> autorizadas para construção</div>
+    <div class="il-stat"><b>16</b> em fase de projeto</div>
+    <div class="il-stat" style="margin-top:4px"><span class="val" style="font-size:1rem;color:var(--acc)">R$ 40 bi</span> investimentos mapeados</div>
+    <div class="il-stat"><b>Rendimento:</b> 440 L/ton milho (+20% em 7 anos)</div>
+    <div class="il-stat"><b>Brasil:</b> 2º maior produtor mundial (após EUA)</div>
+  </div>
+  <div class="inf-lane">
+    <h4>🌽 Vantagem Estrutural</h4>
+    <div class="il-stat"><span class="inf-pill pill-g">Sem entressafra</span> opera 365 dias/ano</div>
+    <div class="il-stat"><span class="inf-pill pill-b">Milho barato</span> safra recorde ~130 Mi ton</div>
+    <div class="il-stat"><span class="inf-pill pill-a">Coprodutos</span> DDG (ração): 2,12 Mi ton em MT</div>
+    <div class="il-stat"><span class="inf-pill pill-d">Bioenergia</span> gera energia elétrica excedente</div>
+    <div class="il-stat" style="margin-top:6px;color:var(--gn);font-weight:600">→ Inpasa inaugurou LEM/BA (mar/26)</div>
+    <div class="il-stat">1ª grande planta NE · 470 Mi L/ano · milho + sorgo</div>
+    <div class="il-stat">Próximas: Rio Verde/GO + Rondonópolis/MT (2027)</div>
+  </div>
+</div>
+</div>
+<div class="cs"><a href="https://timesbrasil.com.br/brasil/etanol-de-milho-cresce-20-ao-ano-e-faz-do-brasil-o-segundo-maior-produtor-mundial/" target="_blank">Times Brasil/CNBC</a> · <a href="https://www.novacana.com/noticias/producao-etanol-milho-dispara-superar-25-total-2025-unem-230625" target="_blank">NovaCana/Unem</a> · <a href="https://fiemt.ind.br/noticias/4067/mato-grosso-e-segundo-maior-produtor-nacional-de-etanol" target="_blank">FIEMT/Bioind-MT</a> · <a href="https://eixos.com.br/combustiveis-e-bioenergia/biocombustiveis/inpasa-inicia-operacao-na-bahia-para-produzir-470-milhoes-de-litros-de-etanol/" target="_blank">Eixos (Inpasa LEM)</a></div></div>
 
 <div class="card"><div class="ct"><span class="badge">PRECO</span> Dinâmica de Preços e Paridade Etanol × Gasolina</div>
-<div class="pr"><p><strong>Regra dos 70%:</strong> Se etanol custa ≤70% do preço da gasolina, compensa abastecer com etanol (menor poder calorífico). Em jan/2026, paridade média nacional foi <span class="hr">72,2%</span> — desfavorável ao etanol. Porém, competitivo em estados produtores: <span class="hg">MT 63,3%</span> (mais competitivo), MS 67,3%, SP 64,5%, MG 64,2%, GO 66,9%.</p>
-<p>No <span class="hr">Norte e Nordeste, etanol não é competitivo</span> — paridade >80% em muitos estados. O RJ registrou 75%. O Acre tem o etanol mais caro do país. A distância das usinas, logística e ICMS (monofásico, mas com alíquotas variáveis para etanol) explicam as diferenças.</p>
-<p><strong>Projeção 2026/27 (StoneX):</strong> preço médio hidratado nas usinas SP de <span class="hg">R$ 3,23/L</span>; paridade SP de <span class="hg">64,9%</span> — muito favorável ao etanol. Consumo hidratado deve retomar crescimento com >30% da frota flex abastecendo etanol.</p></div>
-<div class="cs"><a href="https://timesbrasil.com.br/empresas-e-negocios/transporte/preco-do-etanol-aumenta-em-15-estados-veja-onde-ficou-mais-competitivo/" target="_blank">Times Brasil/ANP, jan/2026</a> · <a href="https://matogrossoeconomico.com.br/agronegocio-mato-grosso/consumo-de-etanol-hidratado-devera-se-recuperar-em-2026/" target="_blank">MT Econômico/Datagro, fev/2026</a> · <a href="https://aiko.digital/oferta-de-etanol/" target="_blank">Aiko/StoneX</a></div></div>
+<div class="inf">
+<!-- Rule of 70 visual -->
+<div style="text-align:center;margin-bottom:10px">
+  <div style="font-size:.72rem;color:var(--txd);font-weight:600;margin-bottom:4px">REGRA DOS 70% — Se etanol ≤70% do preço da gasolina, compensa abastecer etanol</div>
+  <div class="inf-bar" style="height:26px;font-size:.65rem;line-height:26px;max-width:500px;margin:0 auto">
+    <div style="width:63%;background:var(--gn)">✓ Competitivo ≤70%</div>
+    <div style="width:7%;background:var(--acc)">70%</div>
+    <div style="width:30%;background:var(--rd)">✗ Desfavorável &gt;70%</div>
+  </div>
+</div>
+<!-- State paridade boxes -->
+<div style="font-size:.68rem;color:var(--txd);font-weight:600;margin:10px 0 4px">PARIDADE POR ESTADO (jan/2026) — Preço etanol ÷ preço gasolina</div>
+<div class="inf-row" style="gap:4px">
+  <div class="inf-box ib-grn" style="padding:6px 10px;min-width:60px"><strong>MT</strong><span class="val" style="font-size:.9rem">63,3%</span></div>
+  <div class="inf-box ib-grn" style="padding:6px 10px;min-width:60px"><strong>SP</strong><span class="val" style="font-size:.9rem">64,5%</span></div>
+  <div class="inf-box ib-grn" style="padding:6px 10px;min-width:60px"><strong>MG</strong><span class="val" style="font-size:.9rem">64,2%</span></div>
+  <div class="inf-box ib-grn" style="padding:6px 10px;min-width:60px"><strong>GO</strong><span class="val" style="font-size:.9rem">66,9%</span></div>
+  <div class="inf-box ib-grn" style="padding:6px 10px;min-width:60px"><strong>MS</strong><span class="val" style="font-size:.9rem">67,3%</span></div>
+  <div class="inf-box ib-gray" style="padding:6px 10px;min-width:60px"><strong>BR médio</strong><span class="val" style="font-size:.9rem;color:var(--rd)">72,2%</span></div>
+  <div class="inf-box ib-red" style="padding:6px 10px;min-width:60px"><strong>RJ</strong><span class="val" style="font-size:.9rem">75%</span></div>
+  <div class="inf-box ib-red" style="padding:6px 10px;min-width:60px"><strong>N/NE</strong><span class="val" style="font-size:.9rem">&gt;80%</span></div>
+</div>
+<div class="inf-note">Etanol competitivo em apenas 5 estados (todos produtores). Norte/NE: logística + ICMS inviabilizam. Acre = mais caro do país.</div>
+<!-- Projection -->
+<div class="inf-row" style="margin-top:10px">
+  <div class="inf-box ib-sec" style="flex:1;max-width:100%"><strong>Projeção Safra 2026/27 (StoneX/Datagro)</strong>Preço usina Paulínia: <b>R$ 3,23/L</b> · Paridade SP: <b style="color:#fff">64,9%</b> (muito favorável) · &gt;30% da frota flex abastecendo etanol</div>
+</div>
+</div>
+<div class="cs"><a href="https://timesbrasil.com.br/empresas-e-negocios/transporte/preco-do-etanol-aumenta-em-15-estados-veja-onde-ficou-mais-competitivo/" target="_blank">Times Brasil/ANP, jan/2026</a> · <a href="https://matogrossoeconomico.com.br/agronegocio-mato-grosso/consumo-de-etanol-hidratado-devera-se-recuperar-em-2026/" target="_blank">MT Econômico/Datagro</a> · <a href="https://aiko.digital/oferta-de-etanol/" target="_blank">Aiko/StoneX</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">CONJ</span> Conjuntura mar/2026 — Estoques, Entressafra e Crise Geopolítica</div>
+<div class="inf">
+<!-- Crisis KPIs row -->
+<div class="inf-row">
+  <div class="inf-box ib-red"><strong>Estoques Passagem</strong><span class="val">1,79 Mi m³</span>Menor em 6 anos · −28%</div>
+  <div class="inf-box ib-gray"><strong>Gasolina (guerra Irã)</strong><span class="val" style="color:var(--rd)">+11%</span>R$6,28 → R$6,98</div>
+  <div class="inf-box ib-gray"><strong>Diesel</strong><span class="val" style="color:var(--rd)">+24,3%</span>R$6,09 → R$7,57</div>
+  <div class="inf-box ib-grn"><strong>Etanol Hidratado</strong><span class="val" style="color:var(--gn)">+1,95%</span>R$4,61 → R$4,70 · Refúgio de preço</div>
+</div>
+<!-- What prevented shortage -->
+<div style="font-size:.72rem;color:var(--txd);font-weight:700;margin:12px 0 6px;text-transform:uppercase;letter-spacing:.5px">O que evitou a escassez?</div>
+<div class="inf-g3">
+  <div class="inf-lane" style="border-left:3px solid var(--bl)">
+    <h4>📦 Importações Antecipadas</h4>
+    <div class="il-stat"><span class="val" style="font-size:.9rem;color:var(--bl)">213,2 mil m³</span></div>
+    <div class="il-stat">em jan-fev/2026 (MDIC)</div>
+    <div class="il-stat">Janela de preço favorável aproveitada</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--gn)">
+    <h4>🌽 Milho = Colchão Permanente</h4>
+    <div class="il-stat"><span class="val" style="font-size:.9rem;color:var(--gn)">365 dias/ano</span></div>
+    <div class="il-stat">Produz na entressafra da cana</div>
+    <div class="il-stat">Absorve gap de oferta estrutural</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--acc)">
+    <h4>📈 Safra 26/27 Recorde</h4>
+    <div class="il-stat"><span class="val" style="font-size:.9rem;color:var(--acc)">36,9 Mi m³</span></div>
+    <div class="il-stat">+9,8% vs 25/26 (Argus)</div>
+    <div class="il-stat">23 usinas já iniciaram moagem em mar</div>
+  </div>
+</div>
+<!-- Price + E32 -->
+<div class="inf-row" style="margin-top:10px">
+  <div class="inf-box ib-gray" style="flex:1"><strong>Preço Produtor (Cepea/USP)</strong>R$2,74 → R$2,95/L na safra (+7,7%) · Projeção: queda a partir de maio com retomada da oferta de cana</div>
+  <div class="inf-box ib-sec"><strong>Proposta</strong><span class="val">E32</span>Produtores pedem elevação da mistura · Testes E35 em preparação pela ANP</div>
+</div>
+</div>
+<div class="cs"><a href="https://eixos.com.br/combustiveis-e-bioenergia/biocombustiveis/estoque-de-etanol-bate-minima-de-6-anos-mas-importacao-e-milho-evitam-escassez/" target="_blank">Eixos/Argus, 30/mar/2026</a> · Cepea/Esalq-USP · MDIC (importações) · ANP (preços bomba)</div></div>
+
+<div class="card"><div class="ct"><span class="badge">CICLO</span> Anatomia do Ciclo Safra–Entressafra do Etanol</div>
+<div class="tw"><table>
+<thead><tr><th>Período</th><th>Meses</th><th>O que Acontece</th><th>Impacto nos Preços</th></tr></thead>
+<tbody>
+<tr><td class="bold" style="color:var(--gn)">Início de Safra</td><td class="mono">Abr–Mai</td><td>Usinas de cana retomam moagem no Centro-Sul. Oferta cresce rapidamente.</td><td>Preços caem (pico de oferta). Paridade etanol/gasolina melhora.</td></tr>
+<tr><td class="bold" style="color:var(--gn)">Pico da Safra</td><td class="mono">Jun–Nov</td><td>Moagem plena. Produção máxima. Estoques se acumulam. Mix açúcar vs etanol é decidido.</td><td>Pressão baixista. Preço usina Paulínia chega a ~R$2,50/L.</td></tr>
+<tr><td class="bold" style="color:var(--rd)">Fim da Safra</td><td class="mono">Dez–Jan</td><td>Usinas encerram moagem. Estoque de passagem é formado. Oferta depende de tancagem.</td><td>Preços começam a subir. Distribuidores fazem reposição.</td></tr>
+<tr><td class="bold" style="color:var(--rd)">Entressafra</td><td class="mono">Fev–Mar</td><td>Cana parada. <span class="hg">Etanol de milho mantém produção</span>. Importações complementam. Estoques são consumidos.</td><td>Preços no pico anual. Paulínia pode ultrapassar R$3,00/L. Risco de escassez se estoques forem baixos.</td></tr>
+<tr style="background:var(--gn-bg)"><td class="bold">Safra 26/27</td><td class="mono">Abr/2026→</td><td colspan="2">Projeção recorde: <span class="hg">36,9 Mi m³</span> (+9,8%). Chuvas favoráveis devem recuperar produtividade. Preços devem cair a partir de maio. 23 usinas já iniciaram moagem na 2ª quinzena de março.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://eixos.com.br/combustiveis-e-bioenergia/biocombustiveis/estoque-de-etanol-bate-minima-de-6-anos-mas-importacao-e-milho-evitam-escassez/" target="_blank">Eixos/Argus, 30/mar/2026</a> · <a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA (safra 24/25)</a> · <a href="https://matogrossoeconomico.com.br/agronegocio-mato-grosso/consumo-de-etanol-hidratado-devera-se-recuperar-em-2026/" target="_blank">MT Econômico/Datagro</a></div></div>
 
 <div class="card"><div class="ct"><span class="badge">REG</span> Marco Regulatório e RenovaBio</div>
-<div class="pr"><p><strong>Lei do Combustível do Futuro (14.993/2024):</strong> Mandatos de E30 (etanol na gasolina), trajetória B14→B15→B20 (biodiesel no diesel), e programas de SAF. A elevação de E27 para E30 (ago/2025) criou demanda adicional de ~<span class="hl">1,4 bi litros/ano</span> de anidro, sustentando preços.</p>
-<p><strong>RenovaBio (Lei 13.576/2017):</strong> CBIOs (Créditos de Descarbonização) — cada litro de etanol gera créditos que distribuidores devem comprar. Meta 2024: 37,47 Mi créditos. O etanol de cana evita 2,56 kgCO₂eq/L (anidro) e 1,12 kgCO₂eq/L (hidratado). Na safra 24/25, o consumo de etanol evitou <span class="hg">48,4 Mi toneladas de CO₂eq</span> — equivalente às emissões anuais do Equador.</p>
-<p><strong>Frota flex fuel:</strong> >85% dos veículos leves no Brasil. Tecnologia madura de 20+ anos. Economia aos consumidores: <span class="hg">R$ 6–7 bilhões/ano</span> pela possibilidade de escolha etanol vs gasolina.</p></div>
+<div class="inf">
+<!-- E-mandate progression -->
+<div style="font-size:.68rem;color:var(--txd);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Trajetória do Mandato de Mistura Etanol na Gasolina</div>
+<div class="inf-row" style="gap:3px">
+  <div class="inf-box ib-gray" style="padding:6px 8px;min-width:50px"><strong>E20</strong><span style="font-size:.6rem;display:block">~2015</span></div>
+  <div style="color:var(--txd)">→</div>
+  <div class="inf-box ib-gray" style="padding:6px 8px;min-width:50px"><strong>E27</strong><span style="font-size:.6rem;display:block">2015–2025</span></div>
+  <div style="color:var(--txd)">→</div>
+  <div class="inf-box ib-grn" style="padding:6px 8px;min-width:50px"><strong>E30</strong><span style="font-size:.6rem;display:block">Ago/2025</span></div>
+  <div style="color:var(--txd)">→</div>
+  <div class="inf-box ib-sec" style="padding:6px 8px;min-width:50px"><strong>E32?</strong><span style="font-size:.6rem;display:block">Proposta mar/26</span></div>
+  <div style="color:var(--txd)">→</div>
+  <div class="inf-box ib-pri" style="padding:6px 8px;min-width:50px"><strong>E35</strong><span style="font-size:.6rem;display:block">Testes ANP</span></div>
+</div>
+<div class="inf-note">E27→E30 = +1,4 bi L/ano de demanda de anidro. E32 proposto como resposta à crise mar/26.</div>
+
+<!-- Three pillars -->
+<div class="inf-g3" style="margin-top:12px">
+  <div class="inf-lane" style="border-left:3px solid var(--acc)">
+    <h4>⚖️ Lei do Combustível do Futuro</h4>
+    <div class="il-stat">(Lei 14.993/2024)</div>
+    <div class="il-stat"><span class="inf-pill pill-g">E30</span> etanol na gasolina</div>
+    <div class="il-stat"><span class="inf-pill pill-b">B14→B20</span> biodiesel no diesel</div>
+    <div class="il-stat"><span class="inf-pill pill-a">ProBioQAV</span> SAF para aviação</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--gn)">
+    <h4>🌱 RenovaBio</h4>
+    <div class="il-stat">(Lei 13.576/2017)</div>
+    <div class="il-stat"><b>CBIOs</b> — Créditos de Descarbonização</div>
+    <div class="il-stat">Meta 2024: <b>37,47 Mi</b> créditos</div>
+    <div class="il-stat">Safra 24/25 evitou:</div>
+    <div class="il-stat"><span class="val" style="font-size:.85rem;color:var(--gn)">48,4 Mi ton CO₂eq</span></div>
+    <div class="il-stat">≈ emissões anuais do Equador</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--bl)">
+    <h4>🚗 Frota Flex Fuel</h4>
+    <div class="il-stat"><span class="val" style="font-size:.85rem;color:var(--bl)">&gt;85%</span></div>
+    <div class="il-stat">dos veículos leves</div>
+    <div class="il-stat">Tecnologia madura de 20+ anos</div>
+    <div class="il-stat" style="margin-top:4px">Economia ao consumidor:</div>
+    <div class="il-stat"><span class="val" style="font-size:.85rem;color:var(--gn)">R$ 6–7 bi/ano</span></div>
+    <div class="il-stat">pela escolha etanol vs gasolina</div>
+  </div>
+</div>
+</div>
 <div class="cs"><a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA (emissões evitadas)</a> · <a href="https://www.canaonline.com.br/conteudo/aumento-da-mistura-de-etanol-na-gasolina-sustenta-precos-e-reduz-oferta-de-hidratado.html" target="_blank">Cana Online (E30)</a> · <a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica</a></div></div>
 
-<div class="co g"><strong>O dilema açúcar vs. etanol:</strong> Usinas flexíveis ajustam o mix conforme preços. Com açúcar internacional atrativo, mais cana vai para açúcar → menos etanol de cana → preços do etanol sobem → milho preenche o gap. O etanol de milho funciona como "seguro de oferta" contra a sazonalidade e as escolhas de mix da cana.</div>
-<div class="co b"><strong>Mapa do futuro:</strong> Centro-Oeste desponta como novo polo de biocombustíveis, integrando cana, milho e bioenergia. FS (Sorriso/MT) processa 4,8 Mi ton de milho/ano. Inpasa expande para BA (Luís Eduardo Magalhães, R$ 4,9 bi). A 3Tentos (RS) investe R$ 1,2 bi em Porto Alegre do Norte/MT. BNDES aprovou R$ 4,3 bi para biocombustíveis em 2024. Produção de milho-etanol projetada para 15,6 bi L até 2033 (MME).</div>
+<div class="co g"><strong>O dilema açúcar vs. etanol — e o seguro do milho:</strong> Usinas de cana ajustam o mix conforme preços: açúcar internacional atrativo → mais cana para açúcar → menos etanol de cana → preços do etanol sobem. Na entressafra (fev-mar), quando a cana para, <span class="hg">o etanol de milho mantém produção contínua</span>, funcionando como colchão permanente de oferta — evitou escassez em mar/2026 mesmo com estoques de passagem na mínima de 6 anos (1,79 Mi m³, −28%). Importações complementam: 213 mil m³ em jan-fev/2026.</div>
+<div class="co b"><strong>Mapa do futuro:</strong> Centro-Oeste desponta como polo de biocombustíveis, integrando cana, milho e bioenergia. FS (Sorriso/MT) processa 4,8 Mi ton de milho/ano. Inpasa expandiu para BA (Luís Eduardo Magalhães, inaugurada mar/2026, 470 Mi L/ano, processando milho e sorgo do Matopiba) e planeja Rio Verde/GO e Rondonópolis/MT até 2027 — capacidade total de 6,2 bi L/ano em 8 unidades. A 3Tentos (RS) investe R$ 1,2 bi em Porto Alegre do Norte/MT. BNDES aprovou R$ 4,3 bi para biocombustíveis em 2024. Produção de milho-etanol projetada para 15,6 bi L até 2033 (MME).</div>
 </div>
 
 <!-- ===== S7: BIODIESEL ===== -->
@@ -340,15 +652,73 @@
 <div class="cs"><a href="https://www.gov.br/mdic/pt-br/assuntos/noticias/2023/dezembro/cnpe-aprova-antecipacao-do-b14-para-marco-de-2024-e-b15-para-marco-de-2025-incentivando-a-producao-de-biocombustiveis-e-a-transicao-energetica" target="_blank">CNPE/MDIC</a> · <a href="https://www.biodieselbr.com/noticias/usinas/info/brasil-pode-nao-cumprir-prazo-de-elevar-mistura-de-biodiesel-em-marco-de-2026-diz-mme-071025" target="_blank">BiodieselBR (B16 delay)</a> · <a href="https://www.biodieselbr.com/noticias/eventos/conferencia-biodieselbr/cbbr-2024-a-disponibilidade-de-materias-primas-para-combustivel-do-futuro-041124" target="_blank">BiodieselBR (B20)</a></div></div>
 
 <div class="card"><div class="ct"><span class="badge">SOJA</span> A Cadeia Soja–Biodiesel: Efeitos Cruzados</div>
-<div class="pr"><p>O biodiesel brasileiro depende de <span class="hl">~70% de óleo de soja</span> como matéria-prima, que representa <span class="hr">~80% do custo de produção</span>. Para atender o B15 em 2025, são necessárias <span class="hb">7,8 milhões de toneladas de óleo de soja</span> (vs 7,2 Mi em 2024 e 5,8 Mi em 2023). Isso exige ~39,2 Mi ton de soja processada (esmagada).</p>
-<p>Mas o esmagamento gera <span class="hg">farelo de soja</span>, insumo essencial para a cadeia de proteína animal. Cada ponto percentual adicional na mistura BX reduz em ~R$ 3,5 bilhões o custo de produção de frangos, suínos, ovos e peixes — gerando efeito <span class="hg">deflacionário de 0,05 pp no IPCA</span>. O impacto no preço do diesel ao consumidor de B14→B15 é de apenas R$ 0,05/L (0,002 pp no IPCA).</p>
-<p>Outros insumos em crescimento: <span class="hb">gordura animal (sebo bovino)</span> ~11,3% do mix, e <span class="hg">óleo de cozinha usado (UCO/OFU)</span> ~2,3%, com pressão exportadora de UCO para HVO europeu. Palma, milho e macaúba são potenciais futuros.</p></div>
-<div class="cs"><a href="https://fpbiodiesel.com.br/" target="_blank">FPBio</a> · <a href="https://www.biodieselbr.com/noticias/usinas/producao/demanda-de-biodiesel-no-brasil-em-2025-deve-chegar-a-9-6-bilhoes-de-litros-130625" target="_blank">BiodieselBR/StoneX (soja demand)</a> · <a href="https://www.biodieselbr.com/noticias/materia-prima/ogr/oleo-de-cozinha-usado-avanca-com-demanda-por-biocombustiveis-280923" target="_blank">BiodieselBR (UCO)</a></div></div>
+<div class="inf">
+<!-- Chain flow -->
+<div class="inf-row">
+  <div class="inf-box ib-sec"><strong>Soja Esmagada</strong><span class="val">39,2 Mi ton</span>Para atender B15 em 2025</div>
+  <div style="font-size:1.3rem;color:var(--txd)">→</div>
+  <div class="inf-box ib-pri"><strong>Óleo de Soja</strong><span class="val">7,8 Mi ton</span>~80% do custo do biodiesel</div>
+  <div style="font-size:1.3rem;color:var(--txd)">→</div>
+  <div class="inf-box ib-grn"><strong>Biodiesel</strong><span class="val">9,6 bi L</span>B15 (15% no diesel B)</div>
+</div>
+<div style="text-align:center;font-size:.7rem;color:var(--txd);margin:2px 0">⤵ coproduto do esmagamento</div>
+<div class="inf-row">
+  <div class="inf-box ib-grn" style="max-width:340px"><strong>Farelo de Soja → Ração Animal</strong><span class="val">Efeito deflacionário</span>Cada +1 pp na mistura BX → −R$ 3,5 bi no custo de frangos, suínos, ovos e peixes → −0,05 pp no IPCA</div>
+</div>
+<!-- Impact comparison -->
+<div class="inf-split" style="margin-top:10px">
+  <div class="inf-lane" style="text-align:center">
+    <h4>Impacto no diesel (B14→B15)</h4>
+    <div class="il-stat"><span class="val" style="font-size:1.1rem;color:var(--gn)">R$ 0,05/L</span></div>
+    <div class="il-stat">0,002 pp no IPCA</div>
+    <div class="il-stat" style="color:var(--gn);font-weight:600">Quase imperceptível</div>
+  </div>
+  <div class="inf-lane">
+    <h4>Outros Insumos em Crescimento</h4>
+    <div class="il-stat"><span class="inf-pill pill-r">Sebo bovino</span> ~11,3% do mix</div>
+    <div class="il-stat"><span class="inf-pill pill-g">UCO (óleo fritura)</span> ~2,3% — pressão export. p/ HVO europeu</div>
+    <div class="il-stat"><span class="inf-pill pill-d">Futuro:</span> palma, milho, macaúba</div>
+  </div>
+</div>
+</div>
+<div class="cs"><a href="https://fpbiodiesel.com.br/" target="_blank">FPBio</a> · <a href="https://www.biodieselbr.com/noticias/usinas/producao/demanda-de-biodiesel-no-brasil-em-2025-deve-chegar-a-9-6-bilhoes-de-litros-130625" target="_blank">BiodieselBR/StoneX</a> · <a href="https://www.biodieselbr.com/noticias/materia-prima/ogr/oleo-de-cozinha-usado-avanca-com-demanda-por-biocombustiveis-280923" target="_blank">BiodieselBR (UCO)</a></div></div>
 
 <div class="card"><div class="ct"><span class="badge">IND</span> Estrutura Industrial e Investimentos</div>
-<div class="pr"><p><strong>Parque industrial:</strong> 58 usinas em 14 estados, capacidade autorizada de <span class="hl">15,6 bi L/ano</span>. Sul e Centro-Oeste concentram ~80% da produção. Utilização em 2025: 63,2%, indicando folga para absorver B20. CAGR desde 2018: 9%.</p>
-<p><strong>Consolidação:</strong> Cargill adquiriu 3 fábricas da Granol (Anápolis/GO, Porto Nacional/TO, Cachoeira do Sul/RS) tornando-se uma das maiores em capacidade. Oleoplan adquiriu planta de Lucas do Rio Verde/MT. Cooperativas do Sul detêm 35% do esmagamento de soja nacional.</p>
-<p><strong>Investimentos:</strong> R$ 7 bilhões em projetos recentes (maioria cooperativas do Sul). R$ 5,9 bilhões nos próximos 12 meses (Abiove). No entanto, <span class="hr">alta da Selic</span> (juros elevados) impacta rentabilidade de novos projetos e pode desacelerar expansão.</p></div>
+<div class="inf">
+<div class="inf-row">
+  <div class="inf-box ib-pri"><strong>Usinas</strong><span class="val">58</span>em 14 estados</div>
+  <div class="inf-box ib-grn"><strong>Capacidade</strong><span class="val">15,6 bi L/ano</span>Autorizada pela ANP</div>
+  <div class="inf-box ib-sec"><strong>Utilização</strong><span class="val">63,2%</span>Folga para absorver B20</div>
+  <div class="inf-box ib-gray"><strong>CAGR 2018–25</strong><span class="val">9%</span>Crescimento sustentado</div>
+</div>
+<div class="inf-bar" style="height:24px;font-size:.62rem;line-height:24px;margin:6px 0">
+  <div style="width:40%;background:var(--gn)">Sul ~40%</div>
+  <div style="width:40%;background:var(--acc)">Centro-Oeste ~40%</div>
+  <div style="width:20%;background:var(--txd)">SE+N+NE ~20%</div>
+</div>
+<div class="inf-note" style="margin-bottom:8px">Sul + Centro-Oeste = ~80% da produção nacional de biodiesel</div>
+<div class="inf-g3">
+  <div class="inf-lane" style="border-left:3px solid var(--bl)">
+    <h4>🔄 Consolidação</h4>
+    <div class="il-stat"><b>Cargill</b> adquiriu 3 fábricas Granol (GO, TO, RS)</div>
+    <div class="il-stat"><b>Oleoplan</b> comprou Lucas do Rio Verde/MT</div>
+    <div class="il-stat"><b>Coops Sul</b> = 35% do esmagamento de soja BR</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--gn)">
+    <h4>💰 Investimentos</h4>
+    <div class="il-stat"><span class="val" style="font-size:.85rem;color:var(--gn)">R$ 7 bi</span></div>
+    <div class="il-stat">em projetos recentes (maioria coops do Sul)</div>
+    <div class="il-stat"><span class="val" style="font-size:.85rem;color:var(--acc)">R$ 5,9 bi</span></div>
+    <div class="il-stat">pipeline nos próximos 12 meses (Abiove)</div>
+  </div>
+  <div class="inf-lane" style="border-left:3px solid var(--rd)">
+    <h4>⚠ Risco</h4>
+    <div class="il-stat"><span class="val" style="font-size:.85rem;color:var(--rd)">Selic alta</span></div>
+    <div class="il-stat">Juros elevados impactam rentabilidade de novos projetos</div>
+    <div class="il-stat">Pode desacelerar expansão apesar da demanda B20</div>
+  </div>
+</div>
+</div>
 <div class="cs"><a href="https://moodyslocal.com.br/wp-content/uploads/2025/03/Comentario-Setorial-Biodiesel-1.pdf" target="_blank">Moody's Local Brasil, mar/2025</a> · <a href="https://www.biodieselbr.com/noticias/usinas/producao/demanda-de-biodiesel-no-brasil-em-2025-deve-chegar-a-9-6-bilhoes-de-litros-130625" target="_blank">BiodieselBR/Abiove</a></div></div>
 
 <div class="co g"><strong>Impacto ambiental:</strong> O B15 evita a emissão de 127 milhões de toneladas de CO₂eq — equivalente ao plantio de 930 milhões de árvores. O biodiesel reduz emissões de GEE entre 70% e 94% comparado ao diesel fóssil. O uso de UCO (óleo de fritura) absorve ~150 Mi L/ano, evitando contaminação de 3,8 trilhões de litros de água.</div>
@@ -423,7 +793,7 @@
 <div class="card"><div class="ct">Vulnerabilidades Estruturais</div>
 <div class="vi"><div class="vit"><span class="vn">1</span> Concentração geográfica do refino</div><p>~66% no Sudeste. Centro-Oeste (zero refinarias) e Norte (capacidade marginal) dependem de transferências.</p></div>
 <div class="vi"><div class="vit"><span class="vn">2</span> Dependência de importação (~25% diesel, ~25% GLP)</div><p>Gap não fecha até 2030+. Expõe a choques — guerra Irã/2026, possíveis sanções ao diesel russo.</p></div>
-<div class="vi"><div class="vit"><span class="vn">3</span> Defasagem Petrobras vs. mercado</div><p>Preços abaixo PPI → importadores recuam → distribuidoras racionam → "mercados duais" (RJ R$5,69 vs SP R$9,99).</p></div>
+<div class="vi"><div class="vit"><span class="vn">3</span> Defasagem Petrobras vs. mercado → ciclo de desabastecimento</div><p>Preços abaixo PPI → importadores recuam (diesel importado R$2,50/L mais caro) → distribuidoras priorizam redes próprias, cortam 10–20% a bandeira branca/TRRs → "mercados duais" (RJ R$5,69 vs SP R$9,99). Governo subsidia R$0,32/L mas Petrobras reajusta R$0,38 → subsídio neutralizado. PF lançou Operação Vem Diesel (27/mar) contra preços abusivos em 11 estados.</p></div>
 <div class="vi"><div class="vit"><span class="vn">4</span> Sazonalidade agrícola (diesel)</div><p>Demanda salta em safras soja/milho, tensionando REPLAN→Centro-Oeste no limite.</p></div>
 <div class="vi"><div class="vit"><span class="vn">5</span> Fragilidade logística do Norte</div><p>REMAN irregular. Norte ~100% dependente cabotagem + importação. Barcaças do Mar Aberto são solução parcial.</p></div>
 <div class="cs"><a href="https://www.fecombustiveis.org.br/noticia/alta-de-precos-e-risco-de-escassez-de-combustiveis-mostram-pouca-eficacia-de-acoes-do-governo/263964" target="_blank">Fecombustíveis</a> · <a href="https://www.cnnbrasil.com.br/economia/macroeconomia/petrobras-precisa-atualizar-os-precos-dos-combustiveis-diz-abicom/" target="_blank">CNN/Abicom</a> · <a href="https://revistaoeste.com/economia/diesel-sobe-24-em-sp-e-precos-abusivos-levam-a-autuacoes-da-anp/" target="_blank">Revista Oeste</a></div></div>
@@ -443,11 +813,116 @@
 <div class="co g"><strong>Programa BioRefino da Petrobras:</strong> US$ 1,5 bi para transformar o parque de refino em biorefinarias. RPBC (Cubatão/SP) será a 1ª planta dedicada HVO+SAF do país (16 mil bpd). REDUC já opera Diesel R5/R7 e SAF certificada ISCC. REVAP testa SAF e produz asfalto renovável (CAP Pro R). O Plano Estratégico contempla US$ 11,5 bi em transição energética e baixo carbono. Ao mesmo tempo, 9 contratos assinados para completar o Trem 2 da RNEST, adicionando 76 kbpd de Diesel S-10 + 20 kbpd de QAV.</div>
 </div>
 
+<!-- ===== S11: PLAYERS ===== -->
+<div class="sec" id="s11">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Vibra (2025)</div><div class="kv">35,9 <span>Mi m³</span></div><div class="kn">Líder · 24,5% share · Receita R$189,8 bi</div><div class="ks"><a href="https://ri.vibraenergia.com.br" target="_blank">Vibra ER 4T25</a></div></div>
+  <div class="kpi bu"><div class="kl">Ipiranga (2025)</div><div class="kv">R$3,5 <span>bi EBITDA Rec.</span></div><div class="kn">15,3% share · Ultrapar Receita R$142,5 bi</div><div class="ks"><a href="https://ri.ultra.com.br" target="_blank">Ultrapar ER 4T25</a></div></div>
+  <div class="kpi re"><div class="kl">Raízen Dist. BR (9M 25/26)</div><div class="kv">R$4,0 <span>bi EBITDA</span></div><div class="kn">15% share · Dív. Líq. R$55 bi · 5,3x DL/EBITDA</div><div class="ks"><a href="https://ri.raizen.com.br" target="_blank">Raízen ER 3T 25/26</a></div></div>
+  <div class="kpi gn"><div class="kl">Petrobras RTM (2025)</div><div class="kv">R$29,2 <span>bi EBITDA</span></div><div class="kn">Receita R$469,5 bi · Mg. 6,2% · ~1,8 Mbpd vendas MI</div><div class="ks"><a href="https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/ff03b826-dc9a-f3e5-33a5-629148e15e31?origin=2" target="_blank">Petrobras ER 4T25 (p.18)</a></div></div>
+  <div class="kpi pu"><div class="kl">Inpasa (2024)</div><div class="kv">R$4,0 <span>bi EBITDA</span></div><div class="kn">Receita R$13,7 bi · Margem 29% · Cap. 6,2 bi L/ano</div><div class="ks"><a href="https://moodyslocal.com.br" target="_blank">Moody's Local mai/2025</a></div></div>
+  <div class="kpi cn"><div class="kl">Raízen — Reestruturação</div><div class="kv">−57% <span>RAIZ4 (2025)</span></div><div class="kn">Impairment R$11,1 bi · Incerteza continuidade · Assessores contratados</div><div class="ks"><a href="https://ri.raizen.com.br" target="_blank">Raízen ER 3T 25/26</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">FIN</span> Comparativo Financeiro — Distribuição e Produção de Combustíveis</div>
+<div class="tw"><table>
+<thead><tr><th>Empresa</th><th>Período</th><th>Volume</th><th>Receita Líq.</th><th>EBITDA Adj.</th><th>Margem/m³</th><th>Mg. EBITDA</th></tr></thead>
+<tbody>
+<tr style="background:var(--bl-bg)"><td class="bold">Vibra (Distrib.)</td><td class="mono">FY 2025</td><td class="mono">35,9 Mi m³</td><td class="mono">R$ 189,8 bi</td><td class="mono">R$ 7,1 bi</td><td class="mono">R$ 197/m³</td><td class="mono">3,7%</td></tr>
+<tr><td class="bold">Ipiranga (seg.)</td><td class="mono">FY 2025</td><td class="mono">~26 Mi m³¹</td><td class="mono">~R$ 120 bi¹</td><td class="mono">R$ 3,5 bi²</td><td class="mono">~R$ 133/m³¹</td><td class="mono">~2,9%¹</td></tr>
+<tr style="background:var(--rd-bg)"><td class="bold">Raízen Dist. BR</td><td class="mono">9M 25/26</td><td class="mono">~20 Mi m³¹</td><td class="mono">R$ 174,5 bi³</td><td class="mono">R$ 4,0 bi</td><td class="mono">~R$ 200/m³¹</td><td class="mono">~2,3%³</td></tr>
+<tr><td class="bold">Petrobras RTM</td><td class="mono">FY 2025</td><td class="mono">~104 Mi m³⁴</td><td class="mono">R$ 469,5 bi</td><td class="mono">R$ 29,2 bi</td><td class="mono">~R$ 281/m³</td><td class="mono">6,2%</td></tr>
+<tr style="background:var(--gn-bg)"><td class="bold">Inpasa</td><td class="mono">FY 2024</td><td class="mono">~4,5 bi L⁷</td><td class="mono">R$ 13,7 bi</td><td class="mono">R$ 4,0 bi</td><td class="mono">—</td><td class="mono">29,2%</td></tr>
+</tbody></table></div>
+<div style="font-size:.62rem;color:var(--txd);line-height:1.6;margin-top:6px">
+¹ Estimativa baseada em market share ANP × mercado total. ² EBITDA Adj. Recorrente (Ultrapar segmento Ipiranga). ³ Receita e margem consolidadas (inclui EAB + Dist. Argentina). ⁴ Vendas derivados mercado interno ~1,8 Mbpd convertidas a m³/ano. ⁷ Produção estimada; cap. instalada 2024: ~5,8 bi L/ano.
+</div>
+<div class="cs"><a href="https://api.mziq.com/mzfilemanager/v2/d/d243bdaa-0468-4f64-8c09-ba0bcee9789b/c634e091-3da2-4b16-8b74-a79e56076f82?origin=2" target="_blank">Vibra ER 4T25</a> · <a href="https://api.mziq.com/mzfilemanager/v2/d/4282e939-a6dc-401d-a873-e3c28b7e48df/185b8f18-9e92-8ac5-2030-c9859eee414a?origin=2" target="_blank">Ultrapar ER 4T25</a> · <a href="https://api.mziq.com/mzfilemanager/v2/d/c016735f-1711-48ce-919f-a8c701b83c19/1d03ac65-2db0-e060-95d0-7666a76d0182?origin=2" target="_blank">Raízen 3T 25/26</a> · <a href="https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/ff03b826-dc9a-f3e5-33a5-629148e15e31?origin=2" target="_blank">Petrobras 4T25</a> · <a href="https://moodyslocal.com.br/wp-content/uploads/2025/05/1.2_MLBR_RelatoriodeCredito_Inpasa_08052025_V4.pdf" target="_blank">Moody's/Inpasa mai/2025</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">REFINO</span> Upstream & Refino — Concentração Petrobras</div>
+<div class="tw"><table>
+<thead><tr><th>Player</th><th>Ativos</th><th>Capacidade</th><th>Posição</th></tr></thead>
+<tbody>
+<tr><td class="bold">Petrobras</td><td>13 refinarias (REPLAN, REDUC, REVAP, RPBC, RLAM/Mataripe*, RNEST, REGAP, REFAP, REPAR, etc.)</td><td class="mono">~1.810 kbpd</td><td>Monopólio de fato no refino · Receita RTM: R$110 bi/tri · FUT 93% (2024) · Programa BioRefino US$1,5 bi</td></tr>
+<tr><td class="bold">Acelen (Mubadala Capital)</td><td>Refinaria de Mataripe (ex-RLAM), Bahia</td><td class="mono">289 kbpd</td><td>Única refinaria privada de grande porte. Comprada em 2021 por US$1,65 bi. Referência PPI pura. Planeja HVO/SAF.</td></tr>
+<tr><td class="bold">3R / Maha Energy</td><td>Clara Camarão (RN) — pequena refinaria</td><td class="mono">~38 kbpd</td><td>Foco em upstream (campos maduros). Refino é marginal.</td></tr>
+<tr><td class="bold">Dax Oil</td><td>Refinaria de Camaçari (BA)</td><td class="mono">~4 kbpd</td><td>Micro-refinaria privada, nicho local.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://agencia.petrobras.com.br/w/negocio/petrobras-atinge-recordes-na-producao-do-pre-sal-em-2024-e-tem-maior-fator-de-utilizacao-das-suas-refinarias-em-10-anos" target="_blank">Agência Petrobras (recordes 2024)</a> · <a href="https://www.sec.gov/Archives/edgar/data/0001119639/000129281425004008/pbrrmf3q25usd_6k.htm" target="_blank">Petrobras 6-K SEC</a> · *Mataripe vendida à Acelen/Mubadala em 2021</div></div>
+
+<div class="card"><div class="ct"><span class="badge">DIST</span> Distribuição — O Oligopólio e a Informalidade</div>
+<div class="tw"><table>
+<thead><tr><th>Distribuidora</th><th>Controlador</th><th>Share (2024)</th><th>Postos</th><th>Margem EBITDA/m³ (4T25)</th><th>Destaques</th></tr></thead>
+<tbody>
+<tr><td class="bold">Vibra Energia</td><td>Petrobras (minoritária) / Free float (VBBR3)</td><td class="mono" style="color:var(--gn);font-weight:700">24,5%</td><td class="mono">~8.100</td><td class="mono">R$ 251</td><td>Líder. Margem +73% no 4T25. Volume 35,9 Mi m³/ano. Carbono Oculto beneficiou.</td></tr>
+<tr><td class="bold">Ipiranga</td><td>Ultrapar (UGPA3)</td><td class="mono">15,3%</td><td class="mono">~7.800</td><td class="mono">—</td><td>2ª maior. Forte no Sul/SE. Também opera AmPm (conveniência) e Jet Oil (lubrificantes).</td></tr>
+<tr><td class="bold">Raízen (Shell)</td><td>Cosan + Shell (RAIZ4)</td><td class="mono">~15%</td><td class="mono">~7.200</td><td class="mono">—</td><td>Única integrada: distribuição + produção de etanol (34 usinas). Em reestruturação financeira.</td></tr>
+<tr><td class="bold">Alesat</td><td>Grupo Ale + Sat</td><td class="mono">~2,8%</td><td class="mono">—</td><td class="mono">—</td><td>4ª maior. Regional NE/CO.</td></tr>
+<tr><td style="color:var(--rd);font-weight:700">Bandeira Branca + Regionais</td><td>~174 distribuidoras</td><td class="mono" style="color:var(--rd)">~42%</td><td class="mono">~20.000+</td><td class="mono">—</td><td>Ganharam 4 pp desde 2022. Inclui informais: fraude fiscal, adulteração, não mistura de biodiesel.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://eixos.com.br/newsletters/comece-seu-dia/grandes-distribuidoras-perderam-participacao-no-mercado-de-combustiveis-em-2024/" target="_blank">Eixos/Citi (share 2024)</a> · <a href="https://investnews.com.br/negocios/vibra-vbbr3-petrobras-postos-4t25/" target="_blank">InvestNews (Vibra 4T25)</a> · <a href="https://braziljournal.com/vibra-raizen-e-ipiranga-perderam-3-de-share-para-os-informais-em-16-meses/" target="_blank">Brazil Journal/Bradesco (informalidade)</a> · <a href="https://investnews.com.br/negocios/petroleo-crise-vibra-raizen-ipiranga/" target="_blank">InvestNews (Carbono Oculto)</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">CANA</span> Etanol de Cana — Ranking dos Grupos (Safra 24/25)</div>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>Grupo</th><th>Usinas</th><th>Moagem (Mi ton)</th><th>Var. vs 23/24</th><th>Notas</th></tr></thead>
+<tbody>
+<tr><td class="mono">1</td><td class="bold">Raízen</td><td class="mono">34 (29 SP, 3 MS, 1 MG, 1 GO)</td><td class="mono">78,3</td><td class="mono" style="color:var(--rd)">−7,0%</td><td>Receita R$78,5 bi. Maior grupo sucroenergético do mundo. 30 Mi L E2G. Cosan+Shell.</td></tr>
+<tr><td class="mono">2</td><td class="bold">BP Bunge</td><td class="mono">11 (4 MG, 3 SP, 2 GO, 1 MS, 1 TO)</td><td class="mono">26,7</td><td class="mono" style="color:var(--rd)">−7,9%</td><td>JV BP+Bunge. Receita R$7,9 bi. Forte em bioeletricidade.</td></tr>
+<tr><td class="mono">3</td><td class="bold">Atvos</td><td class="mono">~8</td><td class="mono">~25</td><td class="mono">—</td><td>Ex-Odebrecht Agroindustrial. Reestruturada. SP, MS, GO, MT.</td></tr>
+<tr><td class="mono">4</td><td class="bold">São Martinho</td><td class="mono">4</td><td class="mono">~24</td><td class="mono">—</td><td>Listada (SMTO3). Referência em eficiência operacional.</td></tr>
+<tr><td class="mono">5</td><td class="bold">Tereos</td><td class="mono">7</td><td class="mono">~22</td><td class="mono">—</td><td>Francesa. Interior de SP.</td></tr>
+<tr><td class="mono">6–10</td><td>Lincoln Junqueira, Cofco, Coruripe, Pedra, Adecoagro</td><td class="mono">—</td><td class="mono">~91 (soma)</td><td class="mono">—</td><td>Top 10 = 242 Mi ton (40,4% do total nacional).</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://agroadvance.com.br/blog-maiores-grupos-do-setor-sucroalcooleiro/" target="_blank">AgroAdvance/FG-A (Ranking 24/25)</a> · <a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">MILHO</span> Etanol de Milho — Os Gigantes Emergentes</div>
+<div class="tw"><table>
+<thead><tr><th>Player</th><th>Localização</th><th>Capacidade</th><th>Produção (24/25)</th><th>Destaques</th></tr></thead>
+<tbody>
+<tr><td class="bold">Inpasa</td><td>Sinop/MT, Nova Mutum/MT, Sidrolândia/MS, Dourados/MS, Balsas/MA, <span class="hg">Luís Eduardo Magalhães/BA (inaugurada mar/2026)</span> + 2 no Paraguai</td><td class="mono">6,2 bi L/ano</td><td class="mono">3,7 bi L (Sinop)</td><td>8 unidades (6 BR + 2 PY). LEM/BA: 470 Mi L/ano, 1 Mi ton grãos (milho+sorgo), R$1,3 bi, 450 empregos. Produz 3,3 Mi ton DDGS + 312 mil ton óleo vegetal + 1.513 GWh. Próximas: Rio Verde/GO e Rondonópolis/MT (até 2027).</td></tr>
+<tr><td class="bold">FS Agrisolutions</td><td>Sorriso/MT, Lucas do Rio Verde/MT + nova planta MT</td><td class="mono">~2,5 bi L/ano</td><td class="mono">2,3 bi L</td><td>Processa 4,8 Mi ton milho/ano. 1,7 Mi ton DDGS. Pioneer em MT (desde 2017).</td></tr>
+<tr><td class="bold">3Tentos</td><td>Porto Alegre do Norte/MT (em construção)</td><td class="mono">—</td><td class="mono">—</td><td>Gaúcha, de processamento de soja/biodiesel. R$1,2 bi investidos. BNDES R$500 mi. Inauguração prevista 2026.</td></tr>
+<tr><td class="bold">CerradinhoBio</td><td>Chapadão do Céu/GO</td><td class="mono">—</td><td class="mono">—</td><td>Usina flex (cana+milho) desde 2019. Referência CO.</td></tr>
+<tr><td class="bold">SJC Bioenergia</td><td>GO</td><td class="mono">—</td><td class="mono">—</td><td>Pioneira em milho no CO (desde 2015). JV com Cargill.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://eixos.com.br/combustiveis-e-bioenergia/biocombustiveis/inpasa-inicia-operacao-na-bahia-para-produzir-470-milhoes-de-litros-de-etanol/" target="_blank">Eixos (Inpasa LEM/BA, mar/2026)</a> · <a href="https://timesbrasil.com.br/brasil/etanol-de-milho-cresce-20-ao-ano-e-faz-do-brasil-o-segundo-maior-produtor-mundial/" target="_blank">Times Brasil/CNBC (Inpasa, FS)</a> · <a href="https://www.novacana.com/noticias/producao-etanol-milho-dispara-superar-25-total-2025-unem-230625" target="_blank">NovaCana/Unem (pipeline)</a> · <a href="https://fiemt.ind.br/noticias/4067/mato-grosso-e-segundo-maior-produtor-nacional-de-etanol" target="_blank">FIEMT/Bioind-MT</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">BIO</span> Biodiesel — Estrutura Industrial e M&A</div>
+<div class="tw"><table>
+<thead><tr><th>Player</th><th>Perfil</th><th>Movimentos Recentes</th></tr></thead>
+<tbody>
+<tr><td class="bold">Cargill</td><td>Multinacional. Esmagadora + biodiesel.</td><td>Adquiriu 3 fábricas Granol (Anápolis/GO, Porto Nacional/TO, Cachoeira do Sul/RS) + 4 armazéns. Tornou-se uma das maiores em capacidade.</td></tr>
+<tr><td class="bold">Oleoplan</td><td>Gaúcha. Esmagadora + biodiesel.</td><td>Adquiriu planta de Lucas do Rio Verde/MT (ex-grupo Granol). Expansão Centro-Oeste.</td></tr>
+<tr><td class="bold">BSBios</td><td>RS/MT. Esmagadora + biodiesel.</td><td>Uma das maiores. Foco em verticalização soja→óleo→biodiesel.</td></tr>
+<tr><td class="bold">Cooperativas do Sul</td><td>Coamo, Cocamar, Lar, Aurora, etc.</td><td>Detêm 35% do esmagamento de soja no Brasil. Investimentos na ordem de R$7 bi em projetos de expansão.</td></tr>
+<tr><td class="bold">Grupo Potencial</td><td>Esmagadora de soja + biodiesel.</td><td>Maior projeto anunciado: nova esmagadora para ampliar produção de biodiesel.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://moodyslocal.com.br/wp-content/uploads/2025/03/Comentario-Setorial-Biodiesel-1.pdf" target="_blank">Moody's Local Brasil (M&A, mar/2025)</a> · <a href="https://www.biodieselbr.com/noticias/usinas/producao/demanda-de-biodiesel-no-brasil-em-2025-deve-chegar-a-9-6-bilhoes-de-litros-130625" target="_blank">BiodieselBR/StoneX</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">MAPA</span> Mapa de Grupos Estratégicos — Derivados & Biocombustíveis Brasil</div>
+<div class="pr" style="font-size:.75rem;margin-bottom:10px"><strong>Eixo X:</strong> Escopo na cadeia de valor (segmento único → multi-segmento integrado). <strong>Eixo Y:</strong> Exposição a renováveis/biocombustíveis (fóssil puro → 100% renovável). <strong>Tamanho da bolha:</strong> escala relativa (receita / capacidade). Metodologia: Porter — Strategic Group Map.</div>
+<div class="cw" style="min-height:380px"><canvas id="c11b"></canvas></div>
+<div class="cs">Elaboração própria com dados ANP, Petrobras, UNICA, Unem, Moody's Local, Citi, InvestNews · Metodologia: Porter, <em>Competitive Strategy</em>, Ch. 7 — Strategic Group Mapping</div></div>
+
+<div class="g2">
+<div class="card"><div class="ct"><span class="badge">SHARE</span> Market Share Distribuição (%, vendas 2024)</div><div class="cw"><canvas id="c11a"></canvas></div><div class="cs"><a href="https://eixos.com.br/newsletters/comece-seu-dia/grandes-distribuidoras-perderam-participacao-no-mercado-de-combustiveis-em-2024/" target="_blank">Eixos/Citi (2024)</a> · <a href="https://investnews.com.br/negocios/vibra-vbbr3-petrobras-postos-4t25/" target="_blank">InvestNews (Vibra 4T25)</a></div></div>
+<div class="card"><div class="ct"><span class="badge">MOV</span> Barreiras de Mobilidade & Movimentos</div>
+<div class="pr"><p><strong>Grupo Fóssil Integrado (Petrobras):</strong> Barreira máxima — monopólio de fato no refino, escala de capital inalcançável (CAPEX refino ~US$15 bi/década), acesso a cru do pré-sal. Nenhum entrante privado conseguiu competir no refino em 25 anos. Acelen é a única exceção e opera sob pressão de margens.</p>
+<p><strong>Big 3 Distribuição → Informais:</strong> Convergência perigosa. Informais competem em preço via evasão fiscal/adulteração. Operação Carbono Oculto (ago/2025) criou barreira de mobilidade temporária, mas a fiscalização precisa ser permanente. Estados são gargalo.</p>
+<p><strong>Etanol Milho → Expansão geográfica:</strong> Movimento divergente (estabilizador). Inpasa inaugurou LEM/BA (mar/2026) — primeira grande planta de milho no NE, processando milho e sorgo do Matopiba. Próximas: GO e MT. 3Tentos entra em MT. Barreira de mobilidade: capital intensivo (R$1,3–5 bi por planta), acesso a milho barato, tecnologia americana. Poucos podem entrar.</p>
+<p><strong>Raízen — vetor único:</strong> Migra do quadrante "distribuição fóssil" para "integrado renovável" (E2G, bioeletricidade), mas reestruturação financeira limita velocidade. Risco de colisão com etanol milho no hidratado.</p></div>
+<div class="cs">Análise Porter — <em>Competitive Strategy</em>, Cap. 7: Mobility Barriers, Strategic Movement, Trend Analysis</div></div>
+</div>
+
+<div class="co r"><strong>A ameaça informal + fiscalização intensificada:</strong> As 3 grandes (Vibra, Ipiranga, Raízen) perderam 3 pp de share em apenas 16 meses (jan/2024–abr/2025) para distribuidores informais. A informalidade envolve não adição de biodiesel, formulação de gasolina sem impostos e adulteração — faturamento estimado de R$ 61,5 bi/ano pelo crime organizado (FBSP). Duas operações em 6 meses: <span class="hl">Operação Carbono Oculto</span> (ago/2025, PCC em 941 postos) e <span class="hl">Operação Vem Diesel</span> (PF, 27/mar/2026, preços abusivos em 11 estados + DF). Pós-Carbono Oculto, margens das 3 grandes subiram: Vibra +73% no EBITDA/m³ no 4T25. Mas na crise de mar/2026, margens de distribuidoras e postos cresceram <span class="hr">37%</span> desde o início do conflito (Ibeps/MME), gerando nova rodada de fiscalização.</div>
+
+<div class="co b"><strong>Raízen — o caso especial:</strong> Única empresa integrada verticalmente da cadeia: produz etanol (34 usinas, maior do mundo), distribui combustíveis (Shell), gera bioeletricidade e produz E2G celulósico (30 Mi L). Mas enfrenta reestruturação financeira — Cosan e Shell abandonaram negociações de capitalização. Dívida pressiona. Receita de R$78,5 bi não se traduz em margem suficiente.</div>
+</div>
+
 </div></div>
 
 <script>
-const T=['Visão Geral do Mercado','Refino & Produção','Consumo por Derivado','Diesel — Deep Dive','Balanço Regional','Gasolina, GLP & QAV','Etanol','Biodiesel','Comércio Exterior','Infraestrutura Logística','Riscos & Expansão'];
-const CI=[false,false,false,false,false,false,false,false,false,false,false];
+const T=['Visão Geral do Mercado','Refino & Produção','Consumo por Derivado','Diesel — Deep Dive','Balanço Regional','Gasolina, GLP & QAV','Etanol','Biodiesel','Comércio Exterior','Infraestrutura Logística','Riscos & Expansão','Players'];
+const CI=[false,false,false,false,false,false,false,false,false,false,false,false];
 function nv(i,el){document.querySelectorAll('.sec').forEach((s,x)=>s.classList.toggle('a',x===i));document.querySelectorAll('.ni').forEach(n=>n.classList.remove('a'));if(el)el.classList.add('a');document.getElementById('tt').textContent=T[i];if(!CI[i]){CI[i]=true;iC(i)}if(window.innerWidth<768)tgSb()}
 let so=window.innerWidth>=768;function tgSb(){so=!so;const sb=document.getElementById('sb'),mn=document.getElementById('mn'),ov=document.getElementById('ov');if(window.innerWidth<768){sb.classList.toggle('open',so);ov.classList.toggle('sh',so)}else{sb.classList.toggle('closed',!so);mn.classList.toggle('exp',!so)}}
 if(window.innerWidth<768)document.getElementById('sb').classList.remove('open');
@@ -490,6 +965,7 @@ if(tab===4){
     {label:'Diesel 2023 (R$/L)',data:[5.66,5.70,5.73,5.82,6.11],backgroundColor:c.bl+'90',borderRadius:3},
     {label:'Diesel mar/2026 est. (R$/L)',data:[7.25,7.27,7.17,7.50,7.65],backgroundColor:c.rd+'90',borderRadius:3}
   ]},options:{...bC(c)}});
+  mC('c4d',{type:'doughnut',data:{labels:['Vibra (24,5%)','Ipiranga (15,3%)','Raízen (15,0%)','Alesat (2,8%)','Bandeira Branca + Regionais (42,4%)'],datasets:[{data:[24.5,15.3,15.0,2.8,42.4],backgroundColor:[c.bl,c.gn,c.pr,c.cy,c.d],borderColor:c.c,borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'right',labels:{color:c.t,font:{family:'IBM Plex Sans',size:10},boxWidth:12}},datalabels:dlDonut}}});
 }
 if(tab===6){
   mC('c6a',{type:'bar',data:{labels:['18/19','19/20','20/21','21/22','22/23','23/24','24/25','25/26p'],datasets:[
@@ -513,8 +989,18 @@ if(tab===8){
 if(tab===10){
   mC('c10a',{type:'bar',data:{labels:['RNEST Trem 2','REPLAN HDT-D','REVAP Moderniz.','Conv. S500→S10','Outros'],datasets:[{label:'kbpd',data:[94,63,30,173,40],backgroundColor:[c.gn,c.a,c.bl,c.pr,c.d],borderRadius:4}]},options:{...bC(c),indexAxis:'y',plugins:{...bC(c).plugins,legend:{display:false}}}});
 }
+if(tab===11){
+  mC('c11b',{type:'bubble',data:{datasets:[
+    {label:'Refino & Upstream',data:[{x:9.2,y:1.8,r:26,l:'Petrobras'},{x:5.0,y:1.2,r:10,l:'Acelen'}],backgroundColor:c.bl+'80',borderColor:c.bl,borderWidth:2},
+    {label:'Distribuição',data:[{x:3.2,y:2.2,r:18,l:'Vibra'},{x:3.0,y:1.5,r:14,l:'Ipiranga'},{x:2.0,y:1.0,r:11,l:'Alesat+Regionais'}],backgroundColor:c.d+'80',borderColor:c.d,borderWidth:2},
+    {label:'Integrado Renovável',data:[{x:8.8,y:8.5,r:19,l:'Raízen'},{x:5.0,y:7.8,r:11,l:'BP Bunge'}],backgroundColor:c.gn+'80',borderColor:c.gn,borderWidth:2},
+    {label:'Etanol (Cana & Milho)',data:[{x:3.5,y:8.5,r:9,l:'São Martinho'},{x:3.0,y:9.0,r:8,l:'Atvos'},{x:2.8,y:9.5,r:14,l:'Inpasa'},{x:2.3,y:9.3,r:11,l:'FS'}],backgroundColor:c.a+'80',borderColor:c.a,borderWidth:2},
+    {label:'Biodiesel',data:[{x:5.5,y:6.2,r:12,l:'Cargill'},{x:4.0,y:6.5,r:11,l:'Coops Sul'},{x:3.0,y:7.0,r:7,l:'BSBios'}],backgroundColor:c.pr+'80',borderColor:c.pr,borderWidth:2}
+  ]},options:{responsive:true,maintainAspectRatio:true,scales:{x:{min:0,max:10.5,title:{display:true,text:'Escopo na Cadeia de Valor →',color:c.b,font:{family:'IBM Plex Sans',size:11,weight:'bold'}},ticks:{display:false},grid:{color:c.g}},y:{min:0,max:10.5,title:{display:true,text:'Exposição Renovável →',color:c.b,font:{family:'IBM Plex Sans',size:11,weight:'bold'}},ticks:{display:false},grid:{color:c.g}}},plugins:{tooltip:{callbacks:{title:function(items){var r=items[0]&&items[0].raw;return r&&r.l?r.l:''},label:function(item){var g=item.dataset.label||'';var r=item.raw||{};return g+' · Integração: '+(r.x||0).toFixed(1)+' · Renovável: '+(r.y||0).toFixed(1)}}},legend:{position:'bottom',labels:{color:c.t,font:{family:'IBM Plex Sans',size:9},boxWidth:10}},datalabels:{display:function(ctx){return !!(ctx.raw&&ctx.raw.l)},color:c.b,anchor:'center',align:'center',font:{family:'IBM Plex Mono',size:8,weight:700},formatter:function(v,ctx){return(ctx.raw&&ctx.raw.l)||''}}}}});
+  mC('c11a',{type:'doughnut',data:{labels:['Vibra (24,5%)','Ipiranga (15,3%)','Raízen (15,0%)','Alesat (2,8%)','Bandeira Branca + Regionais (42,4%)'],datasets:[{data:[24.5,15.3,15.0,2.8,42.4],backgroundColor:[c.bl,c.a,c.gn,c.pr,c.d],borderColor:c.c,borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'right',labels:{color:c.t,font:{family:'IBM Plex Sans',size:10},boxWidth:12}},datalabels:dlDonut}}});
 }
-function rC(){for(let i=0;i<11;i++)if(CI[i])iC(i)}
+}
+function rC(){for(let i=0;i<12;i++)if(CI[i])iC(i)}
 CI[0]=true;iC(0);
 </script>
 </body>
