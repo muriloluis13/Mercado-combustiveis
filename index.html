@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercado de Derivados de Petróleo | Brasil</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{--bg:#f3f4f6;--bg-sb:#fff;--bg-c:#fff;--bg-ca:#f9fafb;--bg-th:#f1f3f5;--bg-h:#f5f6f8;--brd:#e2e5ea;--brd-l:#eef0f3;--tx:#374151;--txd:#6b7280;--txb:#111827;--txi:#fff;--sh:0 1px 3px rgba(0,0,0,.06);--acc:#d97706;--acc-bg:#fffbeb;--bl:#2563eb;--bl-bg:#eff6ff;--gn:#059669;--gn-bg:#ecfdf5;--rd:#dc2626;--rd-bg:#fef2f2;--pr:#7c3aed;--pr-bg:#f5f3ff;--cy:#0891b2;--cy-bg:#ecfeff;--sb-a:#f3f4f6;--sb-h:#f9fafb;--ov:rgba(0,0,0,.3);--cg:#e5e7eb;--ct:#6b7280;--tp-bg:rgba(37,99,235,.08);--tp-c:#2563eb;--tv-bg:rgba(124,58,237,.08);--tv-c:#7c3aed}
+[data-theme="dark"]{--bg:#0b0e13;--bg-sb:#11151c;--bg-c:#151a24;--bg-ca:#1a2030;--bg-th:#1a2030;--bg-h:rgba(255,255,255,.03);--brd:#252d3a;--brd-l:#1e2533;--tx:#b0b8c8;--txd:#636d80;--txb:#e4e8f0;--txi:#0b0e13;--sh:0 1px 3px rgba(0,0,0,.3);--acc:#f59e0b;--acc-bg:rgba(245,158,11,.08);--bl:#3b82f6;--bl-bg:rgba(59,130,246,.08);--gn:#10b981;--gn-bg:rgba(16,185,129,.08);--rd:#ef4444;--rd-bg:rgba(239,68,68,.08);--pr:#a78bfa;--pr-bg:rgba(167,139,250,.08);--cy:#22d3ee;--cy-bg:rgba(34,211,238,.08);--sb-a:#1a2030;--sb-h:#151a24;--ov:rgba(0,0,0,.6);--cg:#252d3a;--ct:#636d80;--tp-bg:rgba(59,130,246,.12);--tp-c:#60a5fa;--tv-bg:rgba(167,139,250,.12);--tv-c:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.65;overflow-x:hidden}.layout{display:flex;min-height:100vh}
+.sidebar{width:260px;min-width:260px;background:var(--bg-sb);border-right:1px solid var(--brd);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .25s}.sidebar.closed{transform:translateX(-260px)}.sidebar-hd{padding:18px 20px;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between}.sidebar-br{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--txb)}.sidebar-br small{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:.6rem;color:var(--txd);font-weight:400;margin-top:2px;letter-spacing:.3px;text-transform:uppercase}
+.bi{width:30px;height:30px;border:1px solid var(--brd);border-radius:6px;background:var(--bg-c);color:var(--txd);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:.15s}.bi:hover{background:var(--bg-h);color:var(--txb)}
+.sidebar-nav{flex:1;overflow-y:auto;padding:10px 0}.ngl{padding:10px 20px 4px;font-size:.58rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--txd);font-weight:700}.ni{display:flex;align-items:center;gap:9px;padding:8px 20px;cursor:pointer;font-size:.8rem;color:var(--txd);font-weight:500;transition:.12s;border-left:3px solid transparent}.ni:hover{background:var(--sb-h);color:var(--tx)}.ni.a{background:var(--sb-a);color:var(--txb);border-left-color:var(--acc);font-weight:600}.ni .ic{width:18px;text-align:center;font-size:13px;flex-shrink:0}.ni .cd{font-family:'IBM Plex Mono',monospace;font-size:.58rem;background:var(--bg-ca);border:1px solid var(--brd);padding:1px 5px;border-radius:3px;color:var(--txd);margin-left:auto}
+.sidebar-ft{padding:12px 20px;border-top:1px solid var(--brd);display:flex;align-items:center;gap:10px}.tt{display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--txd);cursor:pointer;background:none;border:none;font-family:inherit}.tt:hover{color:var(--tx)}.ttr{width:34px;height:18px;background:var(--brd);border-radius:9px;position:relative;transition:.2s}.ttr::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:var(--bg-c);border-radius:50%;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.15)}[data-theme="dark"] .ttr{background:var(--acc)}[data-theme="dark"] .ttr::after{left:18px}
+.sov{display:none;position:fixed;inset:0;background:var(--ov);z-index:90}.sov.sh{display:block}
+.main{flex:1;margin-left:260px;transition:margin-left .25s}.main.exp{margin-left:0}.topbar{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--brd);padding:11px 24px;display:flex;align-items:center;gap:12px}.topbar-t{font-size:.84rem;color:var(--txd);font-weight:500}.content{padding:22px 24px 80px}
+.kg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.kpi{background:var(--bg-c);border:1px solid var(--brd);border-radius:10px;padding:16px 18px;position:relative;box-shadow:var(--sh);overflow:hidden}.kpi::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px}.kpi.go::before{background:var(--acc)}.kpi.bu::before{background:var(--bl)}.kpi.gn::before{background:var(--gn)}.kpi.re::before{background:var(--rd)}.kpi.pu::before{background:var(--pr)}.kpi.cn::before{background:var(--cy)}.kl{font-size:.65rem;text-transform:uppercase;letter-spacing:.8px;color:var(--txd);margin-bottom:5px;font-weight:600}.kv{font-family:'IBM Plex Mono',monospace;font-size:1.35rem;font-weight:700;color:var(--txb)}.kv span{font-size:.7rem;font-weight:400;color:var(--txd)}.kn{font-size:.68rem;color:var(--txd);margin-top:3px}.ks{font-size:.58rem;color:var(--txd);margin-top:7px;padding-top:5px;border-top:1px solid var(--brd-l)}.ks a{color:var(--bl);text-decoration:none}.ks a:hover{text-decoration:underline}
+.card{background:var(--bg-c);border:1px solid var(--brd);border-radius:10px;padding:20px 22px;margin-bottom:18px;box-shadow:var(--sh)}.ct{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--txb);margin-bottom:12px;display:flex;align-items:center;gap:8px}.badge{font-family:'IBM Plex Mono',monospace;font-size:.58rem;background:var(--acc);color:var(--txi);padding:2px 6px;border-radius:3px;font-weight:700}.cs{font-size:.58rem;color:var(--txd);margin-top:12px;padding-top:8px;border-top:1px solid var(--brd-l);line-height:1.7}.cs a{color:var(--bl);text-decoration:none}.cs a:hover{text-decoration:underline}
+.tw{overflow-x:auto;margin:12px 0;border-radius:8px;border:1px solid var(--brd)}table{width:100%;border-collapse:collapse;font-size:.78rem}thead{background:var(--bg-th)}th{padding:9px 12px;text-align:left;font-weight:600;color:var(--txd);text-transform:uppercase;font-size:.62rem;letter-spacing:.7px;border-bottom:1px solid var(--brd)}td{padding:8px 12px;border-bottom:1px solid var(--brd-l)}tr:last-child td{border-bottom:none}tr:hover{background:var(--bg-h)}.mono{font-family:'IBM Plex Mono',monospace;font-weight:500}.bold{font-weight:700;color:var(--txb)}.tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.6rem;font-weight:700;text-transform:uppercase}.tp{background:var(--tp-bg);color:var(--tp-c)}.tv{background:var(--tv-bg);color:var(--tv-c)}.tse{background:var(--acc-bg);color:var(--acc)}.tne{background:var(--gn-bg);color:var(--gn)}.ts{background:var(--cy-bg);color:var(--cy)}.tn{background:var(--rd-bg);color:var(--rd)}
+.cw canvas{max-height:310px}
+.flow{background:var(--bg-ca);border:1px solid var(--brd);border-radius:8px;padding:14px 16px;margin:10px 0}.flt{font-size:.68rem;text-transform:uppercase;letter-spacing:.6px;color:var(--txd);font-weight:700;margin-bottom:7px}.fc{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:4px}.fn{background:var(--bg-c);border:1px solid var(--brd);border-radius:5px;padding:5px 9px;font-size:.74rem;font-weight:500}.fn.o{border-left:3px solid var(--acc)}.fn.d{border-left:3px solid var(--gn)}.fa{color:var(--txd);font-size:.82rem}.flow>p{font-size:.74rem;color:var(--txd);margin-top:5px}
+.co{padding:13px 16px;margin:14px 0;border-radius:0 8px 8px 0;font-size:.82rem}.co.y{background:var(--acc-bg);border-left:3px solid var(--acc)}.co.b{background:var(--bl-bg);border-left:3px solid var(--bl)}.co.r{background:var(--rd-bg);border-left:3px solid var(--rd)}.co.g{background:var(--gn-bg);border-left:3px solid var(--gn)}.co strong{color:var(--txb)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.sec{display:none}.sec.a{display:block}
+.pr{margin:8px 0;line-height:1.75;font-size:.86rem}.hl{color:var(--acc);font-weight:600}.hb{color:var(--bl);font-weight:600}.hg{color:var(--gn);font-weight:600}.hr{color:var(--rd);font-weight:600}
+.vi{margin-bottom:18px}.vit{font-weight:700;color:var(--txb);font-size:.9rem;margin-bottom:3px;display:flex;align-items:center;gap:7px}.vn{font-family:'IBM Plex Mono',monospace;font-size:.58rem;background:var(--rd);color:#fff;padding:2px 6px;border-radius:3px;font-weight:700}.vi p{font-size:.82rem}
+@media(max-width:1024px){.kg{grid-template-columns:repeat(2,1fr)}.g2,.g3{grid-template-columns:1fr}}
+@media(max-width:768px){.sidebar{transform:translateX(-260px)}.sidebar.open{transform:translateX(0)}.main{margin-left:0!important}.content{padding:14px 14px 80px}.topbar{padding:9px 14px}.kg{grid-template-columns:repeat(2,1fr);gap:8px}.kpi{padding:12px 14px}.kv{font-size:1.15rem}}
+</style>
+</head>
+<body>
+<div class="sov" id="ov" onclick="tgSb()"></div>
+<aside class="sidebar" id="sb">
+  <div class="sidebar-hd">
+    <div class="sidebar-br">Derivados de Petróleo<small>Mercado Brasileiro — 2024/2026</small></div>
+    <button class="bi" onclick="tgSb()">✕</button>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="ngl">Panorama</div>
+    <div class="ni a" onclick="nv(0,this)"><span class="ic">📊</span> Visão Geral<span class="cd">01</span></div>
+    <div class="ngl">Oferta</div>
+    <div class="ni" onclick="nv(1,this)"><span class="ic">🏭</span> Refino & Produção<span class="cd">02</span></div>
+    <div class="ngl">Demanda</div>
+    <div class="ni" onclick="nv(2,this)"><span class="ic">⛽</span> Consumo por Derivado<span class="cd">03</span></div>
+    <div class="ngl">Derivados</div>
+    <div class="ni" onclick="nv(3,this)"><span class="ic">🛢️</span> Diesel — Deep Dive<span class="cd">04</span></div>
+    <div class="ni" onclick="nv(4,this)"><span class="ic">🗺️</span> Balanço Regional<span class="cd">05</span></div>
+    <div class="ni" onclick="nv(5,this)"><span class="ic">⛽</span> Gasolina, GLP & QAV<span class="cd">06</span></div>
+    <div class="ni" onclick="nv(6,this)"><span class="ic">🌿</span> Etanol<span class="cd">07</span></div>
+    <div class="ni" onclick="nv(7,this)"><span class="ic">🌱</span> Biodiesel<span class="cd">08</span></div>
+    <div class="ngl">Comércio & Logística</div>
+    <div class="ni" onclick="nv(8,this)"><span class="ic">🚢</span> Comércio Exterior<span class="cd">08</span></div>
+    <div class="ni" onclick="nv(9,this)"><span class="ic">🏗️</span> Infraestrutura<span class="cd">09</span></div>
+    <div class="ngl">Perspectivas</div>
+    <div class="ni" onclick="nv(10,this)"><span class="ic">⚠️</span> Riscos & Expansão<span class="cd">10</span></div>
+  </nav>
+  <div class="sidebar-ft"><button class="tt" onclick="tgTh()"><div class="ttr"></div><span id="tl">Modo escuro</span></button></div>
+</aside>
+<div class="main" id="mn">
+<div class="topbar"><button class="bi" onclick="tgSb()">☰</button><span class="topbar-t" id="tt">Visão Geral do Mercado</span></div>
+<div class="content">
+
+<!-- ===== S0: PANORAMA ===== -->
+<div class="sec a" id="s0">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Produção de Petróleo (2024)</div><div class="kv">3,4 <span>Mi bpd</span></div><div class="kn">Recorde jan/2026: 3,95 Mi bpd</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/anp-divulga-dados-consolidados-do-setor-regulado-em-2024" target="_blank">ANP Anuário 2025</a></div></div>
+  <div class="kpi bu"><div class="kl">Produção de Derivados (2024)</div><div class="kv">2,2 <span>Mi bpd</span></div><div class="kn">86,4% da capacidade instalada</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/anp-divulga-dados-consolidados-do-setor-regulado-em-2024" target="_blank">ANP Anuário 2025</a></div></div>
+  <div class="kpi gn"><div class="kl">Vendas Totais Combustíveis (2024)</div><div class="kv">133,1 <span>bi litros</span></div><div class="kn">Combustíveis líquidos automotivos</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP Seminário 2025</a></div></div>
+  <div class="kpi re"><div class="kl">Agentes Regulados ANP</div><div class="kv">131.278</div><div class="kn">44.678 postos · 384 distribuidores</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP Seminário 2025</a></div></div>
+</div>
+<div class="g2">
+  <div class="card"><div class="ct"><span class="badge">MIX</span> Vendas por Derivado (2024)</div><div class="cw"><canvas id="c0a"></canvas></div><div class="cs"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP Seminário Abastecimento 2025</a></div></div>
+  <div class="card"><div class="ct"><span class="badge">DEP</span> Dependência de Importação por Derivado</div><div class="cw"><canvas id="c0b"></canvas></div><div class="cs"><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2025-02/Brasil-vende-mais-de-133-bilh%C3%B5es-de-litros-de-combust%C3%ADveis-em-2024" target="_blank">ANP/Agência Brasil (2024)</a> · <a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">COMB</span> Painel de Combustíveis — Brasil 2024</div>
+<div class="tw"><table>
+<thead><tr><th>Derivado</th><th>Vendas 2024</th><th>Var. vs 2023</th><th>Produção Nacional</th><th>Import./Consumo</th><th>Tendência EPE 2030</th></tr></thead>
+<tbody>
+<tr><td class="bold">Diesel B</td><td class="mono">67,25 bi L</td><td class="mono" style="color:var(--gn)">+2,6%</td><td>~75% da demanda</td><td class="mono" style="color:var(--rd)">~25%</td><td>Importador líquido (diesel + QAV mais deficitários)</td></tr>
+<tr><td class="bold">Gasolina C</td><td class="mono">44,19 bi L</td><td class="mono" style="color:var(--rd)">−4,0%</td><td>~90% da demanda</td><td class="mono">~10%</td><td>Tendência à autossuficiência</td></tr>
+<tr><td class="bold">Etanol Hidratado</td><td class="mono">21,66 bi L</td><td class="mono" style="color:var(--gn)">+33,4%</td><td>100% (nacional)</td><td class="mono">~0%</td><td>Crescimento por competitividade de preço</td></tr>
+<tr><td class="bold">GLP</td><td class="mono">7,57 Mi m³</td><td class="mono" style="color:var(--gn)">+2,2%</td><td>~75% da demanda</td><td class="mono" style="color:var(--rd)">~25%</td><td>Superávit possível a partir de ~2029</td></tr>
+<tr><td class="bold">Biodiesel</td><td class="mono">8,96 bi L</td><td class="mono" style="color:var(--gn)">+22,0%</td><td>100% (nacional)</td><td class="mono">0%</td><td>Crescimento mandatório: B14→B15→B20 (2030)</td></tr>
+<tr><td class="bold">QAV</td><td class="mono">~7 Mi m³</td><td class="mono" style="color:var(--gn)">+6,8%</td><td>Maioria nacional</td><td class="mono">Crescente</td><td>Importações acima de máximas históricas</td></tr>
+<tr><td class="bold">Óleo Combustível</td><td class="mono">—</td><td class="mono">—</td><td>Excedentário</td><td class="mono" style="color:var(--gn)">Exportador</td><td>Excedente permanente · bunker + exportação</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a> · <a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a> · <a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica</a></div></div>
+<div class="co y"><strong>Paradoxo brasileiro:</strong> 8º maior produtor de petróleo do mundo (3,4 Mi bpd), exportador líquido de petróleo bruto (1,7 Mi bpd), mas importador líquido de derivados — especialmente diesel, GLP e QAV. O gargalo é o refino, não a matéria-prima.</div>
+
+<div class="card"><div class="ct"><span class="badge">PREÇO</span> Formação de Preços — Como se Compõe o Litro na Bomba</div>
+<div class="tw"><table>
+<thead><tr><th>Componente</th><th>Gasolina C</th><th>Diesel B</th><th>Notas</th></tr></thead>
+<tbody>
+<tr><td class="bold">Petrobras (refinaria)</td><td class="mono">~R$ 3,04/L (47%)</td><td class="mono">~47–63%</td><td>Referência PPI (paridade importação), mas Petrobras se descolou em mar/2026 (desconto de 18,1% vs PPI)</td></tr>
+<tr><td class="bold">ICMS (estadual, ad rem)</td><td class="mono">R$ 1,57/L (24%)</td><td class="mono">R$ 1,17/L (19%)</td><td>Monofásico desde LC 192/2022 · Confaz atualiza anualmente · GLP: R$ 1,47/kg</td></tr>
+<tr><td class="bold">PIS/Cofins + CIDE (federal)</td><td class="mono">~R$ 0,89/L (14%)</td><td class="mono">~R$ 0,35/L (5%)</td><td>Diesel: PIS/Cofins <span class="hr">zerados em mar/2026</span> (MP 1.340) + subsídio R$ 0,32/L até dez/2026</td></tr>
+<tr><td class="bold">Biocombustível na mistura</td><td class="mono">E30 (30% anidro)</td><td class="mono">B15 (15% biodiesel)</td><td>Custo do biocombustível embutido no preço final · Biodiesel ~R$ 5,29/L</td></tr>
+<tr><td class="bold">Distribuição + Revenda</td><td class="mono">~R$ 1,12/L (18%)</td><td class="mono">~18%</td><td>Margem cresceu <span class="hr">31,3% em 2025</span> enquanto preço refinaria caiu 21,3% (Ineep)</td></tr>
+<tr style="background:var(--acc-bg);font-weight:700"><td>TOTAL na bomba</td><td class="mono">~R$ 6,47/L</td><td class="mono">~R$ 5,90–7,22/L</td><td>Impostos = ~34% gasolina, ~22% diesel. Carga total entre as mais altas do mundo.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://istoedinheiro.com.br/impostos-representam-ate-34-do-preco-dos-combustiveis-nos-postos-veja-composicao" target="_blank">ISTOÉ Dinheiro/Petrobras</a> · <a href="https://comsefaz.org.br/novo/atualizacao-de-aliquotas-do-icms-sobre-combustiveis-entra-em-vigor-em-1o-de-janeiro-de-2026/" target="_blank">Comsefaz (ICMS 2026)</a> · <a href="https://revistaforum.com.br/brasil/o-que-faz-o-diesel-subir-de-preco-no-brasil/" target="_blank">R. Fórum (composição diesel)</a> · <a href="https://www.defesaemfoco.com.br/autossuficiencia-e-preco-alto/" target="_blank">Defesa em Foco (PPI/margens)</a></div></div>
+
+<div class="co r"><strong>Distorção de margens (2025):</strong> Entre jan–out 2025, o preço da gasolina A na refinaria caiu 21,3%, mas na bomba subiu 0,3%. A margem de distribuição e revenda saltou de R$ 0,96 para R$ 1,26 (+31,3%). O consumidor não sentiu a queda do petróleo internacional. Em mar/2026, o governo zerou PIS/Cofins sobre diesel e criou subsídio de R$ 0,32/L (redução potencial de R$ 0,64/L), mas fiscalização da ANP em 9 estados encontrou postos que não repassaram integralmente.</div>
+</div>
+
+<!-- ===== S1: REFINO & PRODUÇÃO ===== -->
+<div class="sec" id="s1">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Refinarias em Operação</div><div class="kv">18</div><div class="kn">14 Petrobras + 4 privadas</div><div class="ks"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+  <div class="kpi bu"><div class="kl">Capacidade Total</div><div class="kv">~2,1 <span>Mbpd</span></div><div class="kn">Petrobras ~1,65 Mbpd (84%)</div><div class="ks"><a href="https://jornalggn.com.br/artigos/refino-brasileiro-nao-cresce-em-2025-e-dependencia-externa-persiste-por-alessandra-leal/" target="_blank">GGN/Leal jan/2026</a></div></div>
+  <div class="kpi gn"><div class="kl">FUT Médio Petrobras</div><div class="kv">93% <span>(2024)</span></div><div class="kn">Maior desde 2014</div><div class="ks"><a href="https://agencia.petrobras.com.br/w/negocio/petrobras-atinge-recordes-na-producao-do-pre-sal-em-2024-e-tem-maior-fator-de-utilizacao-das-suas-refinarias-em-10-anos" target="_blank">Agência Petrobras</a></div></div>
+  <div class="kpi pu"><div class="kl">Produtos Alto Valor (2024)</div><div class="kv">69% <span>do mix</span></div><div class="kn">Diesel + Gasolina + QAV</div><div class="ks"><a href="https://agencia.petrobras.com.br/w/negocio/petrobras-atinge-recordes-na-producao-do-pre-sal-em-2024-e-tem-maior-fator-de-utilizacao-das-suas-refinarias-em-10-anos" target="_blank">Agência Petrobras</a></div></div>
+</div>
+<div class="g2">
+  <div class="card"><div class="ct"><span class="badge">CAP</span> Capacidade por Região (kbpd)</div><div class="cw"><canvas id="c1a"></canvas></div><div class="cs"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+  <div class="card"><div class="ct"><span class="badge">REC</span> Recordes de Produção Petrobras (2024)</div><div class="cw"><canvas id="c1b"></canvas></div><div class="cs"><a href="https://agencia.petrobras.com.br/w/negocio/petrobras-atinge-recordes-na-producao-do-pre-sal-em-2024-e-tem-maior-fator-de-utilizacao-das-suas-refinarias-em-10-anos" target="_blank">Agência Petrobras fev/2025</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">MAP</span> Principais Refinarias</div>
+<div class="tw"><table>
+<thead><tr><th>Refinaria</th><th>UF</th><th>Oper.</th><th>kbpd</th><th>Reg.</th><th>Destinos Primários</th></tr></thead>
+<tbody>
+<tr><td class="bold">REPLAN</td><td>SP</td><td><span class="tag tp">Petrobras</span></td><td class="mono">434</td><td><span class="tag tse">SE</span></td><td>Interior SP, GO, DF, MT, MS, TO, RO, AC</td></tr>
+<tr><td class="bold">Mataripe</td><td>BA</td><td><span class="tag tv">Acelen</span></td><td class="mono">289</td><td><span class="tag tne">NE</span></td><td>BA, SE; cabotagem NE</td></tr>
+<tr><td class="bold">REDUC</td><td>RJ</td><td><span class="tag tp">Petrobras</span></td><td class="mono">252</td><td><span class="tag tse">SE</span></td><td>RJ, ES, MG</td></tr>
+<tr><td class="bold">REVAP</td><td>SP</td><td><span class="tag tp">Petrobras</span></td><td class="mono">252</td><td><span class="tag tse">SE</span></td><td>RMSP, litoral; cabotagem via S. Sebastião</td></tr>
+<tr><td class="bold">REPAR</td><td>PR</td><td><span class="tag tp">Petrobras</span></td><td class="mono">214</td><td><span class="tag ts">S</span></td><td>PR, SC, parte MS</td></tr>
+<tr><td class="bold">REFAP</td><td>RS</td><td><span class="tag tp">Petrobras</span></td><td class="mono">201</td><td><span class="tag ts">S</span></td><td>RS, parte SC</td></tr>
+<tr><td class="bold">RPBC</td><td>SP</td><td><span class="tag tp">Petrobras</span></td><td class="mono">179</td><td><span class="tag tse">SE</span></td><td>Baixada Santista, RMSP; Santos</td></tr>
+<tr><td class="bold">REGAP</td><td>MG</td><td><span class="tag tp">Petrobras</span></td><td class="mono">166</td><td><span class="tag tse">SE</span></td><td>RMBH e interior MG</td></tr>
+<tr><td class="bold">RNEST</td><td>PE</td><td><span class="tag tp">Petrobras</span></td><td class="mono">130</td><td><span class="tag tne">NE</span></td><td>PE, PB, AL, CE, PI, RN, MA</td></tr>
+<tr><td class="bold">RECAP</td><td>SP</td><td><span class="tag tp">Petrobras</span></td><td class="mono">63</td><td><span class="tag tse">SE</span></td><td>ABCD, RMSP</td></tr>
+<tr><td class="bold">REMAN</td><td>AM</td><td><span class="tag tv">Atem</span></td><td class="mono">46</td><td><span class="tag tn">N</span></td><td>AM (operação irregular 2025)</td></tr>
+<tr><td class="bold">3R Potiguar</td><td>RN</td><td><span class="tag tv">3R</span></td><td class="mono">38</td><td><span class="tag tne">NE</span></td><td>RN, CE (parcial)</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a> · <a href="https://www.brasilemfolhas.com.br/2026/03/refinaria-replan-petrobras-aumento-producao-diesel/" target="_blank">Brasil em Folhas (destinos REPLAN)</a></div></div>
+</div>
+
+<!-- ===== S2: CONSUMO ===== -->
+<div class="sec" id="s2">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Diesel B</div><div class="kv">67,3 <span>bi L</span></div><div class="kn">+2,6% · 50%+ do total · Agro é driver #1</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a></div></div>
+  <div class="kpi bu"><div class="kl">Gasolina C</div><div class="kv">44,2 <span>bi L</span></div><div class="kn">−4% · Perdendo para etanol</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a></div></div>
+  <div class="kpi gn"><div class="kl">Etanol Hidratado</div><div class="kv">21,7 <span>bi L</span></div><div class="kn">+33,4% · Maior competitividade preço</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a></div></div>
+  <div class="kpi cn"><div class="kl">GLP (Gás de Cozinha)</div><div class="kv">7,57 <span>Mi m³</span></div><div class="kn">+2,2% · Import.: 25% das vendas</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">EVO</span> Evolução das Vendas de Combustíveis</div><div class="cw"><canvas id="c2a"></canvas></div><div class="cs"><a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica (dados ANP)</a> · <a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP Seminário 2025</a></div></div>
+<div class="co y"><strong>Diesel &gt;50% do mercado.</strong> A predominância reflete a logística rodoviária do Brasil e a pujança do agronegócio. A correlação entre volume de safra e consumo de diesel no Q3 é estrutural. Já a gasolina perde share para o etanol — a elasticidade-preço cruzada nunca foi tão intensamente testada.</div>
+
+<div class="card"><div class="ct"><span class="badge">FROTA</span> Composição da Frota Nacional — 123,9 Milhões de Veículos (2024)</div>
+<div class="tw"><table>
+<thead><tr><th>Motorização</th><th>% Frota Total</th><th>% Veículos Leves</th><th>Dinâmica</th></tr></thead>
+<tbody>
+<tr><td class="bold">Flex Fuel (etanol+gasolina)</td><td class="mono" style="color:var(--gn);font-weight:700">42,2%</td><td class="mono" style="color:var(--gn);font-weight:700">76,2%</td><td>Dominante desde 2003 · Motor flex em 83% dos novos licenciamentos</td></tr>
+<tr><td class="bold">Gasolina exclusiva</td><td class="mono">40,5%</td><td class="mono">11,5%</td><td>Frota envelhecida, caindo progressivamente</td></tr>
+<tr><td class="bold">Diesel</td><td class="mono">7,8%</td><td class="mono">11,7% (frota circulante)</td><td>Restrito a caminhões, ônibus, utilitários pesados · Proibido para passeio</td></tr>
+<tr><td class="bold">Álcool (E100)</td><td class="mono">3,5%</td><td class="mono">—</td><td>Herança Proálcool (1979) · Veículos antigos, em declínio</td></tr>
+<tr><td class="bold">Elétricos + Híbridos</td><td class="mono" style="color:var(--acc);font-weight:700">~0,4%</td><td class="mono">~0,4%</td><td>86.849 emplacados no 1S 2025 (+41,9%) · Crescimento explosivo porém base ínfima</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.poder360.com.br/poder-economia/frota-de-veiculos-no-brasil-cresce-4-em-2024-diz-levantamento/" target="_blank">Poder360/Veloe/Fipe (frota 2024)</a> · <a href="https://www.autoindustria.com.br/2024/04/24/carros-flex-respondem-por-762-da-frota-brasileira/" target="_blank">AutoIndústria/Sindipeças (76,2% flex)</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">TRANS</span> Transição Energética — A Aposta Brasileira: Híbrido Flex</div>
+<div class="pr"><p>O Brasil não seguirá o modelo europeu de eletrificação pura. A estratégia nacional é o <span class="hg">veículo híbrido flex</span> — motor elétrico combinado com combustão flex (etanol + gasolina). Montadoras comprometeram <span class="hl">R$ 117 bilhões</span> em investimentos, com pelo menos 30 novos modelos previstos. VW investirá R$ 9 bi em plataforma híbrida flex; Hyundai, Stellantis e Toyota também investem pesado. O Programa Mover oferece R$ 19,3 bi até 2028 para P&D em baixa emissão.</p>
+<p><strong>EPE projeta (2034):</strong> No cenário de referência, eletrificados serão <span class="hb">8% da frota</span> de veículos leves. No cenário "turbo", <span class="hb">22%</span> (400 mil híbridos + 122 mil plug-in + 172 mil elétricos/ano). A demanda elétrica para recarga cresceria de 627 GWh (2025) para 7,8 TWh (2035). Infraestrutura: apenas 4.230 eletropostos em 2024, concentrados em grandes centros.</p>
+<p><strong>Transporte pesado permanece diesel:</strong> Caminhões e ônibus não têm alternativa viável em escala. Alternativas piloto: VW Meteor Hybrid (diesel + elétrico, −90% CO₂ com HVO), Volvo FH B100 Flex (biodiesel puro, 80 unidades em uso), Scania elétrico 30G (entrega jan/2026, 250 km autonomia), Cummins HELM (motor único: diesel, gás, hidrogênio). A EPE estima 43 mil caminhões eletrificados até 2035 — uma fração dos milhões a diesel.</p></div>
+<div class="cs"><a href="https://usebaratao.com.br/motores-em-transicao-o-mercado-automotivo-brasileiro-em-2025/" target="_blank">Baratão (frota 2025)</a> · <a href="https://www.jota.info/coberturas-especiais/carros-hibridos-flex-sao-o-futuro-da-mobilidade-no-brasil-25062024" target="_blank">JOTA (híbrido flex)</a> · <a href="https://www.biodieselbr.com/noticias/qualidade/motor/fenatan-caminhoes-hibridos-e-flex-sao-destaque-como-alternativas-ao-diesel-051124" target="_blank">BiodieselBR (Fenatran caminhões)</a> · <a href="https://eixos.com.br/transicao-energetica/quase-um-quarto-da-frota-de-novos-veiculos-leves-sera-eletrificada-em-2035-estima-epe/" target="_blank">Eixos/EPE (projeção 2035)</a></div></div>
+</div>
+
+<!-- ===== S3: DIESEL DEEP DIVE ===== -->
+<div class="sec" id="s3">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Vendas Diesel B (2024)</div><div class="kv">67,3 <span>bi L</span></div><div class="kn">Projeção 2025: 69,3–70,5 bi L (StoneX/EPE)</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a></div></div>
+  <div class="kpi re"><div class="kl">Importações (2025)</div><div class="kv">17,3 <span>bi L</span></div><div class="kn">Recorde · +20% vs 2024</div><div class="ks"><a href="https://www.infomoney.com.br/mercados/importacao-de-diesel-pelo-brasil-bate-recorde-em-2025-com-aumento-de-20/" target="_blank">StoneX/InfoMoney</a></div></div>
+  <div class="kpi pu"><div class="kl">Defasagem Petrobras (mar/2026)</div><div class="kv">67% <span>abaixo PPI</span></div><div class="kn">Guerra Irã · Petróleo +49%</div><div class="ks"><a href="https://www.cnnbrasil.com.br/economia/negocios/defasagem-do-diesel-escala-a-47-nas-refinarias-da-petrobras-diz-abicom/" target="_blank">Abicom/CNN</a></div></div>
+  <div class="kpi cn"><div class="kl">Spread Preço (mar/2026)</div><div class="kv">R$4,30 <span>/L</span></div><div class="kn">RJ R$5,69 vs SP R$9,99</div><div class="ks"><a href="https://revistaoeste.com/economia/diesel-sobe-24-em-sp-e-precos-abusivos-levam-a-autuacoes-da-anp/" target="_blank">Revista Oeste/ANP</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">FLUX</span> Fluxos Internos de Diesel</div>
+<div class="flow"><div class="flt">C1 — SE → Centro-Oeste/Norte (maior fluxo)</div><div class="fc"><div class="fn o">REPLAN (SP)</div><span class="fa">→</span><div class="fn">Duto+Rodovia</div><span class="fa">→</span><div class="fn d">Interior SP, GO, DF, MT, MS, TO, RO, AC</div></div><p>55% da REPLAN para interior SP. Restante via rodovia para CO e Norte. Agro é o driver sazonal.</p></div>
+<div class="flow"><div class="flt">C2 — SE → NE/N (cabotagem)</div><div class="fc"><div class="fn o">Santos/S.Sebastião</div><span class="fa">→</span><div class="fn">Cabotagem</div><span class="fa">→</span><div class="fn d">Suape, Salvador, Itaqui, Belém</div></div><p>São Sebastião: maior terminal Transpetro. Despacha derivados nacionais + importados redistribuídos.</p></div>
+<div class="flow"><div class="flt">C3 — NE: Mataripe + RNEST → Regional</div><div class="fc"><div class="fn o">Mataripe + RNEST</div><span class="fa">→</span><div class="fn d">BA, SE, AL, PE, PB, RN, CE, PI, MA</div></div><p>Mataripe (PPI) + RNEST (Petrobras). Não cobrem 100% NE — gap via importação + cabotagem SE.</p></div>
+<div class="cs"><a href="https://www.brasilemfolhas.com.br/2026/03/refinaria-replan-petrobras-aumento-producao-diesel/" target="_blank">Brasil em Folhas</a> · <a href="https://petrobras.com.br/quem-somos/logistica" target="_blank">Petrobras Logística</a> · <a href="https://www.cnnbrasil.com.br/economia/negocios/defasagem-do-diesel-escala-a-47-nas-refinarias-da-petrobras-diz-abicom/" target="_blank">CNN/Abicom</a></div></div>
+<div class="co r"><strong>Centro-Oeste: zero refinarias.</strong> 100% do diesel vem de fora (REPLAN→rodovia). Coração do agro com demanda sazonal explosiva. Norte (~100% dependente de cabotagem+importação) tem custos logísticos altíssimos — Cruzeiro do Sul/AC e Parintins/AM >R$9/L.</div>
+</div>
+
+<!-- ===== S4: BALANÇO REGIONAL ===== -->
+<div class="sec" id="s4">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Sudeste — Refino</div><div class="kv">~1.346 <span>kbpd</span></div><div class="kn">66% da capacidade nacional · Excedente → CO, NE, N</div><div class="ks"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+  <div class="kpi bu"><div class="kl">Sul — Refino</div><div class="kv">~432 <span>kbpd</span></div><div class="kn">REPAR+REFAP+RPR · Relativamente equilibrado</div><div class="ks"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+  <div class="kpi gn"><div class="kl">Nordeste — Refino</div><div class="kv">~471 <span>kbpd</span></div><div class="kn">Mataripe+RNEST+3R+Lubnor+Dax</div><div class="ks"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+  <div class="kpi re"><div class="kl">Centro-Oeste — Refino</div><div class="kv">0 <span>kbpd</span></div><div class="kn">Zero refinarias · 100% depende de fora</div><div class="ks"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+  <div class="kpi cn"><div class="kl">Norte — Refino</div><div class="kv">46 <span>kbpd</span></div><div class="kn">Apenas REMAN (operação irregular)</div><div class="ks"><a href="https://jornalggn.com.br/artigos/refino-brasileiro-nao-cresce-em-2025-e-dependencia-externa-persiste-por-alessandra-leal/" target="_blank">GGN / Leal</a></div></div>
+  <div class="kpi pu"><div class="kl">Bases de Distribuição (BR)</div><div class="kv">297 <span>bases</span></div><div class="kn">Cap. armazenagem: 4,3 Mi m³</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/anuario-estatistico/arquivos-anuario-estatistico-2024/secao-3/secao3.pdf" target="_blank">ANP Anuário 2024 (Seção 3)</a></div></div>
+</div>
+
+<div class="g2">
+  <div class="card"><div class="ct"><span class="badge">RADAR</span> Perfil Regional — Oferta, Demanda, Vulnerabilidade</div><div class="cw"><canvas id="c4r"></canvas></div><div class="cs">Elaboração própria · <a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a> · <a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a> · Escala relativa 0–100</div></div>
+  <div class="card"><div class="ct"><span class="badge">INFRA</span> Infraestrutura de Distribuição por Região</div><div class="cw"><canvas id="c4b"></canvas></div><div class="cs"><a href="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/anuario-estatistico/arquivos-anuario-estatistico-2024/secao-3/secao3.pdf" target="_blank">ANP Anuário 2024 (Seção 3)</a> — Dados 2023</div></div>
+</div>
+
+<div class="card"><div class="ct"><span class="badge">DIST</span> Mapa da Distribuição — Infraestrutura e Preços por Região</div>
+<div class="tw"><table>
+<thead><tr><th>Região</th><th>Bases Distrib.</th><th>Postos</th><th>TRRs</th><th>Preço Diesel (2023)</th><th>Preço GLP (2023)</th><th>Alta Diesel mar/2026</th></tr></thead>
+<tbody>
+<tr><td class="bold">Sudeste</td><td class="mono">97 (33%)</td><td>SP 19,6%, MG 10,9%, RJ 4,6%</td><td class="mono">25,4%</td><td class="mono">R$ 5,70</td><td class="mono">R$ 7,82</td><td>SP +27,5%, MG +26,5%</td></tr>
+<tr><td class="bold">Sul</td><td class="mono">55 (19%)</td><td>RS 7,2%, PR 6,5%</td><td class="mono">38,2%</td><td class="mono">R$ 5,66</td><td class="mono">R$ 8,20</td><td>SC +30,0%, PR +28,0%</td></tr>
+<tr><td class="bold">Centro-Oeste</td><td class="mono">54 (18%)</td><td>MT destaque; GO, MS, DF</td><td class="mono">23,4%</td><td class="mono">R$ 5,82</td><td class="mono">R$ 8,36</td><td>GO +29,2%, MS +28,3%</td></tr>
+<tr><td class="bold">Nordeste</td><td class="mono">45 (15%)</td><td>BA 7,6%</td><td class="mono">6,9%</td><td class="mono">R$ 5,73</td><td class="mono">R$ 7,89</td><td>BA +26,4%, PI +28,1%</td></tr>
+<tr><td class="bold">Norte</td><td class="mono">46 (15%)</td><td>PA destaque</td><td class="mono">6,1%</td><td class="mono">R$ 6,11</td><td class="mono">R$ 8,88</td><td>PA +25,2%, TO +37,1%</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/anuario-estatistico/arquivos-anuario-estatistico-2024/secao-3/secao3.pdf" target="_blank">ANP Anuário 2024 (Seção 3, preços e infra 2023)</a> · <a href="https://exame.com/brasil/preco-do-diesel-dispara-no-brasil-e-ja-custa-r-722-mostra-levantamento/" target="_blank">Exame/TicketLog (alta diesel mar/2026)</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">BAL</span> Balanço Oferta × Demanda por Região</div>
+<div class="tw"><table>
+<thead><tr><th>Região</th><th>Produção Local</th><th>Demanda</th><th>Posição Estrutural</th><th>Complemento</th></tr></thead>
+<tbody>
+<tr><td class="bold">Sudeste</td><td>~66% cap. refino (REPLAN, REVAP, RPBC, REDUC, REGAP, RECAP)</td><td>Muito alta (SP #1 diesel e gasolina; RJ #1 QAV)</td><td style="color:var(--gn);font-weight:600">Superavitária em gasolina A; deficitária em diesel</td><td>Exporta excedente de gasolina para NE/N por cabotagem. Importa diesel via Santos. REPLAN abastece até RO/AC via rodovia.</td></tr>
+<tr><td class="bold">Sul</td><td>REPAR (214) + REFAP (201) + RPR (17) = ~432 kbpd</td><td>Alta (agro PR/RS, indústria)</td><td style="color:var(--bl);font-weight:600">Relativamente equilibrada</td><td>Menor déficit relativo. Import. complementar via Paranaguá e Rio Grande. Maior concentração de TRRs do país (38,2%), refletindo o agro.</td></tr>
+<tr><td class="bold">Nordeste</td><td>Mataripe (289) + RNEST (130) + 3R (38) + Lubnor (10) + Dax (4)</td><td>Moderada-alta</td><td style="color:var(--acc);font-weight:600">Parcialmente atendida; gap crescente</td><td>Mataripe (PPI) + RNEST cobrem maior parte. Gap: importação (Suape, Aratu, Itaqui) + cabotagem SE. Trem 2 RNEST (+94 kbpd S-10) é transformacional. GLP: Sudeste superavitário exportará para NE.</td></tr>
+<tr><td class="bold">Centro-Oeste</td><td style="color:var(--rd);font-weight:700">Zero refinarias</td><td>Alta e sazonal (soja mar-mai, milho jun-ago)</td><td style="color:var(--rd);font-weight:600">100% dependente de transferências</td><td>REPLAN→rodovia é fonte primária. MT tem 29 bases de distribuição (2º do país) e 11,5% dos TRRs, refletindo demanda do agro. Altas de diesel mar/2026 entre as maiores (GO +29%, MS +28%).</td></tr>
+<tr><td class="bold">Norte</td><td>REMAN (46 kbpd, operação irregular)</td><td>Baixa absoluta, logisticamente difícil</td><td style="color:var(--rd);font-weight:600">~100% dependente cabotagem + importação</td><td>Belém e Itaqui como entrepostos. Preço diesel mais alto do país (R$ 6,11 vs média R$ 5,76). GLP mais caro (R$ 8,88/kg). TO liderou alta diesel mar/2026 (+37%). Barcaças do Mar Aberto são solução parcial.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a> · <a href="https://www.fecombustiveis.org.br/noticia/alta-de-precos-e-risco-de-escassez-de-combustiveis-mostram-pouca-eficacia-de-acoes-do-governo/263964" target="_blank">Fecombustíveis</a> · <a href="https://www.cnnbrasil.com.br/economia/macroeconomia/petrobras-precisa-atualizar-os-precos-dos-combustiveis-diz-abicom/" target="_blank">CNN/Abicom</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">PREÇO</span> Preço Médio Diesel por Região (R$/L)</div><div class="cw"><canvas id="c4c"></canvas></div><div class="cs"><a href="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/anuario-estatistico/arquivos-anuario-estatistico-2024/secao-3/secao3.pdf" target="_blank">ANP Anuário 2024 (Seção 3)</a> · <a href="https://exame.com/brasil/preco-do-diesel-dispara-no-brasil-e-ja-custa-r-722-mostra-levantamento/" target="_blank">Exame/TicketLog mar/2026</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">MERC</span> Concentração de Mercado na Distribuição</div>
+<div class="pr"><p>O mercado de distribuição é dominado por 4 grandes players: <span class="hb">Vibra (BR) 15,9%</span>, <span class="hl">Ipiranga 13,1%</span>, <span class="hg">Raízen (Shell) 10,8%</span> e Alesat 2,8% — juntas, 42,6% dos postos. As 63 bandeiras restantes dividem 57,4%. Na crise de março/2026, <span class="hr">as grandes distribuidoras priorizaram redes próprias, cortando 10–20% das vendas a postos bandeira branca e TRRs</span> — amplificando o racionamento em regiões já vulneráveis.</p>
+<p>Os TRRs (transportadores-revendedores-retalhistas) — 607 no Brasil — são essenciais para o agro, entregando diesel diretamente a fazendas. A concentração no Sul (38,2%) e Centro-Oeste (23,4%) reflete a geografia da demanda agrícola. Na crise, foram os primeiros a sofrer cortes de suprimento.</p></div>
+<div class="cs"><a href="https://www.gov.br/anp/pt-br/centrais-de-conteudo/publicacoes/anuario-estatistico/arquivos-anuario-estatistico-2024/secao-3/secao3.pdf" target="_blank">ANP Anuário 2024 (Seção 3)</a> · <a href="https://www.fecombustiveis.org.br/noticia/alta-de-precos-e-risco-de-escassez-de-combustiveis-mostram-pouca-eficacia-de-acoes-do-governo/263964" target="_blank">Fecombustíveis (racionamento mar/2026)</a></div></div>
+
+<div class="co y"><strong>O paradoxo regional:</strong> O Sudeste concentra ~66% do refino mas é o maior consumidor. O Centro-Oeste — coração do agronegócio, com 29 bases de distribuição só em MT — não tem uma única refinaria. A REPLAN funciona como o "coração" do sistema, bombeando diesel por rodovia até o Acre. O etanol hidratado é competitivo em apenas 5 estados (GO, MT, MG, PR, SP) — no Norte e Nordeste, gasolina permanece dominante, sem alternativa de preço.</div>
+<div class="co b"><strong>Projeção EPE (PDE 2034):</strong> O Sudeste será superavitário em gasolina A, exportando por cabotagem para o NE e N. Para diesel, permanecerá deficitário, recebendo importação via Santos. O NE ganhará capacidade com o Trem 2 da RNEST. Para GLP, o país caminha para superávit a partir de ~2029, com o Sudeste exportando para o NE. O Centro-Oeste e Norte permanecerão 100% dependentes de transferências inter-regionais e importação durante toda a década.</div>
+</div>
+
+<!-- ===== S5: GASOLINA, GLP & QAV ===== -->
+<div class="sec" id="s5">
+<div class="kg">
+  <div class="kpi bu"><div class="kl">Gasolina A — Autossuficiência</div><div class="kv">~90% <span>da demanda</span></div><div class="kn">Importação: ~10% · Tendência à autossuficiência</div><div class="ks"><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2025-02/Brasil-vende-mais-de-133-bilh%C3%B5es-de-litros-de-combust%C3%ADveis-em-2024" target="_blank">ANP/Agência Brasil</a></div></div>
+  <div class="kpi gn"><div class="kl">Gasolina A — Produção Recorde</div><div class="kv">420 <span>kbpd (2024)</span></div><div class="kn">Recordes: REPAR e REDUC</div><div class="ks"><a href="https://agencia.petrobras.com.br/w/negocio/petrobras-atinge-recordes-na-producao-do-pre-sal-em-2024-e-tem-maior-fator-de-utilizacao-das-suas-refinarias-em-10-anos" target="_blank">Agência Petrobras</a></div></div>
+  <div class="kpi cn"><div class="kl">GLP — Importação</div><div class="kv">~25% <span>da demanda</span></div><div class="kn">Superávit possível ~2029 (EPE)</div><div class="ks"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a></div></div>
+  <div class="kpi pu"><div class="kl">QAV — Crescimento</div><div class="kv">+6,8% <span>em 2024</span></div><div class="kn">~7 Mi m³ · Recuperação pós-COVID forte</div><div class="ks"><a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/ANP</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">GAS</span> Gasolina C: dinâmica com Etanol</div>
+<div class="pr"><p>Gasolina C caiu <span class="hr">4%</span> em 2024 enquanto etanol hidratado subiu <span class="hg">33,4%</span> — a "regra dos 70%" (etanol competitivo quando <70% do preço da gasolina) foi amplamente atendida. A Lei do Combustível do Futuro (14.993/2024) prevê etanol anidro até 35% na gasolina (E30 já vigente). A mistura E30 comprime a oferta de hidratado, tendendo a re-equilibrar preços. StoneX projeta gasolina C em alta de ~4,9% em 2025 (recorde de 46,5 bi L) com etanol recuando 7,8%.</p></div>
+<div class="cs"><a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica</a> · <a href="https://br.investing.com/news/economy-news/vendas-de-diesel-b-crescem-em-maio-e-tem-maior-volume-em-7-meses-mostra-anp-1595965" target="_blank">StoneX/Investing</a></div></div>
+<div class="card"><div class="ct"><span class="badge">GLP</span> GLP: gás de cozinha e a questão social</div>
+<div class="pr"><p>GLP é essencial: atende <span class="hl">58.283 revendas</span> e ~95% dos lares brasileiros. Importações cobrem ~25% da demanda. A EPE projeta superávit possível a partir de ~2029 com aumento da produção em UPGNs (processamento de gás natural). Principal vulnerabilidade: preço do botijão — em Ilhéus/BA atingiu R$150 em mar/2026. Transpetro triplicará capacidade de transporte de GLP com 5 novos gaseiros.</p></div>
+<div class="cs"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP 2025</a> · <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-01/novas-embarcacoes-da-petrobras-triplicarao-capacidade-de-transporte" target="_blank">Agência Brasil/Mar Aberto</a></div></div>
+<div class="card"><div class="ct"><span class="badge">QAV</span> QAV & Outros: aviação e indústria</div>
+<div class="pr"><p><strong>QAV (querosene de aviação):</strong> recuperação vigorosa pós-COVID. Crescimento de 6,8% em 2024, aproximando-se dos níveis pré-crise de 2014. EPE projeta importações acima das máximas históricas. Trade-off com diesel: refinarias podem aumentar QAV em detrimento do diesel, até certo limite. SAF (combustível sustentável de aviação) começa a ganhar tração — planta HEFA na RPBC em construção.</p>
+<p><strong>Nafta:</strong> insumo petroquímico. Demanda por plásticos e resinas. Brasil importador líquido durante todo o horizonte.</p>
+<p><strong>Óleo Combustível:</strong> excedentário — produção supera demanda. Usado para bunker (abastecimento naval) e exportação.</p>
+<p><strong>Asfalto (CAP):</strong> demanda correlacionada com ciclos eleitorais e obras públicas (PAC). Produção nacional atende.</p></div>
+<div class="cs"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a> · <a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica</a></div></div>
+</div>
+
+<!-- ===== S6: ETANOL ===== -->
+<div class="sec" id="s6">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Produção Total Etanol (safra 24/25)</div><div class="kv">35,0 <span>bi litros</span></div><div class="kn">Recorde histórico · +4,1% vs safra anterior</div><div class="ks"><a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA, abr/2025</a></div></div>
+  <div class="kpi gn"><div class="kl">Etanol de Milho (24/25)</div><div class="kv">8,19 <span>bi litros</span></div><div class="kn">+30,7% · 23,4% do total · MT lidera (72%)</div><div class="ks"><a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA</a> · <a href="https://www.novacana.com/noticias/producao-etanol-milho-dispara-superar-25-total-2025-unem-230625" target="_blank">NovaCana/Unem</a></div></div>
+  <div class="kpi bu"><div class="kl">Vendas Hidratado (2024)</div><div class="kv">21,7 <span>bi litros</span></div><div class="kn">+33,4% vs 2023 · Preço competitivo</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/pais-teve-comercializacao-de-mais-de-130-bilhoes-de-litros-de-combustiveis-em-2024" target="_blank">ANP Seminário 2025</a></div></div>
+  <div class="kpi pu"><div class="kl">Usinas em Operação</div><div class="kv">444 <span>usinas</span></div><div class="kn">SP ~160, GO 45, MG 44, MT 28, PR 28</div><div class="ks"><a href="https://www.novacana.com/usinas_brasil" target="_blank">NovaCana — Usinas Brasil</a></div></div>
+  <div class="kpi re"><div class="kl">Mistura Anidro na Gasolina</div><div class="kv">E30 <span>(30%)</span></div><div class="kn">Vigente desde ago/2025 (era E27)</div><div class="ks"><a href="https://www.canaonline.com.br/conteudo/aumento-da-mistura-de-etanol-na-gasolina-sustenta-precos-e-reduz-oferta-de-hidratado.html" target="_blank">Cana Online, ago/2025</a></div></div>
+  <div class="kpi cn"><div class="kl">Exportações (safra 24/25)</div><div class="kv">1,67 <span>bi litros</span></div><div class="kn">−32,8% · EUA, Coreia, Japão, UE</div><div class="ks"><a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA</a></div></div>
+</div>
+
+<div class="g2">
+  <div class="card"><div class="ct"><span class="badge">PROD</span> Evolução da Produção de Etanol (bi L)</div><div class="cw"><canvas id="c6a"></canvas></div><div class="cs"><a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA</a> · <a href="https://www.novacana.com/noticias/producao-etanol-milho-dispara-superar-25-total-2025-unem-230625" target="_blank">Unem/NovaCana</a> · Safras Centro-Sul</div></div>
+  <div class="card"><div class="ct"><span class="badge">MIX</span> Cana vs. Milho — % Produção</div><div class="cw"><canvas id="c6b"></canvas></div><div class="cs"><a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA</a> · <a href="https://timesbrasil.com.br/brasil/etanol-de-milho-cresce-20-ao-ano-e-faz-do-brasil-o-segundo-maior-produtor-mundial/" target="_blank">Times Brasil/Unem</a></div></div>
+</div>
+
+<div class="card"><div class="ct"><span class="badge">GEO</span> Mapa Produtivo — Etanol por Estado e Matéria-Prima</div>
+<div class="tw"><table>
+<thead><tr><th>Estado</th><th>Usinas</th><th>Matéria-Prima</th><th>Produção Destaque</th><th>Posição</th></tr></thead>
+<tbody>
+<tr><td class="bold">São Paulo</td><td class="mono">~160</td><td>Cana (dominante)</td><td>#1 produtor nacional de etanol · 29 usinas só da Raízen</td><td>Hub: Paulínia é a referência de preço (CEPEA/USP)</td></tr>
+<tr><td class="bold">Mato Grosso</td><td class="mono">28</td><td>Milho (72% do milho-etanol nacional) + cana</td><td>Vice-líder nacional · Sinop: maior refinaria de milho da América Latina (Inpasa, 3,7 bi L)</td><td>Produz 449 L/ton milho · Atua o ano inteiro (sem entressafra)</td></tr>
+<tr><td class="bold">Goiás</td><td class="mono">45</td><td>Cana + milho (6 usinas milho)</td><td>Grande produtor · Etanol competitivo (paridade ~67%)</td><td>Expansão com usinas flex</td></tr>
+<tr><td class="bold">Minas Gerais</td><td class="mono">44</td><td>Cana</td><td>Triângulo Mineiro: polo canavieiro</td><td>Paridade etanol/gasolina ~64%</td></tr>
+<tr><td class="bold">Mato Grosso do Sul</td><td class="mono">27</td><td>Cana + milho (2 usinas milho)</td><td>Inpasa Sidrolândia em expansão</td><td>Menor preço etanol país em jan/2026 (R$4,00)</td></tr>
+<tr><td class="bold">Paraná</td><td class="mono">28</td><td>Cana + milho (1 usina milho)</td><td>REPAR produz Diesel R com co-processamento</td><td>Paridade ~70% (limiar)</td></tr>
+<tr><td class="bold">Alagoas</td><td class="mono">25</td><td>Cana</td><td>Tradição histórica canavieira NE</td><td>Exporta anidro</td></tr>
+<tr><td class="bold">Pernambuco</td><td class="mono">19</td><td>Cana</td><td>Zona da Mata: cana desde era colonial</td><td>Menor relevância atual vs SE/CO</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.novacana.com/usinas_brasil/estados" target="_blank">NovaCana — Usinas por Estado</a> · <a href="https://fiemt.ind.br/noticias/4067/mato-grosso-e-segundo-maior-produtor-nacional-de-etanol" target="_blank">FIEMT/Bioind-MT</a> · <a href="https://agroadvance.com.br/blog-maiores-grupos-do-setor-sucroalcooleiro/" target="_blank">AgroAdvance (Raízen/grupos)</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">MILHO</span> Revolução do Etanol de Milho</div>
+<div class="pr"><p>A produção de etanol de milho multiplicou-se por <span class="hg">10x em uma década</span> (de 0,8 bi L em 2018/19 para 8,2 bi L em 2024/25). O Brasil é o <span class="hb">2º maior produtor mundial de etanol de milho</span>, atrás apenas dos EUA. A Unem projeta <span class="hl">10 bi litros na safra 2025/26</span> (+20%), quando o milho representará >25% do etanol nacional.</p>
+<p>O modelo é imbatível: milho a preço competitivo (safra recorde ~130 Mi ton), tecnologia americana madura (440 L/ton, +20% em 7 anos), operação o ano todo (sem entressafra da cana), coprodutos de valor (DDG para ração animal: 2,12 Mi ton em MT). São <span class="hb">25 biorrefinarias em operação</span>, com 16 autorizadas para construção e 16 em planejamento — <span class="hl">R$ 40 bilhões em investimentos mapeados</span>. Nova planta Inpasa em Luís Eduardo Magalhães (BA) expande a geografia para o Nordeste pela primeira vez.</p></div>
+<div class="cs"><a href="https://timesbrasil.com.br/brasil/etanol-de-milho-cresce-20-ao-ano-e-faz-do-brasil-o-segundo-maior-produtor-mundial/" target="_blank">Times Brasil/CNBC, ago/2025</a> · <a href="https://www.novacana.com/noticias/producao-etanol-milho-dispara-superar-25-total-2025-unem-230625" target="_blank">NovaCana/Unem, jun/2025</a> · <a href="https://fiemt.ind.br/noticias/4067/mato-grosso-e-segundo-maior-produtor-nacional-de-etanol" target="_blank">FIEMT/Bioind-MT</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">PRECO</span> Dinâmica de Preços e Paridade Etanol × Gasolina</div>
+<div class="pr"><p><strong>Regra dos 70%:</strong> Se etanol custa ≤70% do preço da gasolina, compensa abastecer com etanol (menor poder calorífico). Em jan/2026, paridade média nacional foi <span class="hr">72,2%</span> — desfavorável ao etanol. Porém, competitivo em estados produtores: <span class="hg">MT 63,3%</span> (mais competitivo), MS 67,3%, SP 64,5%, MG 64,2%, GO 66,9%.</p>
+<p>No <span class="hr">Norte e Nordeste, etanol não é competitivo</span> — paridade >80% em muitos estados. O RJ registrou 75%. O Acre tem o etanol mais caro do país. A distância das usinas, logística e ICMS (monofásico, mas com alíquotas variáveis para etanol) explicam as diferenças.</p>
+<p><strong>Projeção 2026/27 (StoneX):</strong> preço médio hidratado nas usinas SP de <span class="hg">R$ 3,23/L</span>; paridade SP de <span class="hg">64,9%</span> — muito favorável ao etanol. Consumo hidratado deve retomar crescimento com >30% da frota flex abastecendo etanol.</p></div>
+<div class="cs"><a href="https://timesbrasil.com.br/empresas-e-negocios/transporte/preco-do-etanol-aumenta-em-15-estados-veja-onde-ficou-mais-competitivo/" target="_blank">Times Brasil/ANP, jan/2026</a> · <a href="https://matogrossoeconomico.com.br/agronegocio-mato-grosso/consumo-de-etanol-hidratado-devera-se-recuperar-em-2026/" target="_blank">MT Econômico/Datagro, fev/2026</a> · <a href="https://aiko.digital/oferta-de-etanol/" target="_blank">Aiko/StoneX</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">REG</span> Marco Regulatório e RenovaBio</div>
+<div class="pr"><p><strong>Lei do Combustível do Futuro (14.993/2024):</strong> Mandatos de E30 (etanol na gasolina), trajetória B14→B15→B20 (biodiesel no diesel), e programas de SAF. A elevação de E27 para E30 (ago/2025) criou demanda adicional de ~<span class="hl">1,4 bi litros/ano</span> de anidro, sustentando preços.</p>
+<p><strong>RenovaBio (Lei 13.576/2017):</strong> CBIOs (Créditos de Descarbonização) — cada litro de etanol gera créditos que distribuidores devem comprar. Meta 2024: 37,47 Mi créditos. O etanol de cana evita 2,56 kgCO₂eq/L (anidro) e 1,12 kgCO₂eq/L (hidratado). Na safra 24/25, o consumo de etanol evitou <span class="hg">48,4 Mi toneladas de CO₂eq</span> — equivalente às emissões anuais do Equador.</p>
+<p><strong>Frota flex fuel:</strong> >85% dos veículos leves no Brasil. Tecnologia madura de 20+ anos. Economia aos consumidores: <span class="hg">R$ 6–7 bilhões/ano</span> pela possibilidade de escolha etanol vs gasolina.</p></div>
+<div class="cs"><a href="https://unica.com.br/noticias/safra-24-25-e-a-segunda-maior-da-historia-no-cs/" target="_blank">UNICA (emissões evitadas)</a> · <a href="https://www.canaonline.com.br/conteudo/aumento-da-mistura-de-etanol-na-gasolina-sustenta-precos-e-reduz-oferta-de-hidratado.html" target="_blank">Cana Online (E30)</a> · <a href="https://hedgehog.quantilica.com/c/6/consumo-combustiveis-brasil-1990-2026" target="_blank">Hedgehog/Quantilica</a></div></div>
+
+<div class="co g"><strong>O dilema açúcar vs. etanol:</strong> Usinas flexíveis ajustam o mix conforme preços. Com açúcar internacional atrativo, mais cana vai para açúcar → menos etanol de cana → preços do etanol sobem → milho preenche o gap. O etanol de milho funciona como "seguro de oferta" contra a sazonalidade e as escolhas de mix da cana.</div>
+<div class="co b"><strong>Mapa do futuro:</strong> Centro-Oeste desponta como novo polo de biocombustíveis, integrando cana, milho e bioenergia. FS (Sorriso/MT) processa 4,8 Mi ton de milho/ano. Inpasa expande para BA (Luís Eduardo Magalhães, R$ 4,9 bi). A 3Tentos (RS) investe R$ 1,2 bi em Porto Alegre do Norte/MT. BNDES aprovou R$ 4,3 bi para biocombustíveis em 2024. Produção de milho-etanol projetada para 15,6 bi L até 2033 (MME).</div>
+</div>
+
+<!-- ===== S7: BIODIESEL ===== -->
+<div class="sec" id="s7">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Produção (2025)</div><div class="kv">9,84 <span>Mi m³</span></div><div class="kn">Recorde · +8,6% vs 2024 · Receita R$55 bi</div><div class="ks"><a href="https://www.biodieselbr.com/noticias/usinas/producao/producao-de-biodiesel-do-brasil-bate-recorde-de-producao-de-m-em-2025-030226" target="_blank">BiodieselBR, fev/2026</a></div></div>
+  <div class="kpi gn"><div class="kl">Mistura Obrigatória Atual</div><div class="kv">B15 <span>(15%)</span></div><div class="kn">Vigente desde ago/2025 · Meta: B20 em 2030</div><div class="ks"><a href="https://www.biodieselbr.com/noticias/usinas/info/brasil-pode-nao-cumprir-prazo-de-elevar-mistura-de-biodiesel-em-marco-de-2026-diz-mme-071025" target="_blank">BiodieselBR/MME</a></div></div>
+  <div class="kpi bu"><div class="kl">Usinas / Capacidade</div><div class="kv">58 <span>usinas · 15,6 bi L/ano</span></div><div class="kn">14 estados · Utilização: 63,2%</div><div class="ks"><a href="https://radardigitalbrasilia.com.br/agronegocio/setor-de-biodiesel-reforca-na-cop-30-o-papel-do-brasil-na-transicao-energetica-e-na-economia-verde/" target="_blank">Ubrabio/COP30</a> · <a href="https://moodyslocal.com.br/wp-content/uploads/2025/03/Comentario-Setorial-Biodiesel-1.pdf" target="_blank">Moody's Local</a></div></div>
+  <div class="kpi pu"><div class="kl">Matéria-Prima Dominante</div><div class="kv">~70% <span>óleo de soja</span></div><div class="kn">Gordura animal ~11% · Outros 19%</div><div class="ks"><a href="https://www.cnabrasil.org.br/noticias/estagnado-programa-de-biodiesel-compromete-campo-e-industria" target="_blank">CNA/FAEP</a></div></div>
+  <div class="kpi re"><div class="kl">Diesel Substituído (B15)</div><div class="kv">674 <span>Mi L/ano</span></div><div class="kn">Economia: US$470 Mi em importação de diesel</div><div class="ks"><a href="https://radardigitalbrasilia.com.br/agronegocio/setor-de-biodiesel-reforca-na-cop-30-o-papel-do-brasil-na-transicao-energetica-e-na-economia-verde/" target="_blank">Ubrabio</a></div></div>
+  <div class="kpi cn"><div class="kl">PIB Soja/Biodiesel</div><div class="kv">R$691 <span>bi (6,3% PIB)</span></div><div class="kn">2,46% dos empregos nacionais</div><div class="ks"><a href="https://fpbiodiesel.com.br/" target="_blank">FPBio/CEPEA/Abiove</a></div></div>
+</div>
+
+<div class="g2">
+  <div class="card"><div class="ct"><span class="badge">PROD</span> Evolução da Produção de Biodiesel (bi L)</div><div class="cw"><canvas id="c7a"></canvas></div><div class="cs"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/anp-divulga-dados-consolidados-do-setor-regulado-em-2024" target="_blank">ANP Anuário 2025</a> · <a href="https://www.biodieselbr.com/noticias/usinas/producao/producao-de-biodiesel-do-brasil-bate-recorde-de-producao-de-m-em-2025-030226" target="_blank">BiodieselBR</a></div></div>
+  <div class="card"><div class="ct"><span class="badge">MP</span> Matérias-Primas (%)</div><div class="cw"><canvas id="c7b"></canvas></div><div class="cs"><a href="https://www.cnabrasil.org.br/noticias/estagnado-programa-de-biodiesel-compromete-campo-e-industria" target="_blank">CNA/FAEP</a> · <a href="https://fpbiodiesel.com.br/" target="_blank">FPBio</a></div></div>
+</div>
+
+<div class="card"><div class="ct"><span class="badge">MAND</span> Trajetória do Mandato de Mistura (BX)</div>
+<div class="tw"><table>
+<thead><tr><th>Ano</th><th>Mistura</th><th>Demanda Estimada</th><th>Marco Legal</th></tr></thead>
+<tbody>
+<tr><td class="mono">2010</td><td class="bold">B5</td><td class="mono">~2,4 bi L</td><td>Resolução CNPE</td></tr>
+<tr><td class="mono">2018</td><td class="bold">B10</td><td class="mono">~5,3 bi L</td><td>Resolução CNPE 16/2018</td></tr>
+<tr><td class="mono">2023</td><td class="bold">B12</td><td class="mono">~7,5 bi L</td><td>Retomada pós-congelamento Bolsonaro</td></tr>
+<tr><td class="mono">Mar/2024</td><td class="bold">B14</td><td class="mono">~9,0 bi L</td><td>CNPE antecipou de 2025 para 2024</td></tr>
+<tr><td class="mono">Ago/2025</td><td class="bold">B15</td><td class="mono">~9,6 bi L</td><td>CNPE antecipou; delay de mar para ago por inflação</td></tr>
+<tr><td class="mono">Mar/2026</td><td style="color:var(--acc);font-weight:700">B16 (previsto)</td><td class="mono">~10,3 bi L</td><td>Lei 14.993/24 — possível delay conforme MME</td></tr>
+<tr><td class="mono">2030</td><td style="color:var(--gn);font-weight:700">B20 (meta)</td><td class="mono">~14 bi m³</td><td>Lei do Combustível do Futuro (+1 pp/ano)</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.gov.br/mdic/pt-br/assuntos/noticias/2023/dezembro/cnpe-aprova-antecipacao-do-b14-para-marco-de-2024-e-b15-para-marco-de-2025-incentivando-a-producao-de-biocombustiveis-e-a-transicao-energetica" target="_blank">CNPE/MDIC</a> · <a href="https://www.biodieselbr.com/noticias/usinas/info/brasil-pode-nao-cumprir-prazo-de-elevar-mistura-de-biodiesel-em-marco-de-2026-diz-mme-071025" target="_blank">BiodieselBR (B16 delay)</a> · <a href="https://www.biodieselbr.com/noticias/eventos/conferencia-biodieselbr/cbbr-2024-a-disponibilidade-de-materias-primas-para-combustivel-do-futuro-041124" target="_blank">BiodieselBR (B20)</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">SOJA</span> A Cadeia Soja–Biodiesel: Efeitos Cruzados</div>
+<div class="pr"><p>O biodiesel brasileiro depende de <span class="hl">~70% de óleo de soja</span> como matéria-prima, que representa <span class="hr">~80% do custo de produção</span>. Para atender o B15 em 2025, são necessárias <span class="hb">7,8 milhões de toneladas de óleo de soja</span> (vs 7,2 Mi em 2024 e 5,8 Mi em 2023). Isso exige ~39,2 Mi ton de soja processada (esmagada).</p>
+<p>Mas o esmagamento gera <span class="hg">farelo de soja</span>, insumo essencial para a cadeia de proteína animal. Cada ponto percentual adicional na mistura BX reduz em ~R$ 3,5 bilhões o custo de produção de frangos, suínos, ovos e peixes — gerando efeito <span class="hg">deflacionário de 0,05 pp no IPCA</span>. O impacto no preço do diesel ao consumidor de B14→B15 é de apenas R$ 0,05/L (0,002 pp no IPCA).</p>
+<p>Outros insumos em crescimento: <span class="hb">gordura animal (sebo bovino)</span> ~11,3% do mix, e <span class="hg">óleo de cozinha usado (UCO/OFU)</span> ~2,3%, com pressão exportadora de UCO para HVO europeu. Palma, milho e macaúba são potenciais futuros.</p></div>
+<div class="cs"><a href="https://fpbiodiesel.com.br/" target="_blank">FPBio</a> · <a href="https://www.biodieselbr.com/noticias/usinas/producao/demanda-de-biodiesel-no-brasil-em-2025-deve-chegar-a-9-6-bilhoes-de-litros-130625" target="_blank">BiodieselBR/StoneX (soja demand)</a> · <a href="https://www.biodieselbr.com/noticias/materia-prima/ogr/oleo-de-cozinha-usado-avanca-com-demanda-por-biocombustiveis-280923" target="_blank">BiodieselBR (UCO)</a></div></div>
+
+<div class="card"><div class="ct"><span class="badge">IND</span> Estrutura Industrial e Investimentos</div>
+<div class="pr"><p><strong>Parque industrial:</strong> 58 usinas em 14 estados, capacidade autorizada de <span class="hl">15,6 bi L/ano</span>. Sul e Centro-Oeste concentram ~80% da produção. Utilização em 2025: 63,2%, indicando folga para absorver B20. CAGR desde 2018: 9%.</p>
+<p><strong>Consolidação:</strong> Cargill adquiriu 3 fábricas da Granol (Anápolis/GO, Porto Nacional/TO, Cachoeira do Sul/RS) tornando-se uma das maiores em capacidade. Oleoplan adquiriu planta de Lucas do Rio Verde/MT. Cooperativas do Sul detêm 35% do esmagamento de soja nacional.</p>
+<p><strong>Investimentos:</strong> R$ 7 bilhões em projetos recentes (maioria cooperativas do Sul). R$ 5,9 bilhões nos próximos 12 meses (Abiove). No entanto, <span class="hr">alta da Selic</span> (juros elevados) impacta rentabilidade de novos projetos e pode desacelerar expansão.</p></div>
+<div class="cs"><a href="https://moodyslocal.com.br/wp-content/uploads/2025/03/Comentario-Setorial-Biodiesel-1.pdf" target="_blank">Moody's Local Brasil, mar/2025</a> · <a href="https://www.biodieselbr.com/noticias/usinas/producao/demanda-de-biodiesel-no-brasil-em-2025-deve-chegar-a-9-6-bilhoes-de-litros-130625" target="_blank">BiodieselBR/Abiove</a></div></div>
+
+<div class="co g"><strong>Impacto ambiental:</strong> O B15 evita a emissão de 127 milhões de toneladas de CO₂eq — equivalente ao plantio de 930 milhões de árvores. O biodiesel reduz emissões de GEE entre 70% e 94% comparado ao diesel fóssil. O uso de UCO (óleo de fritura) absorve ~150 Mi L/ano, evitando contaminação de 3,8 trilhões de litros de água.</div>
+<div class="co y"><strong>Brasil no mundo:</strong> 3º maior produtor global de biodiesel (após EUA com 13,6 bi L e Indonésia com 13,1 bi L). A Indonésia já opera em B35; o Brasil mira B20 em 2030. Com B20, a demanda dobrará para ~14 Mi m³, demandando avanço na diversificação de matérias-primas e na eficiência da cadeia.</div>
+</div>
+
+<!-- ===== S8: COMÉRCIO EXTERIOR ===== -->
+<div class="sec" id="s8">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Export. Petróleo Bruto (2024)</div><div class="kv">1,7 <span>Mi bpd</span></div><div class="kn">Brasil exportador líquido de petróleo</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/anp-divulga-dados-consolidados-do-setor-regulado-em-2024" target="_blank">ANP 2025</a></div></div>
+  <div class="kpi re"><div class="kl">Import. Diesel A (2025)</div><div class="kv">17,3 <span>bi L</span></div><div class="kn">Recorde · US$8,3 bi em 2024</div><div class="ks"><a href="https://www.infomoney.com.br/mercados/importacao-de-diesel-pelo-brasil-bate-recorde-em-2025-com-aumento-de-20/" target="_blank">StoneX/InfoMoney</a></div></div>
+  <div class="kpi bu"><div class="kl">Import. Petróleo Bruto (2024)</div><div class="kv">282 <span>mil bpd</span></div><div class="kn">Petróleos leves para blend</div><div class="ks"><a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/anp-divulga-dados-consolidados-do-setor-regulado-em-2024" target="_blank">ANP 2025</a></div></div>
+  <div class="kpi pu"><div class="kl">Diesel: Principal Fornecedor</div><div class="kv">Rússia <span>~47% (2025)</span></div><div class="kn">EUA ~33% · Índia ~9%</div><div class="ks"><a href="https://www.infomoney.com.br/mercados/importacao-de-diesel-pelo-brasil-bate-recorde-em-2025-com-aumento-de-20/" target="_blank">StoneX</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">IMP</span> Importações de Diesel: Origem por País (%)</div><div class="cw"><canvas id="c5a"></canvas></div><div class="cs"><a href="https://www.fecombustiveis.org.br/noticia/brasil-importou-us-83-bilhoes-em-diesel-em-2024-65-vindo-da-russia/260761" target="_blank">Fecombustíveis (2019–2024)</a> · <a href="https://www.infomoney.com.br/mercados/importacao-de-diesel-pelo-brasil-bate-recorde-em-2025-com-aumento-de-20/" target="_blank">StoneX (2025)</a></div></div>
+<div class="card"><div class="ct"><span class="badge">BAL</span> Balanço Externo por Derivado — Posição Estrutural</div>
+<div class="tw"><table>
+<thead><tr><th>Derivado</th><th>Posição</th><th>Import./Consumo</th><th>Tendência 2030</th></tr></thead>
+<tbody>
+<tr><td class="bold">Petróleo Bruto</td><td style="color:var(--gn);font-weight:700">Exportador Líquido</td><td class="mono">—</td><td>Exportações crescentes (~2/3 da produção exportada em 2030)</td></tr>
+<tr><td class="bold">Diesel A</td><td style="color:var(--rd);font-weight:700">Importador Líquido</td><td class="mono">~25%</td><td>Acima das máximas históricas; maior déficit entre derivados</td></tr>
+<tr><td class="bold">GLP</td><td style="color:var(--rd);font-weight:700">Importador Líquido</td><td class="mono">~25%</td><td>Decrescente — superávit possível a partir de ~2029</td></tr>
+<tr><td class="bold">Gasolina A</td><td style="color:var(--acc);font-weight:700">Import. Marginal</td><td class="mono">~10%</td><td>Tendência à autossuficiência; possível exportador em alguns anos</td></tr>
+<tr><td class="bold">QAV</td><td style="color:var(--rd);font-weight:700">Importador Líquido</td><td class="mono">Crescente</td><td>Importações acima de máximas históricas (aviação em expansão)</td></tr>
+<tr><td class="bold">Nafta</td><td style="color:var(--rd);font-weight:700">Importador Líquido</td><td class="mono">Alta</td><td>Déficit permanente — petroquímica demanda crescente</td></tr>
+<tr><td class="bold">Óleo Combustível</td><td style="color:var(--gn);font-weight:700">Exportador Líquido</td><td class="mono">—</td><td>Excedente permanente (bunker + exportação)</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.epe.gov.br/sites-pt/publicacoes-dados-abertos/publicacoes/PublicacoesArquivos/publicacao-804/topico-709/PDE%202034_Caderno%20de%20Abastecimento_2024-08-29.pdf" target="_blank">EPE PDE 2034</a> · <a href="https://www.gov.br/anp/pt-br/canais_atendimento/imprensa/noticias-comunicados/anp-divulga-dados-consolidados-do-setor-regulado-em-2024" target="_blank">ANP 2025</a></div></div>
+<div class="co b"><strong>Risco geopolítico concentrado:</strong> ~47% do diesel importado vem da Rússia (2025). EUA pressionam países compradores de derivados russos. Sanções secundárias podem afetar ~8 bi litros de suprimento. EUA, Índia e Arábia Saudita são alternativas, mas com capacidade limitada para substituição imediata.</div>
+</div>
+
+<!-- ===== S6: INFRAESTRUTURA ===== -->
+<div class="sec" id="s9">
+<div class="kg">
+  <div class="kpi go"><div class="kl">Terminais Transpetro</div><div class="kv">48 <span>terminais</span></div><div class="kn">27 aquaviários + 21 terrestres</div><div class="ks"><a href="https://transpetro.com.br/transpetro-institucional/nossas-atividades/dutos-e-terminais.htm" target="_blank">Transpetro</a></div></div>
+  <div class="kpi bu"><div class="kl">Malha Dutoviária</div><div class="kv">~8.500 <span>km</span></div><div class="kn">Oleodutos e gasodutos</div><div class="ks"><a href="https://transpetro.com.br/transpetro-institucional/nossas-atividades/dutos-e-terminais.htm" target="_blank">Transpetro</a></div></div>
+  <div class="kpi gn"><div class="kl">Frota de Navios</div><div class="kv">33 <span>navios</span></div><div class="kn">Petroleiros, produtos e gaseiros</div><div class="ks"><a href="https://economicnewsbrasil.com.br/2026/03/18/transporte-maritimo-da-transpetro/" target="_blank">Economic News mar/2026</a></div></div>
+  <div class="kpi pu"><div class="kl">Movimentação (2025 jan–nov)</div><div class="kv">~203 <span>Mi ton</span></div><div class="kn">Petróleo e derivados · portos</div><div class="ks"><a href="https://economicnewsbrasil.com.br/2026/03/18/transporte-maritimo-da-transpetro/" target="_blank">Min. Portos/Economic News</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">TERM</span> Principais Terminais por Região</div>
+<div class="tw"><table>
+<thead><tr><th>Terminal</th><th>UF</th><th>Tipo</th><th>Função Principal</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:var(--acc-bg);font-weight:700;color:var(--acc);font-size:.65rem;text-transform:uppercase;letter-spacing:1px">Sudeste — Hub Central</td></tr>
+<tr><td class="bold">São Sebastião</td><td>SP</td><td>Aquaviário</td><td>Maior terminal Transpetro; recepção petróleo + despacho derivados; abastece 4 refinarias SP</td></tr>
+<tr><td class="bold">Santos (Alemoa)</td><td>SP</td><td>Aquaviário</td><td>Importação de derivados; conexão RPBC e Barueri; diesel, gasolina, QAV, GLP</td></tr>
+<tr><td class="bold">Angra dos Reis (TEBIG)</td><td>RJ</td><td>Aquaviário</td><td>Importação petróleo para REDUC e REGAP; bunker; exportação</td></tr>
+<tr><td colspan="4" style="background:var(--gn-bg);font-weight:700;color:var(--gn);font-size:.65rem;text-transform:uppercase;letter-spacing:1px">Nordeste</td></tr>
+<tr><td class="bold">Suape</td><td>PE</td><td>Aquaviário</td><td>Saída RNEST + importação diesel/gasolina para NE</td></tr>
+<tr><td class="bold">Madre de Deus</td><td>BA</td><td>Aquaviário</td><td>Saída Mataripe; maior terminal NE</td></tr>
+<tr><td class="bold">Itaqui</td><td>MA</td><td>Aquaviário</td><td>~30% do combustível importado do BR; calado 19–26m; STS capaz</td></tr>
+<tr><td colspan="4" style="background:var(--cy-bg);font-weight:700;color:var(--cy);font-size:.65rem;text-transform:uppercase;letter-spacing:1px">Sul</td></tr>
+<tr><td class="bold">Paranaguá</td><td>PR</td><td>Aquaviário</td><td>Importação complementar + conexão REPAR</td></tr>
+<tr><td class="bold">Osório/Tramandaí</td><td>RS</td><td>Aquaviário</td><td>Monoboias offshore para REFAP; ~677 mil m³ armazenagem</td></tr>
+<tr><td colspan="4" style="background:var(--rd-bg);font-weight:700;color:var(--rd);font-size:.65rem;text-transform:uppercase;letter-spacing:1px">Norte</td></tr>
+<tr><td class="bold">Belém (Miramar)</td><td>PA</td><td>Aquaviário</td><td>Recebimento + distribuição Norte; GLP e derivados</td></tr>
+<tr><td class="bold">Manaus (REMAN)</td><td>AM</td><td>Aquaviário</td><td>Entrada petróleo + saída derivados (operação irregular)</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://petrobras.com.br/quem-somos/logistica" target="_blank">Petrobras Logística</a> · <a href="https://transpetro.com.br/transpetro-institucional/nossas-atividades/dutos-e-terminais/terminais-aquaviarios.htm" target="_blank">Transpetro</a> · <a href="https://www.gov.br/portos-e-aeroportos/pt-br/assuntos/noticias/2025/07/porto-do-itaqui-se-destaca-como-um-dos-maiores-centros-de-movimentacao-de-combustiveis-do-pais" target="_blank">Gov.br Itaqui</a></div></div>
+<div class="co b"><strong>Programa Mar Aberto (2026–2030):</strong> US$6 bi · 20 navios cabotagem + 18 barcaças + 18 empurradores. Gaseiros triplicam capacidade GLP. Barcaças inauguram navegação interior (rios amazônicos), melhorando abastecimento do Norte.</div>
+</div>
+
+<!-- ===== S7: RISCOS & EXPANSÃO ===== -->
+<div class="sec" id="s10">
+<div class="kg">
+  <div class="kpi pu"><div class="kl">Trem 2 RNEST</div><div class="kv">+94 <span>kbpd diesel S-10</span></div><div class="kn">R$8,3 bi · Dobra a capacidade</div><div class="ks"><a href="https://movimentoeconomico.com.br/economia/combustivel/2025/11/29/refinaria-hidrogenio-ureia-petrobras-mapeia-futuro-do-nordeste-ate-2030/" target="_blank">Mov. Econômico/Petrobras</a></div></div>
+  <div class="kpi go"><div class="kl">Capacidade 2030</div><div class="kv">2,13 <span>Mbpd</span></div><div class="kn">+17,6% vs atual · Diesel 40%→45% mix</div><div class="ks"><a href="https://agencia.petrobras.com.br/w/negocio/petrobras-aprova-plano-de-neg%C3%B3cios-2026-2030" target="_blank">Petrobras PN 2026–2030</a></div></div>
+  <div class="kpi gn"><div class="kl">Mar Aberto (Transpetro)</div><div class="kv">US$6 <span>bi</span></div><div class="kn">20 navios + 36 barcaças/empurradores</div><div class="ks"><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-01/novas-embarcacoes-da-petrobras-triplicarao-capacidade-de-transporte" target="_blank">Agência Brasil jan/2026</a></div></div>
+  <div class="kpi re"><div class="kl">Alta Diesel Distrib. (mar/2026)</div><div class="kv">+40% <span>em 1 mês</span></div><div class="kn">16 autos infração ANP</div><div class="ks"><a href="https://blog.clubpetro.com/noticias/preco-do-diesel-sobe-40-para-as-distribuidoras-o-brasil/" target="_blank">ClubPetro</a></div></div>
+</div>
+<div class="card"><div class="ct"><span class="badge">EXP</span> Adições de Capacidade Diesel S-10 (kbpd até 2030)</div><div class="cw"><canvas id="c10a"></canvas></div><div class="cs"><a href="https://agencia.petrobras.com.br/w/negocio/petrobras-aprova-plano-de-neg%C3%B3cios-2026-2030" target="_blank">Petrobras PN 2026–2030</a></div></div>
+<div class="card"><div class="ct">Vulnerabilidades Estruturais</div>
+<div class="vi"><div class="vit"><span class="vn">1</span> Concentração geográfica do refino</div><p>~66% no Sudeste. Centro-Oeste (zero refinarias) e Norte (capacidade marginal) dependem de transferências.</p></div>
+<div class="vi"><div class="vit"><span class="vn">2</span> Dependência de importação (~25% diesel, ~25% GLP)</div><p>Gap não fecha até 2030+. Expõe a choques — guerra Irã/2026, possíveis sanções ao diesel russo.</p></div>
+<div class="vi"><div class="vit"><span class="vn">3</span> Defasagem Petrobras vs. mercado</div><p>Preços abaixo PPI → importadores recuam → distribuidoras racionam → "mercados duais" (RJ R$5,69 vs SP R$9,99).</p></div>
+<div class="vi"><div class="vit"><span class="vn">4</span> Sazonalidade agrícola (diesel)</div><p>Demanda salta em safras soja/milho, tensionando REPLAN→Centro-Oeste no limite.</p></div>
+<div class="vi"><div class="vit"><span class="vn">5</span> Fragilidade logística do Norte</div><p>REMAN irregular. Norte ~100% dependente cabotagem + importação. Barcaças do Mar Aberto são solução parcial.</p></div>
+<div class="cs"><a href="https://www.fecombustiveis.org.br/noticia/alta-de-precos-e-risco-de-escassez-de-combustiveis-mostram-pouca-eficacia-de-acoes-do-governo/263964" target="_blank">Fecombustíveis</a> · <a href="https://www.cnnbrasil.com.br/economia/macroeconomia/petrobras-precisa-atualizar-os-precos-dos-combustiveis-diz-abicom/" target="_blank">CNN/Abicom</a> · <a href="https://revistaoeste.com/economia/diesel-sobe-24-em-sp-e-precos-abusivos-levam-a-autuacoes-da-anp/" target="_blank">Revista Oeste</a></div></div>
+<div class="co r"><strong>Conclusão:</strong> Brasil é o 8º maior produtor de petróleo, exportador líquido de cru — mas importador líquido de derivados em toda a década de 2030. Não é falta de petróleo — é falta de refino, concentração geográfica e política de preços que desincentiva importação complementar.</div>
+
+<div class="card"><div class="ct"><span class="badge">FUTURO</span> Novos Combustíveis — HVO, SAF, E2G, Biometano</div>
+<div class="tw"><table>
+<thead><tr><th>Combustível</th><th>O que é</th><th>Status no Brasil</th><th>Investimento / Escala</th></tr></thead>
+<tbody>
+<tr><td class="bold">HVO (Diesel Verde / Diesel R)</td><td>Óleo vegetal hidrotratado — drop-in 100% renovável, substitui diesel fóssil sem adaptação de motor</td><td>REDUC já produz <span class="hg">Diesel R5</span> (5% HVO) e testa R7. RPBC: planta dedicada HEFA (Honeywell UOP) em licitação.</td><td>Planta RPBC: 950 mil ton/ano de matéria-prima, <span class="hl">16 mil bpd</span> de renováveis. Obras a partir de fin. 2026.</td></tr>
+<tr><td class="bold">SAF (BioQAV)</td><td>Combustível sustentável de aviação — obrigatório por mandato CORSIA/ICAO a partir de 2027</td><td>REDUC obteve certificação <span class="hg">ISCC</span> para SAF por coprocessamento (até 1,2% óleo de milho no QAV). Produção comercial: <span class="hl">50 mil m³/mês</span> (10 mil bpd).</td><td>Planta dedicada RPBC (mesma do HVO). Lei do Combustível do Futuro inclui ProBioQAV. Programa BioRefino: US$ 1,5 bi.</td></tr>
+<tr><td class="bold">E2G (Etanol Celulósico)</td><td>Etanol de 2ª geração, produzido de palha/bagaço de cana — resíduo que vira combustível</td><td>Raízen produziu <span class="hg">30 Mi litros</span> em planta piloto. Tecnologia validada mas escala ainda pequena.</td><td>Projeção EPE: 20% do etanol pode ser E2G até 2030. Zero resíduo adicional.</td></tr>
+<tr><td class="bold">Biometano</td><td>Gás renovável de vinhaça/resíduos de cana — substitui GN e diesel em frotas</td><td>Crescente: usinas integram produção de biometano à cadeia. 25+ plantas com autorização ANP.</td><td>VW Constellation 26.280 a biometano em testes. Potencial técnico significativo no setor sucroenergético.</td></tr>
+</tbody></table></div>
+<div class="cs"><a href="https://www.meganesia.com.br/petrobras-inicia-licitacao-de-plantas-de-bioqav-e-hvo-com-obras-previstas-para-fim-de-2026/" target="_blank">Meganésia (RPBC licitação, ago/2025)</a> · <a href="https://agenciagov.ebc.com.br/noticias/202312/petrobras-contrata-tecnologia-para-producao-de-bioquerosene-de-aviacao-e-diesel-100-renovavel" target="_blank">Ag. Gov/Petrobras (HEFA)</a> · <a href="https://www.sec.gov/Archives/edgar/data/0001119639/000129281425002569/pbr20250703_6k.htm" target="_blank">Petrobras 6-K SEC (REDUC ISCC/SAF)</a> · <a href="https://www.biodieselbr.com/noticias/qualidade/motor/fenatan-caminhoes-hibridos-e-flex-sao-destaque-como-alternativas-ao-diesel-051124" target="_blank">BiodieselBR (Fenatran)</a></div></div>
+
+<div class="co g"><strong>Programa BioRefino da Petrobras:</strong> US$ 1,5 bi para transformar o parque de refino em biorefinarias. RPBC (Cubatão/SP) será a 1ª planta dedicada HVO+SAF do país (16 mil bpd). REDUC já opera Diesel R5/R7 e SAF certificada ISCC. REVAP testa SAF e produz asfalto renovável (CAP Pro R). O Plano Estratégico contempla US$ 11,5 bi em transição energética e baixo carbono. Ao mesmo tempo, 9 contratos assinados para completar o Trem 2 da RNEST, adicionando 76 kbpd de Diesel S-10 + 20 kbpd de QAV.</div>
+</div>
+
+</div></div>
+
+<script>
+const T=['Visão Geral do Mercado','Refino & Produção','Consumo por Derivado','Diesel — Deep Dive','Balanço Regional','Gasolina, GLP & QAV','Etanol','Biodiesel','Comércio Exterior','Infraestrutura Logística','Riscos & Expansão'];
+const CI=[false,false,false,false,false,false,false,false,false,false,false];
+function nv(i,el){document.querySelectorAll('.sec').forEach((s,x)=>s.classList.toggle('a',x===i));document.querySelectorAll('.ni').forEach(n=>n.classList.remove('a'));if(el)el.classList.add('a');document.getElementById('tt').textContent=T[i];if(!CI[i]){CI[i]=true;iC(i)}if(window.innerWidth<768)tgSb()}
+let so=window.innerWidth>=768;function tgSb(){so=!so;const sb=document.getElementById('sb'),mn=document.getElementById('mn'),ov=document.getElementById('ov');if(window.innerWidth<768){sb.classList.toggle('open',so);ov.classList.toggle('sh',so)}else{sb.classList.toggle('closed',!so);mn.classList.toggle('exp',!so)}}
+if(window.innerWidth<768)document.getElementById('sb').classList.remove('open');
+function tgTh(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.getElementById('tl').textContent=d?'Modo escuro':'Modo claro';rC()}
+const CH={};Chart.register(ChartDataLabels);function gC(){const s=getComputedStyle(document.documentElement);return{g:s.getPropertyValue('--cg').trim(),t:s.getPropertyValue('--ct').trim(),b:s.getPropertyValue('--txb').trim(),a:s.getPropertyValue('--acc').trim(),bl:s.getPropertyValue('--bl').trim(),gn:s.getPropertyValue('--gn').trim(),rd:s.getPropertyValue('--rd').trim(),pr:s.getPropertyValue('--pr').trim(),cy:s.getPropertyValue('--cy').trim(),d:s.getPropertyValue('--txd').trim(),c:s.getPropertyValue('--bg-c').trim()}}
+const dlBar={display:true,color:'#fff',anchor:'center',align:'center',font:{family:'IBM Plex Mono',size:9,weight:700},formatter:function(v){if(v===0||v===null)return '';return v>=1000?Math.round(v).toLocaleString('pt-BR'):v%1===0?v:v.toFixed(1)}};
+const dlBarStack={display:true,color:'#fff',anchor:'center',align:'center',font:{family:'IBM Plex Mono',size:8,weight:700},formatter:function(v){if(v<3)return '';return v%1===0?v:v.toFixed(1)}};
+const dlDonut={display:true,color:'#fff',font:{family:'IBM Plex Mono',size:10,weight:700},formatter:function(v,ctx){const t=ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0);const p=(v/t*100);if(p<4)return '';return p.toFixed(0)+'%'}};
+function bC(c){return{responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:c.t,font:{family:'IBM Plex Sans',size:10}}},datalabels:dlBar},scales:{x:{ticks:{color:c.d,font:{size:9}},grid:{color:c.g}},y:{ticks:{color:c.d,font:{size:9}},grid:{color:c.g}}}}}
+function mC(id,cfg){if(CH[id])CH[id].destroy();const x=document.getElementById(id);if(!x)return;CH[id]=new Chart(x,cfg)}
+function iC(tab){const c=gC();
+if(tab===0){
+  mC('c0a',{type:'doughnut',data:{labels:['Diesel B (67,3)','Gasolina C (44,2)','Etanol H. (21,7)','Biodiesel (9,0)','GLP','QAV','Outros'],datasets:[{data:[67.3,44.2,21.7,9.0,7.6,7.0,5],backgroundColor:[c.a,c.bl,c.gn,c.pr,c.cy,c.rd,c.d],borderColor:c.c,borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'right',labels:{color:c.t,font:{family:'IBM Plex Sans',size:10},boxWidth:12}},datalabels:dlDonut}}});
+  mC('c0b',{type:'bar',data:{labels:['Diesel A','GLP','Gasolina A','QAV','Nafta','Óleo Comb.'],datasets:[{label:'% Importação / Consumo',data:[25,25,10,15,40,-20],backgroundColor:[c.rd,c.rd,c.a,c.pr,c.rd,c.gn],borderRadius:4}]},options:{...bC(c),plugins:{...bC(c).plugins,legend:{display:false}},scales:{...bC(c).scales,y:{...bC(c).scales.y,title:{display:true,text:'% (negativo = exportador)',color:c.d,font:{size:9}}}}}});
+}
+if(tab===1){
+  mC('c1a',{type:'bar',data:{labels:['Sudeste','Sul','Nordeste','Norte','Centro-Oeste'],datasets:[{label:'kbpd',data:[1346,432,461,46,0],backgroundColor:[c.a,c.cy,c.gn,c.rd,c.d],borderRadius:4}]},options:{...bC(c),indexAxis:'y',plugins:{...bC(c).plugins,legend:{display:false}}}});
+  mC('c1b',{type:'bar',data:{labels:['Diesel S-10','Gasolina','Total Derivados Petrobras'],datasets:[{label:'kbpd (2024)',data:[452,420,1780],backgroundColor:[c.a,c.bl,c.pr],borderRadius:4}]},options:{...bC(c),plugins:{...bC(c).plugins,legend:{display:false}}}});
+}
+if(tab===2){
+  mC('c2a',{type:'line',data:{labels:['2018','2019','2020','2021','2022','2023','2024'],datasets:[
+    {label:'Diesel B',data:[56.8,57.2,54.6,60.2,64.3,65.5,67.3],borderColor:c.a,backgroundColor:c.a+'20',tension:.3,fill:true},
+    {label:'Gasolina C',data:[43.5,44.0,37.0,39.4,43.5,46.0,44.2],borderColor:c.bl,backgroundColor:c.bl+'20',tension:.3,fill:true},
+    {label:'Etanol H.',data:[14.2,16.6,13.5,14.8,14.5,16.2,21.7],borderColor:c.gn,backgroundColor:c.gn+'20',tension:.3,fill:true}
+  ]},options:{...bC(c),plugins:{...bC(c).plugins,datalabels:{display:false}}}});
+}
+if(tab===4){
+  mC('c4r',{type:'radar',data:{labels:['Cap. Refino','Demanda','Autossuficiência','Acesso Logístico','Vulner. Preço'],datasets:[
+    {label:'Sudeste',data:[90,95,70,90,50],borderColor:c.a,backgroundColor:c.a+'18',pointBackgroundColor:c.a},
+    {label:'Sul',data:[35,35,75,80,60],borderColor:c.cy,backgroundColor:c.cy+'18',pointBackgroundColor:c.cy},
+    {label:'Nordeste',data:[40,45,55,60,65],borderColor:c.gn,backgroundColor:c.gn+'18',pointBackgroundColor:c.gn},
+    {label:'Norte',data:[5,10,5,20,90],borderColor:c.rd,backgroundColor:c.rd+'18',pointBackgroundColor:c.rd},
+    {label:'C-Oeste',data:[0,40,0,40,85],borderColor:c.pr,backgroundColor:c.pr+'18',pointBackgroundColor:c.pr}
+  ]},options:{responsive:true,plugins:{legend:{labels:{color:c.t,font:{family:'IBM Plex Sans',size:10}}},datalabels:{display:false}},scales:{r:{angleLines:{color:c.g},grid:{color:c.g},pointLabels:{color:c.t,font:{size:9}},ticks:{display:false},suggestedMin:0,suggestedMax:100}}}});
+  mC('c4b',{type:'bar',data:{labels:['Sudeste','Sul','Centro-Oeste','Norte','Nordeste'],datasets:[
+    {label:'Bases Distrib.',data:[97,55,54,46,45],backgroundColor:c.bl,borderRadius:3},
+    {label:'TRRs (%)',data:[25.4,38.2,23.4,6.1,6.9],backgroundColor:c.a,borderRadius:3}
+  ]},options:{...bC(c)}});
+  mC('c4c',{type:'bar',data:{labels:['Sul','Sudeste','Nordeste','Centro-Oeste','Norte'],datasets:[
+    {label:'Diesel 2023 (R$/L)',data:[5.66,5.70,5.73,5.82,6.11],backgroundColor:c.bl+'90',borderRadius:3},
+    {label:'Diesel mar/2026 est. (R$/L)',data:[7.25,7.27,7.17,7.50,7.65],backgroundColor:c.rd+'90',borderRadius:3}
+  ]},options:{...bC(c)}});
+}
+if(tab===6){
+  mC('c6a',{type:'bar',data:{labels:['18/19','19/20','20/21','21/22','22/23','23/24','24/25','25/26p'],datasets:[
+    {label:'Cana',data:[28.5,27.8,27.5,25.7,27.8,27.3,26.8,26.6],backgroundColor:c.gn,borderRadius:3},
+    {label:'Milho',data:[0.8,1.0,1.5,2.8,4.5,6.3,8.2,10.0],backgroundColor:c.a,borderRadius:3}
+  ]},options:{...bC(c),plugins:{...bC(c).plugins,datalabels:dlBarStack},scales:{x:{...bC(c).scales.x,stacked:true},y:{...bC(c).scales.y,stacked:true}}}});
+  mC('c6b',{type:'doughnut',data:{labels:['Cana-de-Açúcar (76,6%)','Milho (23,4%)'],datasets:[{data:[76.6,23.4],backgroundColor:[c.gn,c.a],borderColor:c.c,borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:c.t,font:{family:'IBM Plex Sans',size:10},boxWidth:12}},datalabels:dlDonut}}});
+}
+if(tab===7){
+  mC('c7a',{type:'bar',data:{labels:['2018','2019','2020','2021','2022','2023','2024','2025'],datasets:[{label:'Biodiesel (bi L)',data:[5.3,5.9,6.0,6.7,6.2,7.5,9.0,9.8],backgroundColor:c.gn,borderRadius:4}]},options:{...bC(c),plugins:{...bC(c).plugins,legend:{display:false}}}});
+  mC('c7b',{type:'doughnut',data:{labels:['Óleo de Soja (~70%)','Gordura Animal (~11%)','Outros Óleos Veg. (~17%)','UCO/OFU (~2%)'],datasets:[{data:[70,11,17,2],backgroundColor:[c.a,c.rd,c.bl,c.gn],borderColor:c.c,borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:c.t,font:{family:'IBM Plex Sans',size:10},boxWidth:12}},datalabels:dlDonut}}});
+}
+if(tab===8){
+  mC('c5a',{type:'bar',data:{labels:['2019','2020','2021','2022','2023','2024','2025'],datasets:[
+    {label:'Rússia',data:[0,0,0,10,47,65,47],backgroundColor:c.rd,borderRadius:2},
+    {label:'EUA',data:[82,82,49,57,26,17,33],backgroundColor:c.bl,borderRadius:2},
+    {label:'Índia',data:[0,0,18,16,10,8,9],backgroundColor:c.a,borderRadius:2},
+    {label:'Outros',data:[18,18,33,17,17,10,11],backgroundColor:c.d,borderRadius:2}
+  ]},options:{...bC(c),plugins:{...bC(c).plugins,datalabels:dlBarStack},scales:{x:{...bC(c).scales.x,stacked:true},y:{...bC(c).scales.y,stacked:true,max:100}}}});
+}
+if(tab===10){
+  mC('c10a',{type:'bar',data:{labels:['RNEST Trem 2','REPLAN HDT-D','REVAP Moderniz.','Conv. S500→S10','Outros'],datasets:[{label:'kbpd',data:[94,63,30,173,40],backgroundColor:[c.gn,c.a,c.bl,c.pr,c.d],borderRadius:4}]},options:{...bC(c),indexAxis:'y',plugins:{...bC(c).plugins,legend:{display:false}}}});
+}
+}
+function rC(){for(let i=0;i<11;i++)if(CI[i])iC(i)}
+CI[0]=true;iC(0);
+</script>
+</body>
+</html>
